@@ -18,6 +18,11 @@ suite =
                 """<div class="mt-2 text-3xl font-extrabold text-gray-900"></div>"""
                     |> htmlToElmTailwindModules
                     |> Expect.equal "div [ css [ Tw.mt_2, Tw.text_3xl, Tw.font_extrabold, Tw.text_gray_900 ] ] []"
+        , test "div with breakpoints" <|
+            \() ->
+                """<div class="flex flex-col md:flex-row"></div>"""
+                    |> htmlToElmTailwindModules
+                    |> Expect.equal "div [ css [ Tw.flex, Tw.flex_col, Bp.md [ Tw.flex_row ] ] ] []"
         ]
 
 
@@ -66,12 +71,38 @@ attributeToElm ( name, value ) =
             twValues =
                 value
                     |> String.split " "
-                    |> List.map (\className -> "Tw." ++ String.replace "-" "_" className)
+                    |> List.map
+                        (\className ->
+                            case splitOutBreakpoints className of
+                                ( Nothing, twClass ) ->
+                                    toTwClass twClass
+
+                                ( Just breakpoint, twClass ) ->
+                                    "Bp." ++ breakpoint ++ " [ " ++ toTwClass twClass ++ " ]"
+                        )
         in
         "css [ " ++ String.join ", " twValues ++ " ]"
 
     else
         "TODO"
+
+
+toTwClass twClass =
+    "Tw." ++ String.replace "-" "_" twClass
+
+
+splitOutBreakpoints : String -> ( Maybe String, String )
+splitOutBreakpoints tailwindClassName =
+    case String.split ":" tailwindClassName of
+        [ breakpoint, tailwindClass ] ->
+            --Just ("Bp." ++ breakpoint ++ "[ " ++ tailwindClass ++ " ]")
+            ( Just breakpoint, tailwindClass )
+
+        [ tailwindClass ] ->
+            ( Nothing, tailwindClass )
+
+        _ ->
+            ( Nothing, "" )
 
 
 surroundWithSpaces : String -> String
