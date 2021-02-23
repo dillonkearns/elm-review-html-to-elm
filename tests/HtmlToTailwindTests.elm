@@ -1,5 +1,7 @@
 module HtmlToTailwindTests exposing (..)
 
+import Dict
+import Dict.Extra
 import Expect exposing (Expectation)
 import Html.Parser
 import Test exposing (..)
@@ -23,6 +25,11 @@ suite =
                 """<div class="flex flex-col md:flex-row"></div>"""
                     |> htmlToElmTailwindModules
                     |> Expect.equal "div [ css [ Tw.flex, Tw.flex_col, Bp.md [ Tw.flex_row ] ] ] []"
+        , test "div with multiple breakpoints" <|
+            \() ->
+                """<div class="flex md:font-extrabold flex-col md:flex-row"></div>"""
+                    |> htmlToElmTailwindModules
+                    |> Expect.equal "div [ css [ Tw.flex, Tw.flex_col, Bp.md [ Tw.font_extrabold, Tw.flex_row ] ] ] []"
         ]
 
 
@@ -68,20 +75,37 @@ attributeToElm : Html.Parser.Attribute -> String
 attributeToElm ( name, value ) =
     if name == "class" then
         let
-            twValues =
+            dict : Dict.Dict String (List String)
+            dict =
                 value
                     |> String.split " "
-                    |> List.map
-                        (\className ->
-                            case splitOutBreakpoints className of
-                                ( Nothing, twClass ) ->
-                                    toTwClass twClass
+                    |> List.map splitOutBreakpoints
+                    |> Dict.Extra.groupBy (Tuple.first >> Maybe.withDefault "")
+                    |> Dict.map (\k v -> List.map Tuple.second v)
 
-                                ( Just breakpoint, twClass ) ->
-                                    "Bp." ++ breakpoint ++ " [ " ++ toTwClass twClass ++ " ]"
+            newThing =
+                dict
+                    |> Dict.toList
+                    |> List.map
+                        (\( breakpoint, twClasses ) ->
+                            --""
+                            if breakpoint == "" then
+                                twClasses
+                                    |> List.map toTwClass
+                                    |> String.join ", "
+
+                            else
+                                "Bp."
+                                    ++ breakpoint
+                                    ++ " [ "
+                                    ++ (twClasses
+                                            |> List.map toTwClass
+                                            |> String.join ", "
+                                       )
+                                    ++ " ]"
                         )
         in
-        "css [ " ++ String.join ", " twValues ++ " ]"
+        "css [ " ++ String.join ", " newThing ++ " ]"
 
     else
         "TODO"
@@ -95,7 +119,6 @@ splitOutBreakpoints : String -> ( Maybe String, String )
 splitOutBreakpoints tailwindClassName =
     case String.split ":" tailwindClassName of
         [ breakpoint, tailwindClass ] ->
-            --Just ("Bp." ++ breakpoint ++ "[ " ++ tailwindClass ++ " ]")
             ( Just breakpoint, tailwindClass )
 
         [ tailwindClass ] ->
