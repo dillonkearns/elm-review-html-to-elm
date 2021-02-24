@@ -28,4 +28,9 @@ suite =
                 """<div class="flex md:font-extrabold flex-col md:flex-row"></div>"""
                     |> htmlToElmTailwindModules
                     |> Expect.equal "div [ css [ Tw.flex, Tw.flex_col, Bp.md [ Tw.font_extrabold, Tw.flex_row ] ] ] []"
+        , test "div with children" <|
+            \() ->
+                """<div class="flex"><div class="font-extrabold"></div></div>"""
+                    |> htmlToElmTailwindModules
+                    |> Expect.equal "div [ css [ Tw.flex ] ] [ div [ css [ Tw.font_extrabold ] ] [] ]"
         ]

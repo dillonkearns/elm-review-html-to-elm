@@ -36,7 +36,9 @@ nodeToElm node =
                         attributes
                         |> String.join ", "
                    )
-                ++ "] []"
+                ++ "] ["
+                ++ (List.filterMap nodeToElm children |> String.join ", " |> surroundWithSpaces)
+                ++ "]"
                 |> Just
 
         Html.Parser.Comment string ->
@@ -102,4 +104,8 @@ splitOutBreakpoints tailwindClassName =
 
 surroundWithSpaces : String -> String
 surroundWithSpaces string =
-    " " ++ string ++ " "
+    if String.isEmpty string then
+        string
+
+    else
+        " " ++ string ++ " "
