@@ -33,7 +33,7 @@ nodeToElm node =
                 Nothing
 
             else
-                "text \"" ++ textBody ++ "\"" |> Just
+                "text \"" ++ trimmed ++ "\"" |> Just
 
         Html.Parser.Element elementName attributes children ->
             elementName

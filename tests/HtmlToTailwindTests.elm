@@ -38,12 +38,11 @@ suite =
                 """<div>               </div>"""
                     |> htmlToElmTailwindModules
                     |> Expect.equal """div [] []"""
-
-        --, test "strips trailing and leading whitespace" <|
-        --    \() ->
-        --        """<div class="flex">    NO WHITESPACE            </div>"""
-        --            |> htmlToElmTailwindModules
-        --            |> Expect.equal """div [] [ text "NO WHITESPACE" "]"""
+        , test "strips trailing and leading whitespace" <|
+            \() ->
+                """<div>    NO WHITESPACE            </div>"""
+                    |> htmlToElmTailwindModules
+                    |> Expect.equal """div [] [ text "NO WHITESPACE" ]"""
         , describe "Elm name normalization"
             [ test "negative" <|
                 \() ->
