@@ -8,12 +8,12 @@ import HtmlToTailwind
 
 
 type alias Model =
-    { count : String }
+    { htmlInput : String }
 
 
 initialModel : Model
 initialModel =
-    { count = "" }
+    { htmlInput = "" }
 
 
 type Msg
@@ -24,7 +24,7 @@ update : Msg -> Model -> Model
 update msg model =
     case msg of
         OnInput newInput ->
-            { model | count = newInput }
+            { model | htmlInput = newInput }
 
 
 view : Model -> Html Msg
@@ -32,10 +32,10 @@ view model =
     div []
         [ Html.textarea
             [ Html.Events.onInput OnInput
-            , Html.Attributes.value model.count
+            , Html.Attributes.value model.htmlInput
             ]
             []
-        , div [] [ text <| HtmlToTailwind.htmlToElmTailwindModules model.count ]
+        , div [] [ text <| HtmlToTailwind.htmlToElmTailwindModules model.htmlInput ]
         ]
 
 
