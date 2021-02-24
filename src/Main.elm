@@ -2,7 +2,7 @@ module Main exposing (main)
 
 import Browser
 import Html exposing (Html, button, div, text)
-import Html.Attributes
+import Html.Attributes as Attr
 import Html.Events exposing (onClick)
 import HtmlToTailwind
 
@@ -29,13 +29,23 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div []
+    div
+        [ Attr.style "padding" "20px"
+        ]
         [ Html.textarea
             [ Html.Events.onInput OnInput
-            , Html.Attributes.value model.htmlInput
+            , Attr.value model.htmlInput
+            , Attr.style "width" "100%"
+            , Attr.style "height" "200px"
             ]
             []
-        , div [] [ text <| HtmlToTailwind.htmlToElmTailwindModules model.htmlInput ]
+        , Html.pre []
+            [ Html.code []
+                [ model.htmlInput
+                    |> HtmlToTailwind.htmlToElmTailwindModules
+                    |> text
+                ]
+            ]
         ]
 
 
