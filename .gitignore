@@ -1,3 +1,6 @@
 node_modules
 elm-stuff
 index.html
+
+# Local Netlify folder
+.netlify

@@ -1,0 +1,12 @@
+# example netlify.toml
+[build]
+  command = "elm make src/Main.elm --output dist/index.html"
+  functions = "functions"
+  publish = "dist"
+
+[dev]
+  command = "npm start"
+  targetPort = 8000
+  publish = "dist"
+  autoLaunch = true
+  framework = "#custom"
