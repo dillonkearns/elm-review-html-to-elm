@@ -24,9 +24,11 @@ nodeToElm : Html.Parser.Node -> Maybe String
 nodeToElm node =
     case node of
         Html.Parser.Text textBody ->
-            "text "
-                ++ textBody
-                |> Just
+            if String.isEmpty textBody then
+                Nothing
+
+            else
+                "text \"" ++ textBody ++ "\"" |> Just
 
         Html.Parser.Element elementName attributes children ->
             elementName
