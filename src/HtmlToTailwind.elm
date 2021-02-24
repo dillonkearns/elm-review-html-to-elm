@@ -87,6 +87,7 @@ attributeToElm ( name, value ) =
         "TODO"
 
 
+toTwClass : String -> String
 toTwClass twClass =
     "Tw." ++ String.replace "-" "_" twClass
 
