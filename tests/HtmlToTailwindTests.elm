@@ -38,6 +38,11 @@ suite =
                 """<div>               </div>"""
                     |> htmlToElmTailwindModules
                     |> Expect.equal """div [] []"""
+        , test "handles HTML attributes besides class" <|
+            \() ->
+                """<a href="#"></a>"""
+                    |> htmlToElmTailwindModules
+                    |> Expect.equal """a [ Attr.href "#" ] []"""
         , test "strips trailing and leading whitespace" <|
             \() ->
                 """<div>    NO WHITESPACE            </div>"""

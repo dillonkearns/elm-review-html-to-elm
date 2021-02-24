@@ -55,41 +55,50 @@ nodeToElm node =
 attributeToElm : Html.Parser.Attribute -> String
 attributeToElm ( name, value ) =
     if name == "class" then
-        let
-            dict : Dict.Dict String (List String)
-            dict =
-                value
-                    |> String.split " "
-                    |> List.map splitOutBreakpoints
-                    |> Dict.Extra.groupBy (Tuple.first >> Maybe.withDefault "")
-                    |> Dict.map (\k v -> List.map Tuple.second v)
-
-            newThing =
-                dict
-                    |> Dict.toList
-                    |> List.map
-                        (\( breakpoint, twClasses ) ->
-                            --""
-                            if breakpoint == "" then
-                                twClasses
-                                    |> List.map toTwClass
-                                    |> String.join ", "
-
-                            else
-                                "Bp."
-                                    ++ breakpoint
-                                    ++ " [ "
-                                    ++ (twClasses
-                                            |> List.map toTwClass
-                                            |> String.join ", "
-                                       )
-                                    ++ " ]"
-                        )
-        in
-        "css [ " ++ String.join ", " newThing ++ " ]"
+        classAttributeToElm value
 
     else
-        "TODO"
+        "Attr."
+            ++ name
+            ++ " \""
+            ++ value
+            ++ "\""
+
+
+classAttributeToElm : String -> String
+classAttributeToElm value =
+    let
+        dict : Dict.Dict String (List String)
+        dict =
+            value
+                |> String.split " "
+                |> List.map splitOutBreakpoints
+                |> Dict.Extra.groupBy (Tuple.first >> Maybe.withDefault "")
+                |> Dict.map (\k v -> List.map Tuple.second v)
+
+        newThing =
+            dict
+                |> Dict.toList
+                |> List.map
+                    (\( breakpoint, twClasses ) ->
+                        --""
+                        if breakpoint == "" then
+                            twClasses
+                                |> List.map toTwClass
+                                |> String.join ", "
+
+                        else
+                            "Bp."
+                                ++ breakpoint
+                                ++ " [ "
+                                ++ (twClasses
+                                        |> List.map toTwClass
+                                        |> String.join ", "
+                                   )
+                                ++ " ]"
+                    )
+    in
+    "css [ " ++ String.join ", " newThing ++ " ]"
 
 
 toTwClass : String -> String
