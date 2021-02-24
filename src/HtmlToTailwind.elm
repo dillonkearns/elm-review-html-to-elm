@@ -3,6 +3,7 @@ module HtmlToTailwind exposing (htmlToElmTailwindModules)
 import Dict
 import Dict.Extra
 import Html.Parser
+import Regex
 
 
 htmlToElmTailwindModules : String -> String
@@ -89,7 +90,18 @@ attributeToElm ( name, value ) =
 
 toTwClass : String -> String
 toTwClass twClass =
-    "Tw." ++ String.replace "-" "_" twClass
+    "Tw." ++ twClassToElmName twClass
+
+
+{-| Mimics the rules in <https://github.com/matheus23/elm-tailwind-modules/blob/cd5809505934ff72c9b54fd1e181f67b53af8186/src/helpers.ts#L24-L59>
+-}
+twClassToElmName twClass =
+    twClass
+        |> Regex.replace (Regex.fromString "^-([a-z])" |> Maybe.withDefault Regex.never)
+            (\match ->
+                "neg_" ++ (match.submatches |> List.head |> Maybe.andThen identity |> Maybe.withDefault "")
+            )
+        |> String.replace "-" "_"
 
 
 splitOutBreakpoints : String -> ( Maybe String, String )

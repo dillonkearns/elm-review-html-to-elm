@@ -33,4 +33,11 @@ suite =
                 """<div class="flex"><div class="font-extrabold"></div></div>"""
                     |> htmlToElmTailwindModules
                     |> Expect.equal "div [ css [ Tw.flex ] ] [ div [ css [ Tw.font_extrabold ] ] [] ]"
+        , describe "Elm name normalization"
+            [ test "negative" <|
+                \() ->
+                    """<div class="-mt-8"></div>"""
+                        |> htmlToElmTailwindModules
+                        |> Expect.equal "div [ css [ Tw.neg_mt_8 ] ] []"
+            ]
         ]
