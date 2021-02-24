@@ -39,5 +39,10 @@ suite =
                     """<div class="-mt-8"></div>"""
                         |> htmlToElmTailwindModules
                         |> Expect.equal "div [ css [ Tw.neg_mt_8 ] ] []"
+            , test "fractions" <|
+                \() ->
+                    """<div class="h-1/2"></div>"""
+                        |> htmlToElmTailwindModules
+                        |> Expect.equal "div [ css [ Tw.h_1over2 ] ] []"
             ]
         ]
