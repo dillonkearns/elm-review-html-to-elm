@@ -25,7 +25,11 @@ nodeToElm : Html.Parser.Node -> Maybe String
 nodeToElm node =
     case node of
         Html.Parser.Text textBody ->
-            if String.isEmpty textBody then
+            let
+                trimmed =
+                    String.trim textBody
+            in
+            if String.isEmpty trimmed then
                 Nothing
 
             else

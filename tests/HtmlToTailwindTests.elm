@@ -33,6 +33,17 @@ suite =
                 """<div class="flex"><div class="font-extrabold"></div></div>"""
                     |> htmlToElmTailwindModules
                     |> Expect.equal "div [ css [ Tw.flex ] ] [ div [ css [ Tw.font_extrabold ] ] [] ]"
+        , test "removes whitespace-only text" <|
+            \() ->
+                """<div>               </div>"""
+                    |> htmlToElmTailwindModules
+                    |> Expect.equal """div [] []"""
+
+        --, test "strips trailing and leading whitespace" <|
+        --    \() ->
+        --        """<div class="flex">    NO WHITESPACE            </div>"""
+        --            |> htmlToElmTailwindModules
+        --            |> Expect.equal """div [] [ text "NO WHITESPACE" "]"""
         , describe "Elm name normalization"
             [ test "negative" <|
                 \() ->
