@@ -1,0 +1,3 @@
+[submodule "vendor/html-parser"]
+	path = vendor/html-parser
+	url = https://github.com/hecrj/html-parser.git
