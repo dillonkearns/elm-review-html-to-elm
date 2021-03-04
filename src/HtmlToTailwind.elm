@@ -1,6 +1,6 @@
 module HtmlToTailwind exposing (htmlToElmTailwindModules)
 
-import Dict
+import Dict exposing (Dict)
 import Dict.Extra
 import Html.Parser
 import Regex
@@ -18,7 +18,7 @@ htmlToElmTailwindModules input =
 
 nodesToElm : List Html.Parser.Node -> String
 nodesToElm nodes =
-    List.filterMap nodeToElm nodes |> join
+    List.filterMap (nodeToElm Html) nodes |> join
 
 
 type Separator
@@ -38,19 +38,24 @@ join nodes =
         ( separator1, node1 ) :: (( separator2, node2 ) as part2) :: otherNodes ->
             case separator1 of
                 NoSeparator ->
-                    node1 ++ "\n" ++ join (part2 :: otherNodes)
+                    node1 ++ "\n    " ++ join (part2 :: otherNodes)
 
                 CommaSeparator ->
                     node1 ++ ", " ++ join (part2 :: otherNodes)
 
 
-nodeToElm : Html.Parser.Node -> Maybe ( Separator, String )
-nodeToElm node =
+nodeToElm : Context -> Html.Parser.Node -> Maybe ( Separator, String )
+nodeToElm context node =
     case node of
         Html.Parser.Text textBody ->
             let
                 trimmed =
                     String.trim textBody
+                        |> Regex.replace
+                            (Regex.fromString "\\s+"
+                                |> Maybe.withDefault Regex.never
+                            )
+                            (\_ -> " ")
             in
             if String.isEmpty trimmed then
                 Nothing
@@ -59,16 +64,30 @@ nodeToElm node =
                 ( CommaSeparator, "text \"" ++ trimmed ++ "\"" ) |> Just
 
         Html.Parser.Element elementName attributes children ->
+            let
+                isSvg =
+                    isSvgContext attributes
+            in
             ( CommaSeparator
             , elementName
                 ++ " ["
-                ++ (List.map
-                        (attributeToElm >> surroundWithSpaces)
+                ++ (List.filterMap
+                        (\attribute ->
+                            attribute
+                                |> attributeToElm
+                                    (if isSvg then
+                                        Svg
+
+                                     else
+                                        context
+                                    )
+                                |> Maybe.map surroundWithSpaces
+                        )
                         attributes
                         |> String.join ", "
                    )
                 ++ "] ["
-                ++ (List.filterMap nodeToElm children |> join |> surroundWithSpaces)
+                ++ (List.filterMap (nodeToElm context) children |> join |> surroundWithSpaces)
                 ++ "]"
             )
                 |> Just
@@ -77,23 +96,60 @@ nodeToElm node =
             Just <| ( NoSeparator, "{-" ++ string ++ "-}" )
 
 
-attributeToElm : Html.Parser.Attribute -> String
-attributeToElm ( name, value ) =
-    if name == "class" then
-        classAttributeToElm value
+isSvgContext : List ( String, String ) -> Bool
+isSvgContext attributes =
+    attributes
+        |> List.any (\( key, value ) -> key /= "xmlns")
+
+
+type Context
+    = Html
+    | Svg
+
+
+attributeToElm : Context -> Html.Parser.Attribute -> Maybe String
+attributeToElm context ( name, value ) =
+    if name == "xmlns" then
+        Nothing
+
+    else if name == "class" then
+        Just <|
+            classAttributeToElm value
+
+    else if context == Svg then
+        svgAttr ( name, value )
 
     else
-        "Attr."
-            ++ name
-            ++ " \""
-            ++ value
-            ++ "\""
+        Just <|
+            "Attr."
+                ++ name
+                ++ " \""
+                ++ value
+                ++ "\""
+
+
+svgMappings : Dict String String
+svgMappings =
+    [ ( "viewbox", "viewBox" )
+    , ( "fill", "fill" )
+    ]
+        |> Dict.fromList
+
+
+svgAttr : ( String, String ) -> Maybe String
+svgAttr ( name, value ) =
+    case Dict.get name svgMappings of
+        Just functionName ->
+            Just <| "SvgAttr." ++ functionName ++ " \"" ++ value ++ "\""
+
+        Nothing ->
+            Just <| "attribute \"" ++ name ++ "\" \"" ++ value ++ "\""
 
 
 classAttributeToElm : String -> String
 classAttributeToElm value =
     let
-        dict : Dict.Dict String (List String)
+        dict : Dict String (List String)
         dict =
             value
                 |> String.split " "

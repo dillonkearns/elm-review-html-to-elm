@@ -2,9 +2,21 @@
 
 const { compileToStringSync } = require("node-elm-compiler");
 const fs = require("fs");
+const { exec } = require("child_process");
 
 async function run() {
   runElm(fs.readFileSync("./examples/Example1.html").toString());
+  exec(
+    "elm make ./examples/Example1.elm --output=/dev/null",
+    (error, stdout, stderr) => {
+      console.log(stdout);
+      console.log(stderr);
+      if (error !== null) {
+        // console.log(`exec error: ${error}`);
+        process.exitCode = 1;
+      }
+    }
+  );
 }
 
 async function runElm(htmlInput) {
