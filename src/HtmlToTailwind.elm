@@ -100,7 +100,7 @@ nodeToElm context node =
 isSvgContext : List ( String, String ) -> Bool
 isSvgContext attributes =
     attributes
-        |> List.any (\( key, value ) -> key /= "xmlns")
+        |> List.any (\( key, value ) -> key == "xmlns")
 
 
 type Context
@@ -121,12 +121,12 @@ attributeToElm context ( name, value ) =
         svgAttr ( name, value )
 
     else
-        Just <|
-            "Attr."
-                ++ name
-                ++ " \""
-                ++ value
-                ++ "\""
+        case ImplementedFunctions.lookup ImplementedFunctions.htmlAttributes name of
+            Just functionName ->
+                Just <| "Attr." ++ functionName ++ " \"" ++ value ++ "\""
+
+            Nothing ->
+                Just <| "attribute \"" ++ name ++ "\" \"" ++ value ++ "\""
 
 
 svgAttr : ( String, String ) -> Maybe String
