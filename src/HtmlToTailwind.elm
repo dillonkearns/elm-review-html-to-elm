@@ -129,14 +129,6 @@ attributeToElm context ( name, value ) =
                 ++ "\""
 
 
-svgMappings : Dict String String
-svgMappings =
-    [ ( "viewbox", "viewBox" )
-    , ( "fill", "fill" )
-    ]
-        |> Dict.fromList
-
-
 svgAttr : ( String, String ) -> Maybe String
 svgAttr ( name, value ) =
     case ImplementedFunctions.lookup ImplementedFunctions.svgAttributes name of
