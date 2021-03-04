@@ -21,6 +21,7 @@
   "homepage": "https://github.com/dillonkearns/html-to-elm-tailwind-modules#readme",
   "devDependencies": {
     "elm-live": "^4.0.2",
+    "elm-test": "^0.19.1-revision6",
     "elm-tooling": "^1.2.0"
   }
 }
