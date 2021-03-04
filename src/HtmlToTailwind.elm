@@ -3,6 +3,7 @@ module HtmlToTailwind exposing (htmlToElmTailwindModules)
 import Dict exposing (Dict)
 import Dict.Extra
 import Html.Parser
+import ImplementedFunctions
 import Regex
 
 
@@ -138,7 +139,7 @@ svgMappings =
 
 svgAttr : ( String, String ) -> Maybe String
 svgAttr ( name, value ) =
-    case Dict.get name svgMappings of
+    case ImplementedFunctions.lookup ImplementedFunctions.svgAttributes name of
         Just functionName ->
             Just <| "SvgAttr." ++ functionName ++ " \"" ++ value ++ "\""
 
