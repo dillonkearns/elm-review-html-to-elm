@@ -18,10 +18,33 @@ htmlToElmTailwindModules input =
 
 nodesToElm : List Html.Parser.Node -> String
 nodesToElm nodes =
-    List.filterMap nodeToElm nodes |> String.join ", "
+    List.filterMap nodeToElm nodes |> join
 
 
-nodeToElm : Html.Parser.Node -> Maybe String
+type Separator
+    = CommaSeparator
+    | NoSeparator
+
+
+join : List ( Separator, String ) -> String
+join nodes =
+    case nodes of
+        [] ->
+            ""
+
+        [ ( separator, singleNode ) ] ->
+            singleNode
+
+        ( separator1, node1 ) :: (( separator2, node2 ) as part2) :: otherNodes ->
+            case separator1 of
+                NoSeparator ->
+                    node1 ++ "\n" ++ join (part2 :: otherNodes)
+
+                CommaSeparator ->
+                    node1 ++ ", " ++ join (part2 :: otherNodes)
+
+
+nodeToElm : Html.Parser.Node -> Maybe ( Separator, String )
 nodeToElm node =
     case node of
         Html.Parser.Text textBody ->
@@ -33,10 +56,11 @@ nodeToElm node =
                 Nothing
 
             else
-                "text \"" ++ trimmed ++ "\"" |> Just
+                ( CommaSeparator, "text \"" ++ trimmed ++ "\"" ) |> Just
 
         Html.Parser.Element elementName attributes children ->
-            elementName
+            ( CommaSeparator
+            , elementName
                 ++ " ["
                 ++ (List.map
                         (attributeToElm >> surroundWithSpaces)
@@ -44,12 +68,13 @@ nodeToElm node =
                         |> String.join ", "
                    )
                 ++ "] ["
-                ++ (List.filterMap nodeToElm children |> String.join ", " |> surroundWithSpaces)
+                ++ (List.filterMap nodeToElm children |> join |> surroundWithSpaces)
                 ++ "]"
+            )
                 |> Just
 
         Html.Parser.Comment string ->
-            Nothing
+            Just <| ( NoSeparator, "{-" ++ string ++ "-}" )
 
 
 attributeToElm : Html.Parser.Attribute -> String
