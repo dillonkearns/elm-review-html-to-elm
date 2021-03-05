@@ -1,25 +1,79 @@
 <main>
     <form noValidate>
-        <input readonly tabindex="2" disabled autofocus>
+        <input readonly tabindex="2" height="100" width="100" minlength="2" maxlength="100" disabled autofocus>
         <input type="email" multiple>
         <input type="text" required>
+        <input type="checkbox" id="scales" name="scales" checked>
+        <label for="story">Tell us your story:</label>
+        <textarea id="story" name="story" rows="5" cols="33">
+        It was a dark and stormy night...
+        </textarea>
+
     </form>
 
     <!-- The second value will be selected initially -->
-    <select name="choice">
+    <select name="choice" size="2">
         <option value="first">First Value</option>
         <option value="second" selected>Second Value</option>
         <option value="third">Third Value</option>
     </select>
     <img isMap>
-    <ol reversed>
+    <ol start="100" reversed>
         <li>1</li>
         <li>2</li>
         <li>3</li>
     </ol>
     <div hidden></div>
     <div contentEditable spellcheck>Hello</div>
-    <video autoplay controls loop>
-    <track default />
+    <video autoplay controls loop
+    src="/media/cc0-videos/friday.mp4"
+    >
+    <track default
+    kind="captions"
+           srclang="en"
+           src="/media/examples/friday.vtt" 
+     />
     </video>
+
+    <table>
+        <caption>Alien football stars</caption>
+        
+        <tr>
+            <th scope="col" colspan="2" rowspan="2">Player</th>
+            <th scope="col">Gloobles</th>
+            <th scope="col">Za'taak</th>
+        </tr>
+        <tr>
+            <th scope="row">TR-7</th>
+            <td>7</td>
+            <td>4,569</td>
+        </tr>
+        <tr>
+            <th scope="row">Khiresh Odo</th>
+            <td>7</td>
+            <td>7,223</td>
+        </tr>
+        <tr>
+            <th scope="row">Mia Oolong</th>
+            <td>9</td>
+            <td>6,219</td>
+        </tr>
+    </table>
+
+    <table>
+        <colgroup>
+            <col span="2" style="background-color:red">
+            <col style="background-color:yellow">
+        </colgroup>
+        <tr>
+            <th>ISBN</th>
+            <th>Title</th>
+            <th>Price</th>
+        </tr>
+        <tr>
+            <td>3476896</td>
+            <td>My first HTML</td>
+            <td>$53</td>
+        </tr>
+    </table>
 </main>

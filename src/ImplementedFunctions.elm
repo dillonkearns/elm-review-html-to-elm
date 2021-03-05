@@ -550,18 +550,19 @@ boolAttributeFunctions =
 -- not currently used
 
 
+intAttributeFunctions : List String
 intAttributeFunctions =
-    [ "maxlength"
+    [ "tabindex"
+    , "height"
+    , "width"
     , "minlength"
+    , "maxlength"
     , "size"
     , "cols"
     , "rows"
-    , "height"
-    , "width"
     , "start"
     , "colspan"
     , "rowspan"
-    , "tabindex"
     ]
 
 
