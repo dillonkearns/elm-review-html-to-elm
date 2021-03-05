@@ -5,7 +5,7 @@
   publish = "dist"
 
 [dev]
-  command = "npm start"
+  command = "npx elm-live src/Main.elm"
   targetPort = 8000
   publish = "dist"
   autoLaunch = true

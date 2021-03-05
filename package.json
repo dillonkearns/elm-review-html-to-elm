@@ -1,11 +1,11 @@
 {
   "name": "html-to-elm-tailwind-modules",
   "version": "1.0.0",
-  "description": "",
+  "description": "Convert HTML to Elm, including tailwind utilities.",
   "main": "index.js",
   "scripts": {
-    "start": "elm-live src/Main.elm",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ntl dev --port 3000",
+    "test": "(cd ete-tests && npm test)",
     "postinstall": "elm-tooling install"
   },
   "repository": {
@@ -13,12 +13,12 @@
     "url": "git+https://github.com/dillonkearns/html-to-elm-tailwind-modules.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Dillon Kearns",
+  "license": "BSD-3",
   "bugs": {
     "url": "https://github.com/dillonkearns/html-to-elm-tailwind-modules/issues"
   },
-  "homepage": "https://github.com/dillonkearns/html-to-elm-tailwind-modules#readme",
+  "homepage": "https://html-to-elm.com",
   "devDependencies": {
     "elm-live": "^4.0.2",
     "elm-test": "^0.19.1-revision6",
