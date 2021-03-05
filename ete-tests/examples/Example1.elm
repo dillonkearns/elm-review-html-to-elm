@@ -11,14 +11,14 @@ import Tailwind.Utilities as Tw
 
 result =
         {- This example requires Tailwind CSS v2.0+ -}
-    div
+            div
         [ css [ Tw.rounded_md, Tw.bg_yellow_50, Tw.p_4 ]]
           [ div
             [ css [ Tw.flex ]]
               [ div
                 [ css [ Tw.flex_shrink_0 ]]
                   [                 {- Heroicon name: solid/exclamation -}
-svg
+                    svg
                     [ css [ Tw.h_5, Tw.w_5, Tw.text_yellow_400 ]
 
                     , SvgAttr.viewBox "0 0 20 20"

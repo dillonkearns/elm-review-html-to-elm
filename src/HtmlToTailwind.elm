@@ -111,7 +111,7 @@ nodeToElm indentLevel context node =
                 |> Just
 
         Html.Parser.Comment string ->
-            Just <| ( indentLevel, NoSeparator, indentation indentLevel ++ "{-" ++ string ++ "-}\n" )
+            Just <| ( indentLevel, NoSeparator, indentation indentLevel ++ "{-" ++ string ++ "-}\n" ++ indentation (indentLevel + 1) )
 
 
 indentation : Int -> String
