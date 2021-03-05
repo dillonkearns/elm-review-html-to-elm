@@ -14,12 +14,7 @@ htmlToElmTailwindModules input =
             "ERROR"
 
         Ok value ->
-            nodesToElm value
-
-
-nodesToElm : List Html.Parser.Node -> String
-nodesToElm nodes =
-    List.filterMap (nodeToElm 1 Html) nodes |> join
+            List.filterMap (nodeToElm 1 Html) value |> join
 
 
 type Separator
