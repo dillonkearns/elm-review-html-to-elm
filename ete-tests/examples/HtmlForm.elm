@@ -20,7 +20,7 @@ result =
                 ]
                   [ text "Enter your name:" ]
             , input
-                [ attribute "type" "text"
+                [ Attr.type_ "text"
                 , Attr.name "name"
                 , Attr.id "name"
                 , attribute "required" ""
@@ -33,7 +33,7 @@ result =
                 ]
                   [ text "Enter your email:" ]
             , input
-                [ attribute "type" "email"
+                [ Attr.type_ "email"
                 , Attr.name "email"
                 , Attr.id "email"
                 , attribute "required" ""
@@ -42,7 +42,7 @@ result =
              ]
         , div []
               [ input
-                [ attribute "type" "submit"
+                [ Attr.type_ "submit"
                 , Attr.value "Subscribe!"
                 ]
                   []

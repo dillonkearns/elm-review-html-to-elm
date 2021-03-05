@@ -188,7 +188,7 @@ attributeToElm indentLevel context ( name, value ) =
                 )
 
     else
-        case ImplementedFunctions.lookup ImplementedFunctions.htmlAttributes name of
+        case ImplementedFunctions.lookupWithDict ImplementedFunctions.htmlAttributeDict ImplementedFunctions.htmlAttributes name of
             Just functionName ->
                 [ "Attr." ++ functionName ++ " \"" ++ value ++ "\"" ]
 

@@ -88,7 +88,7 @@ result =
 
                     ]
                       [ button
-                        [ attribute "type" "button"
+                        [ Attr.type_ "button"
                         , css
                             [ Tw.relative
                             , Tw.w_1over2
@@ -118,7 +118,7 @@ result =
                         ]
                           [ text "Monthly billing" ]
                     , button
-                        [ attribute "type" "button"
+                        [ Attr.type_ "button"
                         , css
                             [ Tw.ml_0_dot_5
                             , Tw.relative

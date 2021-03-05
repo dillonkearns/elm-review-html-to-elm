@@ -174,6 +174,11 @@ svgTags =
     ]
 
 
+htmlAttributeDict : Dict String String
+htmlAttributeDict =
+    Dict.fromList [ ( "type", "type_" ) ]
+
+
 htmlAttributes =
     [ "key"
     , -- "style",   -- style is disabled as it requires special parsing
