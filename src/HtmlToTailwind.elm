@@ -27,16 +27,16 @@ type Separator
     | NoSeparator
 
 
-join : List ( Separator, String ) -> String
+join : List ( Int, Separator, String ) -> String
 join nodes =
     case nodes of
         [] ->
             ""
 
-        [ ( separator, singleNode ) ] ->
+        [ ( indentLevel, separator, singleNode ) ] ->
             singleNode
 
-        ( separator1, node1 ) :: (( separator2, node2 ) as part2) :: otherNodes ->
+        ( indentLevel1, separator1, node1 ) :: (( indentLevel2, separator2, node2 ) as part2) :: otherNodes ->
             case separator1 of
                 NoSeparator ->
                     node1 ++ "" ++ join (part2 :: otherNodes)
@@ -45,7 +45,7 @@ join nodes =
                     node1 ++ ", " ++ join (part2 :: otherNodes)
 
 
-nodeToElm : Int -> Context -> Html.Parser.Node -> Maybe ( Separator, String )
+nodeToElm : Int -> Context -> Html.Parser.Node -> Maybe ( Int, Separator, String )
 nodeToElm indentLevel context node =
     case node of
         Html.Parser.Text textBody ->
@@ -62,17 +62,16 @@ nodeToElm indentLevel context node =
                 Nothing
 
             else
-                ( CommaSeparator, "text \"" ++ trimmed ++ "\"" ) |> Just
+                ( 0, CommaSeparator, "text \"" ++ trimmed ++ "\"" ) |> Just
 
         Html.Parser.Element elementName attributes children ->
             let
                 isSvg =
                     isSvgContext attributes
             in
-            ( CommaSeparator
-            , "\n"
-                ++ indentation indentLevel
-                ++ elementName
+            ( indentLevel
+            , CommaSeparator
+            , elementName
                 ++ " ["
                 ++ (List.filterMap
                         (\attribute ->
@@ -91,12 +90,13 @@ nodeToElm indentLevel context node =
                    )
                 ++ "] ["
                 ++ (List.filterMap (nodeToElm (indentLevel + 1) context) children |> join |> surroundWithSpaces)
-                ++ "]"
+                ++ "]\n"
+                ++ indentation indentLevel
             )
                 |> Just
 
         Html.Parser.Comment string ->
-            Just <| ( NoSeparator, "{-" ++ string ++ "-}" )
+            Just <| ( indentLevel, NoSeparator, indentation indentLevel ++ "{-" ++ string ++ "-}\n" )
 
 
 indentation : Int -> String
