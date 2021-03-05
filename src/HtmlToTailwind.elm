@@ -187,7 +187,7 @@ svgAttr : ( String, String ) -> Maybe String
 svgAttr ( name, value ) =
     case ImplementedFunctions.lookup ImplementedFunctions.svgAttributes name of
         Just functionName ->
-            Just <| "SvgAttr." ++ functionName ++ " \"" ++ value ++ "\""
+            Just <| "SvgAttr." ++ ImplementedFunctions.toCamelCase functionName ++ " \"" ++ value ++ "\""
 
         Nothing ->
             Just <| "attribute \"" ++ name ++ "\" \"" ++ value ++ "\""
