@@ -11,7 +11,7 @@ import Tailwind.Utilities as Tw
 
 result =
         {- This example requires Tailwind CSS v2.0+ -}
-            div
+        div
         [ css [ Tw.bg_white ]]
           [ div
             [ css [ Tw.max_w_7xl, Tw.mx_auto, Tw.py_24, Tw.px_4, Bp.lg [ Tw.px_8 ], Bp.sm [ Tw.px_6 ] ]]
@@ -74,7 +74,7 @@ result =
                               [ li
                                 [ css [ Tw.flex, Tw.space_x_3 ]]
                                   [                                 {- Heroicon name: solid/check -}
-                                    svg
+                                svg
                                     [ css [ Tw.flex_shrink_0, Tw.h_5, Tw.w_5, Tw.text_green_500 ]
 
                                     , SvgAttr.viewBox "0 0 20 20"
@@ -97,7 +97,7 @@ result =
                             , li
                                 [ css [ Tw.flex, Tw.space_x_3 ]]
                                   [                                 {- Heroicon name: solid/check -}
-                                    svg
+                                svg
                                     [ css [ Tw.flex_shrink_0, Tw.h_5, Tw.w_5, Tw.text_green_500 ]
 
                                     , SvgAttr.viewBox "0 0 20 20"
@@ -155,7 +155,7 @@ result =
                               [ li
                                 [ css [ Tw.flex, Tw.space_x_3 ]]
                                   [                                 {- Heroicon name: solid/check -}
-                                    svg
+                                svg
                                     [ css [ Tw.flex_shrink_0, Tw.h_5, Tw.w_5, Tw.text_green_500 ]
 
                                     , SvgAttr.viewBox "0 0 20 20"
@@ -178,7 +178,7 @@ result =
                             , li
                                 [ css [ Tw.flex, Tw.space_x_3 ]]
                                   [                                 {- Heroicon name: solid/check -}
-                                    svg
+                                svg
                                     [ css [ Tw.flex_shrink_0, Tw.h_5, Tw.w_5, Tw.text_green_500 ]
 
                                     , SvgAttr.viewBox "0 0 20 20"
@@ -201,7 +201,7 @@ result =
                             , li
                                 [ css [ Tw.flex, Tw.space_x_3 ]]
                                   [                                 {- Heroicon name: solid/check -}
-                                    svg
+                                svg
                                     [ css [ Tw.flex_shrink_0, Tw.h_5, Tw.w_5, Tw.text_green_500 ]
 
                                     , SvgAttr.viewBox "0 0 20 20"
@@ -259,7 +259,7 @@ result =
                               [ li
                                 [ css [ Tw.flex, Tw.space_x_3 ]]
                                   [                                 {- Heroicon name: solid/check -}
-                                    svg
+                                svg
                                     [ css [ Tw.flex_shrink_0, Tw.h_5, Tw.w_5, Tw.text_green_500 ]
 
                                     , SvgAttr.viewBox "0 0 20 20"
@@ -282,7 +282,7 @@ result =
                             , li
                                 [ css [ Tw.flex, Tw.space_x_3 ]]
                                   [                                 {- Heroicon name: solid/check -}
-                                    svg
+                                svg
                                     [ css [ Tw.flex_shrink_0, Tw.h_5, Tw.w_5, Tw.text_green_500 ]
 
                                     , SvgAttr.viewBox "0 0 20 20"
@@ -305,7 +305,7 @@ result =
                             , li
                                 [ css [ Tw.flex, Tw.space_x_3 ]]
                                   [                                 {- Heroicon name: solid/check -}
-                                    svg
+                                svg
                                     [ css [ Tw.flex_shrink_0, Tw.h_5, Tw.w_5, Tw.text_green_500 ]
 
                                     , SvgAttr.viewBox "0 0 20 20"
@@ -328,7 +328,7 @@ result =
                             , li
                                 [ css [ Tw.flex, Tw.space_x_3 ]]
                                   [                                 {- Heroicon name: solid/check -}
-                                    svg
+                                svg
                                     [ css [ Tw.flex_shrink_0, Tw.h_5, Tw.w_5, Tw.text_green_500 ]
 
                                     , SvgAttr.viewBox "0 0 20 20"
@@ -386,7 +386,7 @@ result =
                               [ li
                                 [ css [ Tw.flex, Tw.space_x_3 ]]
                                   [                                 {- Heroicon name: solid/check -}
-                                    svg
+                                svg
                                     [ css [ Tw.flex_shrink_0, Tw.h_5, Tw.w_5, Tw.text_green_500 ]
 
                                     , SvgAttr.viewBox "0 0 20 20"
@@ -409,7 +409,7 @@ result =
                             , li
                                 [ css [ Tw.flex, Tw.space_x_3 ]]
                                   [                                 {- Heroicon name: solid/check -}
-                                    svg
+                                svg
                                     [ css [ Tw.flex_shrink_0, Tw.h_5, Tw.w_5, Tw.text_green_500 ]
 
                                     , SvgAttr.viewBox "0 0 20 20"
@@ -432,7 +432,7 @@ result =
                             , li
                                 [ css [ Tw.flex, Tw.space_x_3 ]]
                                   [                                 {- Heroicon name: solid/check -}
-                                    svg
+                                svg
                                     [ css [ Tw.flex_shrink_0, Tw.h_5, Tw.w_5, Tw.text_green_500 ]
 
                                     , SvgAttr.viewBox "0 0 20 20"
@@ -455,7 +455,7 @@ result =
                             , li
                                 [ css [ Tw.flex, Tw.space_x_3 ]]
                                   [                                 {- Heroicon name: solid/check -}
-                                    svg
+                                svg
                                     [ css [ Tw.flex_shrink_0, Tw.h_5, Tw.w_5, Tw.text_green_500 ]
 
                                     , SvgAttr.viewBox "0 0 20 20"
@@ -478,7 +478,7 @@ result =
                             , li
                                 [ css [ Tw.flex, Tw.space_x_3 ]]
                                   [                                 {- Heroicon name: solid/check -}
-                                    svg
+                                svg
                                     [ css [ Tw.flex_shrink_0, Tw.h_5, Tw.w_5, Tw.text_green_500 ]
 
                                     , SvgAttr.viewBox "0 0 20 20"
@@ -501,7 +501,7 @@ result =
                             , li
                                 [ css [ Tw.flex, Tw.space_x_3 ]]
                                   [                                 {- Heroicon name: solid/check -}
-                                    svg
+                                svg
                                     [ css [ Tw.flex_shrink_0, Tw.h_5, Tw.w_5, Tw.text_green_500 ]
 
                                     , SvgAttr.viewBox "0 0 20 20"
@@ -524,7 +524,7 @@ result =
                             , li
                                 [ css [ Tw.flex, Tw.space_x_3 ]]
                                   [                                 {- Heroicon name: solid/check -}
-                                    svg
+                                svg
                                     [ css [ Tw.flex_shrink_0, Tw.h_5, Tw.w_5, Tw.text_green_500 ]
 
                                     , SvgAttr.viewBox "0 0 20 20"

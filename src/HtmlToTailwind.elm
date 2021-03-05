@@ -68,6 +68,20 @@ nodeToElm indentLevel context node =
             let
                 isSvg =
                     isSvgContext attributes
+
+                filteredAttributes =
+                    List.filterMap
+                        (\attribute ->
+                            attribute
+                                |> attributeToElm
+                                    (if isSvg then
+                                        Svg
+
+                                     else
+                                        context
+                                    )
+                        )
+                        attributes
             in
             ( indentLevel
             , CommaSeparator
@@ -78,40 +92,34 @@ nodeToElm indentLevel context node =
                 ""
               )
                 ++ elementName
-                ++ (List.filterMap
-                        (\attribute ->
-                            attribute
-                                |> attributeToElm
-                                    (if isSvg then
-                                        Svg
+                ++ ((if List.isEmpty filteredAttributes then
+                        " []\n"
 
-                                     else
-                                        context
-                                    )
-                         --|> Maybe.map surroundWithSpaces
+                     else
+                        (filteredAttributes
+                            |> List.indexedMap
+                                (\index string ->
+                                    if index == 0 then
+                                        "\n" ++ indentation (indentLevel + 1) ++ "[ " ++ string
+
+                                    else
+                                        "\n" ++ indentation (indentLevel + 1) ++ ", " ++ string
+                                )
+                            |> String.join "\n"
                         )
-                        attributes
-                        |> List.indexedMap
-                            (\index string ->
-                                if index == 0 then
-                                    "\n" ++ indentation (indentLevel + 1) ++ "[ " ++ string
-
-                                else
-                                    "\n" ++ indentation (indentLevel + 1) ++ ", " ++ string
-                            )
-                        |> String.join "\n"
+                            ++ "]\n"
+                    )
+                        ++ indentation indentLevel
+                        ++ "      ["
+                        ++ (List.filterMap (nodeToElm (indentLevel + 1) context) children |> join |> surroundWithSpaces)
+                        ++ "]\n"
+                        ++ indentation indentLevel
                    )
-                ++ "]\n"
-                ++ indentation indentLevel
-                ++ "      ["
-                ++ (List.filterMap (nodeToElm (indentLevel + 1) context) children |> join |> surroundWithSpaces)
-                ++ "]\n"
-                ++ indentation indentLevel
             )
                 |> Just
 
         Html.Parser.Comment string ->
-            Just <| ( indentLevel, NoSeparator, indentation indentLevel ++ "{-" ++ string ++ "-}\n" ++ indentation (indentLevel + 1) )
+            Just <| ( indentLevel, NoSeparator, indentation indentLevel ++ "{-" ++ string ++ "-}\n" ++ indentation indentLevel )
 
 
 indentation : Int -> String
