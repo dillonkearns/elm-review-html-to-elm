@@ -23,7 +23,7 @@ result =
                 [ Attr.type_ "text"
                 , Attr.name "name"
                 , Attr.id "name"
-                , attribute "required" ""
+                , Attr.required True
                 ]
                   []
              ]
@@ -36,7 +36,7 @@ result =
                 [ Attr.type_ "email"
                 , Attr.name "email"
                 , Attr.id "email"
-                , attribute "required" ""
+                , Attr.required True
                 ]
                   []
              ]

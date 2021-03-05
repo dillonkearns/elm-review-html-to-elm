@@ -524,34 +524,25 @@ capitalize string =
             string
 
 
-
--- not currently used
-
-
+boolAttributeFunctions : List String
 boolAttributeFunctions =
     [ "hidden"
+    , "contenteditable"
+    , "spellcheck"
+    , "autoplay"
+    , "controls"
+    , "loop"
+    , "default"
     , "checked"
     , "selected"
-    , "autocomplete"
     , "autofocus"
     , "disabled"
     , "multiple"
     , "novalidate"
     , "readonly"
     , "required"
-    , "download"
     , "ismap"
-    , "autoplay"
-    , "controls"
-    , "loop"
-    , "default"
-    , "seamless"
     , "reversed"
-    , "async"
-    , "defer"
-    , "scoped"
-    , "contenteditable"
-    , "spellcheck"
     ]
 
 

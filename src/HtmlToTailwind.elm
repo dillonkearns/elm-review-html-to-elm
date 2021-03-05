@@ -188,12 +188,17 @@ attributeToElm indentLevel context ( name, value ) =
                 )
 
     else
-        case ImplementedFunctions.lookupWithDict ImplementedFunctions.htmlAttributeDict ImplementedFunctions.htmlAttributes name of
-            Just functionName ->
-                [ "Attr." ++ functionName ++ " \"" ++ value ++ "\"" ]
+        case ImplementedFunctions.lookup ImplementedFunctions.boolAttributeFunctions name of
+            Just boolFunction ->
+                [ "Attr." ++ boolFunction ++ " True" ]
 
             Nothing ->
-                [ "attribute \"" ++ name ++ "\" \"" ++ value ++ "\"" ]
+                case ImplementedFunctions.lookupWithDict ImplementedFunctions.htmlAttributeDict ImplementedFunctions.htmlAttributes name of
+                    Just functionName ->
+                        [ "Attr." ++ functionName ++ " \"" ++ value ++ "\"" ]
+
+                    Nothing ->
+                        [ "attribute \"" ++ name ++ "\" \"" ++ value ++ "\"" ]
 
 
 svgAttr : ( String, String ) -> String
