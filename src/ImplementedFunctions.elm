@@ -142,6 +142,8 @@ svgTags =
     , "clipPath"
     , "path"
     , "g"
+    , "svg"
+    , "path"
     ]
 
 

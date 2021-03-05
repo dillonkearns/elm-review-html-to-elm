@@ -61,20 +61,44 @@ nodeToElm indentLevel context node =
 
         Html.Parser.Element elementName attributes children ->
             let
+                elementFunction =
+                    case newContext of
+                        Svg ->
+                            "Svg."
+                                ++ (case ImplementedFunctions.lookup ImplementedFunctions.svgTags elementName of
+                                        Just functionName ->
+                                            functionName
+
+                                        Nothing ->
+                                            "node \"" ++ elementName ++ "\""
+                                   )
+
+                        Html ->
+                            ""
+                                ++ (case ImplementedFunctions.lookup ImplementedFunctions.htmlTags elementName of
+                                        Just functionName ->
+                                            functionName
+
+                                        Nothing ->
+                                            "node \"" ++ elementName ++ "\""
+                                   )
+
                 isSvg =
                     isSvgContext attributes
+
+                newContext =
+                    if isSvg then
+                        Svg
+
+                    else
+                        context
 
                 filteredAttributes =
                     List.filterMap
                         (\attribute ->
                             attribute
                                 |> attributeToElm (indentLevel + 1)
-                                    (if isSvg then
-                                        Svg
-
-                                     else
-                                        context
-                                    )
+                                    newContext
                         )
                         attributes
             in
@@ -85,11 +109,11 @@ nodeToElm indentLevel context node =
                else
                 ""
               )
-                ++ elementName
+                ++ elementFunction
                 ++ (indentedThingy (indentLevel + 1) identity filteredAttributes
                         ++ indentation indentLevel
                         ++ "      ["
-                        ++ (List.filterMap (nodeToElm (indentLevel + 1) context) children |> join |> surroundWithSpaces)
+                        ++ (List.filterMap (nodeToElm (indentLevel + 1) newContext) children |> join |> surroundWithSpaces)
                         ++ "]\n"
                         ++ indentation indentLevel
                    )
