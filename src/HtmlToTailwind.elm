@@ -209,13 +209,21 @@ svgAttr ( name, value ) =
 classAttributeToElm : Int -> String -> String
 classAttributeToElm indentLevel value =
     let
-        dict : Dict String (List String)
+        dict : Dict String (Dict String (List String))
         dict =
             value
                 |> String.split " "
                 |> List.map splitOutBreakpoints
-                |> Dict.Extra.groupBy (\breakpoint -> breakpoint |> .breakpoint)
-                |> Dict.map (\k v -> List.map .tailwindClass v)
+                |> Dict.Extra.groupBy .breakpoint
+                |> Dict.map
+                    (\k v ->
+                        v
+                            |> Dict.Extra.groupBy .pseudoClass
+                            |> Dict.map
+                                (\k2 v2 ->
+                                    List.map .tailwindClass v2
+                                )
+                    )
 
         newThing =
             dict
@@ -223,27 +231,54 @@ classAttributeToElm indentLevel value =
                 |> List.map
                     (\( breakpoint, twClasses ) ->
                         if breakpoint == "" then
-                            twClasses
+                            let
+                                allClasses : List String
+                                allClasses =
+                                    twClasses
+                                        |> Dict.values
+                                        |> List.concat
+                            in
+                            allClasses
                                 |> List.map toTwClass
 
                         else
-                            case ImplementedFunctions.lookupWithDict ImplementedFunctions.pseudoClasses ImplementedFunctions.cssHelpers breakpoint of
-                                Just functionName ->
-                                    [ "Css."
-                                        ++ functionName
-                                        ++ " "
-                                        ++ indentedThingy (indentLevel + 1) toTwClass twClasses
-                                    ]
+                            twClasses
+                                |> Dict.toList
+                                |> List.map
+                                    (\( pseudoclass, twClassList ) ->
+                                        if pseudoclass == "" then
+                                            twClassList
+                                                |> List.map toTwClass
 
-                                Nothing ->
-                                    [ "Bp."
-                                        ++ breakpoint
-                                        ++ indentedThingy (indentLevel + 1) toTwClass twClasses
-                                    ]
+                                        else
+                                            case ImplementedFunctions.lookupWithDict ImplementedFunctions.pseudoClasses ImplementedFunctions.cssHelpers pseudoclass of
+                                                Just functionName ->
+                                                    [ "Css."
+                                                        ++ functionName
+                                                        ++ " "
+                                                        ++ indentedThingy (indentLevel + 3) toTwClass twClassList
+                                                    ]
+
+                                                Nothing ->
+                                                    [ "Bp."
+                                                        ++ breakpoint
+                                                        ++ indentedThingy (indentLevel + 3) toTwClass twClassList
+                                                    ]
+                                    )
+                                |> List.map
+                                    (\thing ->
+                                        (case ImplementedFunctions.lookupWithDict ImplementedFunctions.pseudoClasses ImplementedFunctions.cssHelpers breakpoint of
+                                            Just functionName ->
+                                                "Css." ++ functionName
+
+                                            Nothing ->
+                                                "Bp." ++ breakpoint
+                                        )
+                                            ++ indentedThingy (indentLevel + 2) identity thing
+                                    )
                     )
                 |> List.concat
     in
-    --"css [ " ++ String.join ", " newThing ++ " ]"
     "css" ++ indentedThingy (indentLevel + 1) identity newThing
 
 
@@ -268,30 +303,30 @@ twClassToElmName twClass =
         |> String.replace "-" "_"
 
 
-splitOutBreakpoints : String -> { breakpoint : String, pseudoClass : Maybe String, tailwindClass : String }
+splitOutBreakpoints : String -> { breakpoint : String, pseudoClass : String, tailwindClass : String }
 splitOutBreakpoints tailwindClassName =
     case String.split ":" tailwindClassName of
         [ breakpoint, pseudoClass, tailwindClass ] ->
             { breakpoint = breakpoint
-            , pseudoClass = Just pseudoClass
+            , pseudoClass = pseudoClass
             , tailwindClass = tailwindClass
             }
 
         [ breakpoint, tailwindClass ] ->
             { breakpoint = breakpoint
-            , pseudoClass = Nothing
+            , pseudoClass = ""
             , tailwindClass = tailwindClass
             }
 
         [ tailwindClass ] ->
             { breakpoint = ""
-            , pseudoClass = Nothing
+            , pseudoClass = ""
             , tailwindClass = tailwindClass
             }
 
         _ ->
             { breakpoint = ""
-            , pseudoClass = Nothing
+            , pseudoClass = ""
             , tailwindClass = ""
             }
 

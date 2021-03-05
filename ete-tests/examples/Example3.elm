@@ -24,12 +24,12 @@ result =
                 , Tw.py_24
                 , Tw.px_4
                 , Bp.lg
-                [ Tw.px_8
-                ]
+                    [ Tw.px_8
+                    ]
 
                 , Bp.sm
-                [ Tw.px_6
-                ]
+                    [ Tw.px_6
+                    ]
 
                 ]
 
@@ -37,10 +37,10 @@ result =
               [ div
                 [ css
                     [ Bp.sm
-                    [ Tw.flex
-                    , Tw.flex_col
-                    , Tw.hidden
-                    ]
+                        [ Tw.flex
+                        , Tw.flex_col
+                        , Tw.hidden
+                        ]
 
                     ]
 
@@ -51,8 +51,8 @@ result =
                         , Tw.font_extrabold
                         , Tw.text_gray_900
                         , Bp.sm
-                        [ Tw.text_center
-                        ]
+                            [ Tw.text_center
+                            ]
 
                         ]
 
@@ -64,8 +64,8 @@ result =
                         , Tw.text_xl
                         , Tw.text_gray_500
                         , Bp.sm
-                        [ Tw.text_center
-                        ]
+                            [ Tw.text_center
+                            ]
 
                         ]
 
@@ -81,8 +81,8 @@ result =
                         , Tw.p_0_dot_5
                         , Tw.flex
                         , Bp.sm
-                        [ Tw.mt_8
-                        ]
+                            [ Tw.mt_8
+                            ]
 
                         ]
 
@@ -101,17 +101,17 @@ result =
                             , Tw.font_medium
                             , Tw.text_gray_700
                             , Tw.whitespace_nowrap
-                            , Css.focus 
-                            [ Tw.outline_none
-                            , Tw.ring_2
-                            , Tw.ring_indigo_500
-                            , Tw.z_10
-                            ]
+                            , Css.focus
+                                [ Tw.outline_none
+                                , Tw.ring_2
+                                , Tw.ring_indigo_500
+                                , Tw.z_10
+                                ]
 
                             , Bp.sm
-                            [ Tw.w_auto
-                            , Tw.px_8
-                            ]
+                                [ Tw.w_auto
+                                , Tw.px_8
+                                ]
 
                             ]
 
@@ -131,17 +131,17 @@ result =
                             , Tw.font_medium
                             , Tw.text_gray_700
                             , Tw.whitespace_nowrap
-                            , Css.focus 
-                            [ Tw.outline_none
-                            , Tw.ring_2
-                            , Tw.ring_indigo_500
-                            , Tw.z_10
-                            ]
+                            , Css.focus
+                                [ Tw.outline_none
+                                , Tw.ring_2
+                                , Tw.ring_indigo_500
+                                , Tw.z_10
+                                ]
 
                             , Bp.sm
-                            [ Tw.w_auto
-                            , Tw.px_8
-                            ]
+                                [ Tw.w_auto
+                                , Tw.px_8
+                                ]
 
                             ]
 
@@ -154,23 +154,23 @@ result =
                     [ Tw.mt_12
                     , Tw.space_y_4
                     , Bp.lg
-                    [ Tw.max_w_4xl
-                    , Tw.mx_auto
-                    ]
+                        [ Tw.max_w_4xl
+                        , Tw.mx_auto
+                        ]
 
                     , Bp.sm
-                    [ Tw.mt_16
-                    , Tw.space_y_0
-                    , Tw.grid
-                    , Tw.grid_cols_2
-                    , Tw.gap_6
-                    ]
+                        [ Tw.mt_16
+                        , Tw.space_y_0
+                        , Tw.grid
+                        , Tw.grid_cols_2
+                        , Tw.gap_6
+                        ]
 
                     , Bp.xl
-                    [ Tw.max_w_none
-                    , Tw.mx_0
-                    , Tw.grid_cols_4
-                    ]
+                        [ Tw.max_w_none
+                        , Tw.mx_0
+                        , Tw.grid_cols_4
+                        ]
 
                     ]
 
@@ -251,9 +251,9 @@ result =
                                 , Tw.font_semibold
                                 , Tw.text_white
                                 , Tw.text_center
-                                , Css.hover 
-                                [ Tw.bg_gray_900
-                                ]
+                                , Css.hover
+                                    [ Tw.bg_gray_900
+                                    ]
 
                                 ]
 
@@ -437,9 +437,9 @@ result =
                                 , Tw.font_semibold
                                 , Tw.text_white
                                 , Tw.text_center
-                                , Css.hover 
-                                [ Tw.bg_gray_900
-                                ]
+                                , Css.hover
+                                    [ Tw.bg_gray_900
+                                    ]
 
                                 ]
 
@@ -659,9 +659,9 @@ result =
                                 , Tw.font_semibold
                                 , Tw.text_white
                                 , Tw.text_center
-                                , Css.hover 
-                                [ Tw.bg_gray_900
-                                ]
+                                , Css.hover
+                                    [ Tw.bg_gray_900
+                                    ]
 
                                 ]
 
@@ -917,9 +917,9 @@ result =
                                 , Tw.font_semibold
                                 , Tw.text_white
                                 , Tw.text_center
-                                , Css.hover 
-                                [ Tw.bg_gray_900
-                                ]
+                                , Css.hover
+                                    [ Tw.bg_gray_900
+                                    ]
 
                                 ]
 

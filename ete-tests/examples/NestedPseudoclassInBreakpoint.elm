@@ -15,9 +15,15 @@ result =
             [ css
                 [ Tw.bg_gray_100
                 , Bp.lg
-                [ Tw.bg_white
-                , Tw.bg_gray_100
-                ]
+                    [ Tw.bg_white
+                    ]
+
+                , Bp.lg
+                    [ Css.hover 
+                        [ Tw.bg_gray_200
+                        ]
+
+                    ]
 
                 ]
 
