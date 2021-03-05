@@ -73,7 +73,7 @@ nodeToElm indentLevel context node =
                     List.filterMap
                         (\attribute ->
                             attribute
-                                |> attributeToElm
+                                |> attributeToElm (indentLevel + 1)
                                     (if isSvg then
                                         Svg
 
@@ -123,6 +123,8 @@ indentedThingy indentLevel function list =
                 )
             |> String.join ""
         )
+            ++ "\n"
+            ++ indentation indentLevel
             ++ "]\n"
 
 
@@ -142,14 +144,14 @@ type Context
     | Svg
 
 
-attributeToElm : Context -> Html.Parser.Attribute -> Maybe String
-attributeToElm context ( name, value ) =
+attributeToElm : Int -> Context -> Html.Parser.Attribute -> Maybe String
+attributeToElm indentLevel context ( name, value ) =
     if name == "xmlns" then
         Nothing
 
     else if name == "class" then
         Just <|
-            classAttributeToElm value
+            classAttributeToElm indentLevel value
 
     else if context == Svg then
         svgAttr ( name, value )
@@ -173,8 +175,8 @@ svgAttr ( name, value ) =
             Just <| "attribute \"" ++ name ++ "\" \"" ++ value ++ "\""
 
 
-classAttributeToElm : String -> String
-classAttributeToElm value =
+classAttributeToElm : Int -> String -> String
+classAttributeToElm indentLevel value =
     let
         dict : Dict String (List String)
         dict =
@@ -189,36 +191,31 @@ classAttributeToElm value =
                 |> Dict.toList
                 |> List.map
                     (\( breakpoint, twClasses ) ->
-                        --""
                         if breakpoint == "" then
                             twClasses
                                 |> List.map toTwClass
-                                |> String.join ", "
+                            ----    |> String.join ", "
+                            --indentedThingy (indentLevel + 1) toTwClass twClasses
 
                         else
                             case ImplementedFunctions.lookup ImplementedFunctions.cssHelpers breakpoint of
                                 Just functionName ->
-                                    "Css."
+                                    [ "Css."
                                         ++ functionName
-                                        ++ " [ "
-                                        ++ (twClasses
-                                                |> List.map toTwClass
-                                                |> String.join ", "
-                                           )
-                                        ++ " ]"
+                                        ++ " "
+                                        ++ indentedThingy (indentLevel + 1) toTwClass twClasses
+                                    ]
 
                                 Nothing ->
-                                    "Bp."
+                                    [ "Bp."
                                         ++ breakpoint
-                                        ++ " [ "
-                                        ++ (twClasses
-                                                |> List.map toTwClass
-                                                |> String.join ", "
-                                           )
-                                        ++ " ]"
+                                        ++ indentedThingy (indentLevel + 1) toTwClass twClasses
+                                    ]
                     )
+                |> List.concat
     in
-    "css [ " ++ String.join ", " newThing ++ " ]"
+    --"css [ " ++ String.join ", " newThing ++ " ]"
+    "css" ++ indentedThingy (indentLevel + 1) identity newThing
 
 
 toTwClass : String -> String
