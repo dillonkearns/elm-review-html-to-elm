@@ -214,8 +214,8 @@ classAttributeToElm indentLevel value =
             value
                 |> String.split " "
                 |> List.map splitOutBreakpoints
-                |> Dict.Extra.groupBy (Tuple.first >> Maybe.withDefault "")
-                |> Dict.map (\k v -> List.map Tuple.second v)
+                |> Dict.Extra.groupBy (\breakpoint -> breakpoint |> .breakpoint)
+                |> Dict.map (\k v -> List.map .tailwindClass v)
 
         newThing =
             dict
@@ -268,17 +268,32 @@ twClassToElmName twClass =
         |> String.replace "-" "_"
 
 
-splitOutBreakpoints : String -> ( Maybe String, String )
+splitOutBreakpoints : String -> { breakpoint : String, pseudoClass : Maybe String, tailwindClass : String }
 splitOutBreakpoints tailwindClassName =
     case String.split ":" tailwindClassName of
+        [ breakpoint, pseudoClass, tailwindClass ] ->
+            { breakpoint = breakpoint
+            , pseudoClass = Just pseudoClass
+            , tailwindClass = tailwindClass
+            }
+
         [ breakpoint, tailwindClass ] ->
-            ( Just breakpoint, tailwindClass )
+            { breakpoint = breakpoint
+            , pseudoClass = Nothing
+            , tailwindClass = tailwindClass
+            }
 
         [ tailwindClass ] ->
-            ( Nothing, tailwindClass )
+            { breakpoint = ""
+            , pseudoClass = Nothing
+            , tailwindClass = tailwindClass
+            }
 
         _ ->
-            ( Nothing, "" )
+            { breakpoint = ""
+            , pseudoClass = Nothing
+            , tailwindClass = ""
+            }
 
 
 surroundWithSpaces : String -> String
