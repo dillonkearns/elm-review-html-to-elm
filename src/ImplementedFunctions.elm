@@ -32,6 +32,7 @@ cssHelpers =
     [ "focus"
     , "group"
     , "hover"
+    , "first"
     ]
 
 
