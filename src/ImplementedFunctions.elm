@@ -3,6 +3,8 @@ module ImplementedFunctions exposing (..)
 {-| Thank you mbylstra for the code from this repo: <https://github.com/mbylstra/html-to-elm/blob/c3c4b9a3f8c8c8b15150bd04f72ad89c4b11462e/elm-src/HtmlToElm/ElmHtmlWhitelists.elm>
 -}
 
+import Dict exposing (Dict)
+
 
 lookup : List String -> String -> Maybe String
 lookup list name =
@@ -11,6 +13,20 @@ lookup list name =
             String.toLower name
     in
     find (\entry -> String.toLower entry == lowerName) list
+
+
+lookupWithDict : Dict String String -> List String -> String -> Maybe String
+lookupWithDict dict list name =
+    case Dict.get name dict of
+        Just retrieved ->
+            Just retrieved
+
+        Nothing ->
+            let
+                lowerName =
+                    String.toLower name
+            in
+            find (\entry -> String.toLower entry == lowerName) list
 
 
 find : (a -> Bool) -> List a -> Maybe a
@@ -34,6 +50,16 @@ cssHelpers =
     , "hover"
     , "first"
     ]
+
+
+pseudoClasses : Dict String String
+pseudoClasses =
+    Dict.fromList
+        [ ( "first", "firstChild" )
+        , ( "last", "lastChild" )
+        , ( "even", "nthChild \"even\"" )
+        , ( "odd", "nthChild \"odd\"" )
+        ]
 
 
 htmlTags =

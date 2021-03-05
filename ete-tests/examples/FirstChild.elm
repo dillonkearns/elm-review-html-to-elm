@@ -11,38 +11,145 @@ import Tailwind.Utilities as Tw
 
 result =
         div []
-          [ div
-            [ css
-                [ Tw.transform
-                , Css.firstChild 
-                [ Tw.rotate_45
-                ]
+          [ div []
+              [ div
+                [ css
+                    [ Tw.transform
+                    , Css.firstChild 
+                    [ Tw.rotate_45
+                    ]
+
+                    ]
 
                 ]
+                  [ text "1" ]
+            , div
+                [ css
+                    [ Tw.transform
+                    , Css.firstChild 
+                    [ Tw.rotate_45
+                    ]
 
-            ]
-              [ text "1" ]
-        , div
-            [ css
-                [ Tw.transform
-                , Css.firstChild 
-                [ Tw.rotate_45
-                ]
-
-                ]
-
-            ]
-              [ text "2" ]
-        , div
-            [ css
-                [ Tw.transform
-                , Css.firstChild 
-                [ Tw.rotate_45
-                ]
+                    ]
 
                 ]
+                  [ text "2" ]
+            , div
+                [ css
+                    [ Tw.transform
+                    , Css.firstChild 
+                    [ Tw.rotate_45
+                    ]
 
-            ]
-              [ text "3" ]
+                    ]
+
+                ]
+                  [ text "3" ]
+             ]
+        , div []
+              [ div
+                [ css
+                    [ Tw.transform
+                    , Css.nthChild "odd" 
+                    [ Tw.rotate_45
+                    ]
+
+                    ]
+
+                ]
+                  [ text "1" ]
+            , div
+                [ css
+                    [ Tw.transform
+                    , Css.nthChild "odd" 
+                    [ Tw.rotate_45
+                    ]
+
+                    ]
+
+                ]
+                  [ text "2" ]
+            , div
+                [ css
+                    [ Tw.transform
+                    , Css.nthChild "odd" 
+                    [ Tw.rotate_45
+                    ]
+
+                    ]
+
+                ]
+                  [ text "3" ]
+             ]
+        , div []
+              [ div
+                [ css
+                    [ Tw.transform
+                    , Css.lastChild 
+                    [ Tw.rotate_45
+                    ]
+
+                    ]
+
+                ]
+                  [ text "1" ]
+            , div
+                [ css
+                    [ Tw.transform
+                    , Css.lastChild 
+                    [ Tw.rotate_45
+                    ]
+
+                    ]
+
+                ]
+                  [ text "2" ]
+            , div
+                [ css
+                    [ Tw.transform
+                    , Css.lastChild 
+                    [ Tw.rotate_45
+                    ]
+
+                    ]
+
+                ]
+                  [ text "3" ]
+             ]
+        , div []
+              [ div
+                [ css
+                    [ Tw.transform
+                    , Css.nthChild "even" 
+                    [ Tw.rotate_45
+                    ]
+
+                    ]
+
+                ]
+                  [ text "1" ]
+            , div
+                [ css
+                    [ Tw.transform
+                    , Css.nthChild "even" 
+                    [ Tw.rotate_45
+                    ]
+
+                    ]
+
+                ]
+                  [ text "2" ]
+            , div
+                [ css
+                    [ Tw.transform
+                    , Css.nthChild "even" 
+                    [ Tw.rotate_45
+                    ]
+
+                    ]
+
+                ]
+                  [ text "3" ]
+             ]
          ]
     

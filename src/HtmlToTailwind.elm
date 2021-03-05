@@ -212,18 +212,9 @@ classAttributeToElm indentLevel value =
                         if breakpoint == "" then
                             twClasses
                                 |> List.map toTwClass
-                            ----    |> String.join ", "
-                            --indentedThingy (indentLevel + 1) toTwClass twClasses
-
-                        else if breakpoint == "first" then
-                            [ "Css."
-                                ++ "firstChild"
-                                ++ " "
-                                ++ indentedThingy (indentLevel + 1) toTwClass twClasses
-                            ]
 
                         else
-                            case ImplementedFunctions.lookup ImplementedFunctions.cssHelpers breakpoint of
+                            case ImplementedFunctions.lookupWithDict ImplementedFunctions.pseudoClasses ImplementedFunctions.cssHelpers breakpoint of
                                 Just functionName ->
                                     [ "Css."
                                         ++ functionName
