@@ -105,7 +105,7 @@ nodeToElm indentLevel context node =
                                     else
                                         "\n" ++ indentation (indentLevel + 1) ++ ", " ++ string
                                 )
-                            |> String.join "\n"
+                            |> String.join ""
                         )
                             ++ "]\n"
                     )

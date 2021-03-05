@@ -27,12 +27,10 @@ result =
                     [ css [ Tw.relative, Tw.self_center, Tw.mt_6, Tw.bg_gray_100, Tw.rounded_lg, Tw.p_0_dot_5, Tw.flex, Bp.sm [ Tw.mt_8 ] ]]
                       [ button
                         [ attribute "type" "button"
-
                         , css [ Tw.relative, Tw.w_1over2, Tw.bg_white, Tw.border_gray_200, Tw.rounded_md, Tw.shadow_sm, Tw.py_2, Tw.text_sm, Tw.font_medium, Tw.text_gray_700, Tw.whitespace_nowrap, Css.focus [ Tw.outline_none, Tw.ring_2, Tw.ring_indigo_500, Tw.z_10 ], Bp.sm [ Tw.w_auto, Tw.px_8 ] ]]
                           [ text "Monthly billing" ]
                     , button
                         [ attribute "type" "button"
-
                         , css [ Tw.ml_0_dot_5, Tw.relative, Tw.w_1over2, Tw.border, Tw.border_transparent, Tw.rounded_md, Tw.py_2, Tw.text_sm, Tw.font_medium, Tw.text_gray_700, Tw.whitespace_nowrap, Css.focus [ Tw.outline_none, Tw.ring_2, Tw.ring_indigo_500, Tw.z_10 ], Bp.sm [ Tw.w_auto, Tw.px_8 ] ]]
                           [ text "Yearly billing" ]
                      ]
@@ -60,7 +58,6 @@ result =
                              ]
                         , a
                             [ Attr.href "#"
-
                             , css [ Tw.mt_8, Tw.block, Tw.w_full, Tw.bg_gray_800, Tw.border, Tw.border_gray_800, Tw.rounded_md, Tw.py_2, Tw.text_sm, Tw.font_semibold, Tw.text_white, Tw.text_center, Css.hover [ Tw.bg_gray_900 ] ]]
                               [ text "Buy Hobby" ]
                          ]
@@ -76,17 +73,12 @@ result =
                                   [                                 {- Heroicon name: solid/check -}
                                 svg
                                     [ css [ Tw.flex_shrink_0, Tw.h_5, Tw.w_5, Tw.text_green_500 ]
-
                                     , SvgAttr.viewBox "0 0 20 20"
-
                                     , SvgAttr.fill "currentColor"
-
                                     , attribute "aria-hidden" "true"]
                                       [ path
                                         [ attribute "fill-rule" "evenodd"
-
                                         , attribute "d" "M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-
                                         , attribute "clip-rule" "evenodd"]
                                           []
                                      ]
@@ -99,17 +91,12 @@ result =
                                   [                                 {- Heroicon name: solid/check -}
                                 svg
                                     [ css [ Tw.flex_shrink_0, Tw.h_5, Tw.w_5, Tw.text_green_500 ]
-
                                     , SvgAttr.viewBox "0 0 20 20"
-
                                     , SvgAttr.fill "currentColor"
-
                                     , attribute "aria-hidden" "true"]
                                       [ path
                                         [ attribute "fill-rule" "evenodd"
-
                                         , attribute "d" "M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-
                                         , attribute "clip-rule" "evenodd"]
                                           []
                                      ]
@@ -141,7 +128,6 @@ result =
                              ]
                         , a
                             [ Attr.href "#"
-
                             , css [ Tw.mt_8, Tw.block, Tw.w_full, Tw.bg_gray_800, Tw.border, Tw.border_gray_800, Tw.rounded_md, Tw.py_2, Tw.text_sm, Tw.font_semibold, Tw.text_white, Tw.text_center, Css.hover [ Tw.bg_gray_900 ] ]]
                               [ text "Buy Freelancer" ]
                          ]
@@ -157,17 +143,12 @@ result =
                                   [                                 {- Heroicon name: solid/check -}
                                 svg
                                     [ css [ Tw.flex_shrink_0, Tw.h_5, Tw.w_5, Tw.text_green_500 ]
-
                                     , SvgAttr.viewBox "0 0 20 20"
-
                                     , SvgAttr.fill "currentColor"
-
                                     , attribute "aria-hidden" "true"]
                                       [ path
                                         [ attribute "fill-rule" "evenodd"
-
                                         , attribute "d" "M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-
                                         , attribute "clip-rule" "evenodd"]
                                           []
                                      ]
@@ -180,17 +161,12 @@ result =
                                   [                                 {- Heroicon name: solid/check -}
                                 svg
                                     [ css [ Tw.flex_shrink_0, Tw.h_5, Tw.w_5, Tw.text_green_500 ]
-
                                     , SvgAttr.viewBox "0 0 20 20"
-
                                     , SvgAttr.fill "currentColor"
-
                                     , attribute "aria-hidden" "true"]
                                       [ path
                                         [ attribute "fill-rule" "evenodd"
-
                                         , attribute "d" "M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-
                                         , attribute "clip-rule" "evenodd"]
                                           []
                                      ]
@@ -203,17 +179,12 @@ result =
                                   [                                 {- Heroicon name: solid/check -}
                                 svg
                                     [ css [ Tw.flex_shrink_0, Tw.h_5, Tw.w_5, Tw.text_green_500 ]
-
                                     , SvgAttr.viewBox "0 0 20 20"
-
                                     , SvgAttr.fill "currentColor"
-
                                     , attribute "aria-hidden" "true"]
                                       [ path
                                         [ attribute "fill-rule" "evenodd"
-
                                         , attribute "d" "M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-
                                         , attribute "clip-rule" "evenodd"]
                                           []
                                      ]
@@ -245,7 +216,6 @@ result =
                              ]
                         , a
                             [ Attr.href "#"
-
                             , css [ Tw.mt_8, Tw.block, Tw.w_full, Tw.bg_gray_800, Tw.border, Tw.border_gray_800, Tw.rounded_md, Tw.py_2, Tw.text_sm, Tw.font_semibold, Tw.text_white, Tw.text_center, Css.hover [ Tw.bg_gray_900 ] ]]
                               [ text "Buy Startup" ]
                          ]
@@ -261,17 +231,12 @@ result =
                                   [                                 {- Heroicon name: solid/check -}
                                 svg
                                     [ css [ Tw.flex_shrink_0, Tw.h_5, Tw.w_5, Tw.text_green_500 ]
-
                                     , SvgAttr.viewBox "0 0 20 20"
-
                                     , SvgAttr.fill "currentColor"
-
                                     , attribute "aria-hidden" "true"]
                                       [ path
                                         [ attribute "fill-rule" "evenodd"
-
                                         , attribute "d" "M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-
                                         , attribute "clip-rule" "evenodd"]
                                           []
                                      ]
@@ -284,17 +249,12 @@ result =
                                   [                                 {- Heroicon name: solid/check -}
                                 svg
                                     [ css [ Tw.flex_shrink_0, Tw.h_5, Tw.w_5, Tw.text_green_500 ]
-
                                     , SvgAttr.viewBox "0 0 20 20"
-
                                     , SvgAttr.fill "currentColor"
-
                                     , attribute "aria-hidden" "true"]
                                       [ path
                                         [ attribute "fill-rule" "evenodd"
-
                                         , attribute "d" "M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-
                                         , attribute "clip-rule" "evenodd"]
                                           []
                                      ]
@@ -307,17 +267,12 @@ result =
                                   [                                 {- Heroicon name: solid/check -}
                                 svg
                                     [ css [ Tw.flex_shrink_0, Tw.h_5, Tw.w_5, Tw.text_green_500 ]
-
                                     , SvgAttr.viewBox "0 0 20 20"
-
                                     , SvgAttr.fill "currentColor"
-
                                     , attribute "aria-hidden" "true"]
                                       [ path
                                         [ attribute "fill-rule" "evenodd"
-
                                         , attribute "d" "M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-
                                         , attribute "clip-rule" "evenodd"]
                                           []
                                      ]
@@ -330,17 +285,12 @@ result =
                                   [                                 {- Heroicon name: solid/check -}
                                 svg
                                     [ css [ Tw.flex_shrink_0, Tw.h_5, Tw.w_5, Tw.text_green_500 ]
-
                                     , SvgAttr.viewBox "0 0 20 20"
-
                                     , SvgAttr.fill "currentColor"
-
                                     , attribute "aria-hidden" "true"]
                                       [ path
                                         [ attribute "fill-rule" "evenodd"
-
                                         , attribute "d" "M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-
                                         , attribute "clip-rule" "evenodd"]
                                           []
                                      ]
@@ -372,7 +322,6 @@ result =
                              ]
                         , a
                             [ Attr.href "#"
-
                             , css [ Tw.mt_8, Tw.block, Tw.w_full, Tw.bg_gray_800, Tw.border, Tw.border_gray_800, Tw.rounded_md, Tw.py_2, Tw.text_sm, Tw.font_semibold, Tw.text_white, Tw.text_center, Css.hover [ Tw.bg_gray_900 ] ]]
                               [ text "Buy Enterprise" ]
                          ]
@@ -388,17 +337,12 @@ result =
                                   [                                 {- Heroicon name: solid/check -}
                                 svg
                                     [ css [ Tw.flex_shrink_0, Tw.h_5, Tw.w_5, Tw.text_green_500 ]
-
                                     , SvgAttr.viewBox "0 0 20 20"
-
                                     , SvgAttr.fill "currentColor"
-
                                     , attribute "aria-hidden" "true"]
                                       [ path
                                         [ attribute "fill-rule" "evenodd"
-
                                         , attribute "d" "M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-
                                         , attribute "clip-rule" "evenodd"]
                                           []
                                      ]
@@ -411,17 +355,12 @@ result =
                                   [                                 {- Heroicon name: solid/check -}
                                 svg
                                     [ css [ Tw.flex_shrink_0, Tw.h_5, Tw.w_5, Tw.text_green_500 ]
-
                                     , SvgAttr.viewBox "0 0 20 20"
-
                                     , SvgAttr.fill "currentColor"
-
                                     , attribute "aria-hidden" "true"]
                                       [ path
                                         [ attribute "fill-rule" "evenodd"
-
                                         , attribute "d" "M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-
                                         , attribute "clip-rule" "evenodd"]
                                           []
                                      ]
@@ -434,17 +373,12 @@ result =
                                   [                                 {- Heroicon name: solid/check -}
                                 svg
                                     [ css [ Tw.flex_shrink_0, Tw.h_5, Tw.w_5, Tw.text_green_500 ]
-
                                     , SvgAttr.viewBox "0 0 20 20"
-
                                     , SvgAttr.fill "currentColor"
-
                                     , attribute "aria-hidden" "true"]
                                       [ path
                                         [ attribute "fill-rule" "evenodd"
-
                                         , attribute "d" "M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-
                                         , attribute "clip-rule" "evenodd"]
                                           []
                                      ]
@@ -457,17 +391,12 @@ result =
                                   [                                 {- Heroicon name: solid/check -}
                                 svg
                                     [ css [ Tw.flex_shrink_0, Tw.h_5, Tw.w_5, Tw.text_green_500 ]
-
                                     , SvgAttr.viewBox "0 0 20 20"
-
                                     , SvgAttr.fill "currentColor"
-
                                     , attribute "aria-hidden" "true"]
                                       [ path
                                         [ attribute "fill-rule" "evenodd"
-
                                         , attribute "d" "M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-
                                         , attribute "clip-rule" "evenodd"]
                                           []
                                      ]
@@ -480,17 +409,12 @@ result =
                                   [                                 {- Heroicon name: solid/check -}
                                 svg
                                     [ css [ Tw.flex_shrink_0, Tw.h_5, Tw.w_5, Tw.text_green_500 ]
-
                                     , SvgAttr.viewBox "0 0 20 20"
-
                                     , SvgAttr.fill "currentColor"
-
                                     , attribute "aria-hidden" "true"]
                                       [ path
                                         [ attribute "fill-rule" "evenodd"
-
                                         , attribute "d" "M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-
                                         , attribute "clip-rule" "evenodd"]
                                           []
                                      ]
@@ -503,17 +427,12 @@ result =
                                   [                                 {- Heroicon name: solid/check -}
                                 svg
                                     [ css [ Tw.flex_shrink_0, Tw.h_5, Tw.w_5, Tw.text_green_500 ]
-
                                     , SvgAttr.viewBox "0 0 20 20"
-
                                     , SvgAttr.fill "currentColor"
-
                                     , attribute "aria-hidden" "true"]
                                       [ path
                                         [ attribute "fill-rule" "evenodd"
-
                                         , attribute "d" "M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-
                                         , attribute "clip-rule" "evenodd"]
                                           []
                                      ]
@@ -526,17 +445,12 @@ result =
                                   [                                 {- Heroicon name: solid/check -}
                                 svg
                                     [ css [ Tw.flex_shrink_0, Tw.h_5, Tw.w_5, Tw.text_green_500 ]
-
                                     , SvgAttr.viewBox "0 0 20 20"
-
                                     , SvgAttr.fill "currentColor"
-
                                     , attribute "aria-hidden" "true"]
                                       [ path
                                         [ attribute "fill-rule" "evenodd"
-
                                         , attribute "d" "M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-
                                         , attribute "clip-rule" "evenodd"]
                                           []
                                      ]
