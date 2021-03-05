@@ -31,13 +31,13 @@ join nodes =
         [ ( indentLevel, separator, singleNode ) ] ->
             singleNode
 
-        ( indentLevel1, separator1, node1 ) :: (( indentLevel2, separator2, node2 ) as part2) :: otherNodes ->
+        ( indentLevel1, separator1, node1 ) :: otherNodes ->
             case separator1 of
                 NoSeparator ->
-                    node1 ++ "" ++ join (part2 :: otherNodes)
+                    node1 ++ "" ++ join otherNodes
 
                 CommaSeparator ->
-                    node1 ++ ", " ++ join (part2 :: otherNodes)
+                    node1 ++ ", " ++ join otherNodes
 
 
 nodeToElm : Int -> Context -> Html.Parser.Node -> Maybe ( Int, Separator, String )
