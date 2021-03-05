@@ -265,21 +265,27 @@ classAttributeToElm indentLevel value =
                                                         ++ indentedThingy (indentLevel + 3) toTwClass twClassList
                                                     ]
                                     )
-                                |> List.map
-                                    (\thing ->
-                                        (case ImplementedFunctions.lookupWithDict ImplementedFunctions.pseudoClasses ImplementedFunctions.cssHelpers breakpoint of
-                                            Just functionName ->
-                                                "Css." ++ functionName
-
-                                            Nothing ->
-                                                "Bp." ++ breakpoint
-                                        )
+                                |> List.concat
+                                --|> List.map (\thing -> indentedThingy (indentLevel + 2) identity thing)
+                                |> (\thing ->
+                                        [ breakpointName breakpoint
                                             ++ indentedThingy (indentLevel + 2) identity thing
-                                    )
+                                        ]
+                                   )
                     )
                 |> List.concat
     in
     "css" ++ indentedThingy (indentLevel + 1) identity newThing
+
+
+breakpointName : String -> String
+breakpointName breakpoint =
+    case ImplementedFunctions.lookupWithDict ImplementedFunctions.pseudoClasses ImplementedFunctions.cssHelpers breakpoint of
+        Just functionName ->
+            "Css." ++ functionName
+
+        Nothing ->
+            "Bp." ++ breakpoint
 
 
 toTwClass : String -> String
