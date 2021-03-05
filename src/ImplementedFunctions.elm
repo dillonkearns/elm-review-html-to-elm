@@ -546,10 +546,6 @@ boolAttributeFunctions =
     ]
 
 
-
--- not currently used
-
-
 intAttributeFunctions : List String
 intAttributeFunctions =
     [ "tabindex"
@@ -563,10 +559,4 @@ intAttributeFunctions =
     , "start"
     , "colspan"
     , "rowspan"
-    ]
-
-
-reservedWords =
-    [ "main"
-    , "type"
     ]
