@@ -22,16 +22,16 @@ type Separator
     | NoSeparator
 
 
-join : List ( Int, Separator, String ) -> String
+join : List ( Separator, String ) -> String
 join nodes =
     case nodes of
         [] ->
             ""
 
-        [ ( indentLevel, separator, singleNode ) ] ->
+        [ ( separator, singleNode ) ] ->
             singleNode
 
-        ( indentLevel1, separator1, node1 ) :: otherNodes ->
+        ( separator1, node1 ) :: otherNodes ->
             case separator1 of
                 NoSeparator ->
                     node1 ++ "" ++ join otherNodes
@@ -40,7 +40,7 @@ join nodes =
                     node1 ++ ", " ++ join otherNodes
 
 
-nodeToElm : Int -> Context -> Html.Parser.Node -> Maybe ( Int, Separator, String )
+nodeToElm : Int -> Context -> Html.Parser.Node -> Maybe ( Separator, String )
 nodeToElm indentLevel context node =
     case node of
         Html.Parser.Text textBody ->
@@ -57,7 +57,7 @@ nodeToElm indentLevel context node =
                 Nothing
 
             else
-                ( 0, CommaSeparator, "text \"" ++ trimmed ++ "\"" ) |> Just
+                ( CommaSeparator, "text \"" ++ trimmed ++ "\"" ) |> Just
 
         Html.Parser.Element elementName attributes children ->
             let
@@ -78,8 +78,7 @@ nodeToElm indentLevel context node =
                         )
                         attributes
             in
-            ( indentLevel
-            , CommaSeparator
+            ( CommaSeparator
             , (if indentLevel == 1 then
                 "    "
 
@@ -98,7 +97,7 @@ nodeToElm indentLevel context node =
                 |> Just
 
         Html.Parser.Comment string ->
-            Just <| ( indentLevel, NoSeparator, indentation indentLevel ++ "{-" ++ string ++ "-}\n" ++ indentation indentLevel )
+            Just <| ( NoSeparator, indentation indentLevel ++ "{-" ++ string ++ "-}\n" ++ indentation indentLevel )
 
 
 indentedThingy : Int -> (a -> String) -> List a -> String
