@@ -19,7 +19,7 @@ htmlToElmTailwindModules input =
 
 nodesToElm : List Html.Parser.Node -> String
 nodesToElm nodes =
-    List.filterMap (nodeToElm Html) nodes |> join
+    List.filterMap (nodeToElm 1 Html) nodes |> join
 
 
 type Separator
@@ -39,14 +39,14 @@ join nodes =
         ( separator1, node1 ) :: (( separator2, node2 ) as part2) :: otherNodes ->
             case separator1 of
                 NoSeparator ->
-                    node1 ++ "\n    " ++ join (part2 :: otherNodes)
+                    node1 ++ "" ++ join (part2 :: otherNodes)
 
                 CommaSeparator ->
                     node1 ++ ", " ++ join (part2 :: otherNodes)
 
 
-nodeToElm : Context -> Html.Parser.Node -> Maybe ( Separator, String )
-nodeToElm context node =
+nodeToElm : Int -> Context -> Html.Parser.Node -> Maybe ( Separator, String )
+nodeToElm indentLevel context node =
     case node of
         Html.Parser.Text textBody ->
             let
@@ -70,7 +70,9 @@ nodeToElm context node =
                     isSvgContext attributes
             in
             ( CommaSeparator
-            , elementName
+            , "\n"
+                ++ indentation indentLevel
+                ++ elementName
                 ++ " ["
                 ++ (List.filterMap
                         (\attribute ->
@@ -88,13 +90,18 @@ nodeToElm context node =
                         |> String.join ", "
                    )
                 ++ "] ["
-                ++ (List.filterMap (nodeToElm context) children |> join |> surroundWithSpaces)
+                ++ (List.filterMap (nodeToElm (indentLevel + 1) context) children |> join |> surroundWithSpaces)
                 ++ "]"
             )
                 |> Just
 
         Html.Parser.Comment string ->
             Just <| ( NoSeparator, "{-" ++ string ++ "-}" )
+
+
+indentation : Int -> String
+indentation level =
+    String.repeat (level * 4) " "
 
 
 isSvgContext : List ( String, String ) -> Bool
