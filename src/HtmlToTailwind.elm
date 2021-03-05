@@ -92,23 +92,7 @@ nodeToElm indentLevel context node =
                 ""
               )
                 ++ elementName
-                ++ ((if List.isEmpty filteredAttributes then
-                        " []\n"
-
-                     else
-                        (filteredAttributes
-                            |> List.indexedMap
-                                (\index string ->
-                                    if index == 0 then
-                                        "\n" ++ indentation (indentLevel + 1) ++ "[ " ++ string
-
-                                    else
-                                        "\n" ++ indentation (indentLevel + 1) ++ ", " ++ string
-                                )
-                            |> String.join ""
-                        )
-                            ++ "]\n"
-                    )
+                ++ (indentedThingy (indentLevel + 1) identity filteredAttributes
                         ++ indentation indentLevel
                         ++ "      ["
                         ++ (List.filterMap (nodeToElm (indentLevel + 1) context) children |> join |> surroundWithSpaces)
@@ -120,6 +104,26 @@ nodeToElm indentLevel context node =
 
         Html.Parser.Comment string ->
             Just <| ( indentLevel, NoSeparator, indentation indentLevel ++ "{-" ++ string ++ "-}\n" ++ indentation indentLevel )
+
+
+indentedThingy : Int -> (a -> String) -> List a -> String
+indentedThingy indentLevel function list =
+    if List.isEmpty list then
+        " []\n"
+
+    else
+        (list
+            |> List.indexedMap
+                (\index element ->
+                    if index == 0 then
+                        "\n" ++ indentation indentLevel ++ "[ " ++ function element
+
+                    else
+                        "\n" ++ indentation indentLevel ++ ", " ++ function element
+                )
+            |> String.join ""
+        )
+            ++ "]\n"
 
 
 indentation : Int -> String
