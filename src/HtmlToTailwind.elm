@@ -200,6 +200,10 @@ twClassToElmName twClass =
             (\match ->
                 "neg_" ++ (match.submatches |> List.head |> Maybe.andThen identity |> Maybe.withDefault "")
             )
+        |> Regex.replace (Regex.fromString "\\." |> Maybe.withDefault Regex.never)
+            (\match ->
+                "_dot_"
+            )
         |> String.replace "/" "over"
         |> String.replace "-" "_"
 

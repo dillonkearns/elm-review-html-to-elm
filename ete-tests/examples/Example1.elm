@@ -1,13 +1,12 @@
 module Example1 exposing (result)
 
 import Css
-import Html.Attributes as Attr
 import Html.Styled exposing (..)
-import Html.Styled.Attributes exposing (attribute, css)
+import Html.Styled.Attributes as Attr exposing (attribute, css)
 import Svg.Styled exposing (path, svg)
 import Svg.Styled.Attributes as SvgAttr
-import Tailwind.Utilities as Tw
 import Tailwind.Breakpoints as Bp
+import Tailwind.Utilities as Tw
 
 
 result =
