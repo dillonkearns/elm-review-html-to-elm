@@ -75,7 +75,7 @@ nodeToElm indentLevel context node =
 
                         Html ->
                             ""
-                                ++ (case ImplementedFunctions.lookup ImplementedFunctions.htmlTags elementName of
+                                ++ (case ImplementedFunctions.lookupWithDict ImplementedFunctions.htmlTagsDict ImplementedFunctions.htmlTags elementName of
                                         Just functionName ->
                                             functionName
 

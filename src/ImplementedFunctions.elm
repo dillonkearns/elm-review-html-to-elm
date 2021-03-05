@@ -62,6 +62,12 @@ pseudoClasses =
         ]
 
 
+htmlTagsDict =
+    Dict.fromList
+        [ ( "main", "main_" )
+        ]
+
+
 htmlTags =
     [ "body"
     , "section"

@@ -10,7 +10,7 @@ import Tailwind.Utilities as Tw
 
 
 result =
-        div []
+        main_ []
           [ div
             [ Attr.style "transition-duration" "1.5s"
             , Attr.style "line-height" "1.5"
