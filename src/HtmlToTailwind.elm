@@ -78,7 +78,6 @@ nodeToElm indentLevel context node =
                 ""
               )
                 ++ elementName
-                ++ " ["
                 ++ (List.filterMap
                         (\attribute ->
                             attribute
@@ -89,10 +88,18 @@ nodeToElm indentLevel context node =
                                      else
                                         context
                                     )
-                                |> Maybe.map surroundWithSpaces
+                         --|> Maybe.map surroundWithSpaces
                         )
                         attributes
-                        |> String.join ", "
+                        |> List.indexedMap
+                            (\index string ->
+                                if index == 0 then
+                                    "\n" ++ indentation (indentLevel + 1) ++ "[ " ++ string
+
+                                else
+                                    "\n" ++ indentation (indentLevel + 1) ++ ", " ++ string
+                            )
+                        |> String.join "\n"
                    )
                 ++ "]\n"
                 ++ indentation indentLevel
