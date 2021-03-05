@@ -1,30 +1,8 @@
 const { compileToStringSync } = require("node-elm-compiler");
 const fs = require("fs");
-const { exec } = require("child_process");
+const { execSync } = require("child_process");
 const path = require("path");
 const { dir } = require("console");
-
-async function run() {
-  // console.log(testFiles());
-
-  // testFiles().forEach(runExample);
-  runExample("Example2");
-}
-
-async function runExample(name) {
-  await runElm(fs.readFileSync(`./examples/${name}.html`).toString(), name);
-  exec(
-    `elm make ./examples/${name}.elm --output=/dev/null`,
-    (error, stdout, stderr) => {
-      console.log(stdout);
-      console.log(stderr);
-      if (error !== null) {
-        // console.log(`exec error: ${error}`);
-        process.exitCode = 1;
-      }
-    }
-  );
-}
 
 function testFiles() {
   return fs
@@ -39,8 +17,8 @@ async function runElm(htmlInput, name) {
   return new Promise((resolve, reject) => {
     console.log("runElm", name);
     fs.writeFileSync(
-      "Run.elm",
-      `port module Run exposing (main)
+      `Run${name}.elm`,
+      `port module Run${name} exposing (main)
 
 import HtmlToTailwind exposing (htmlToElmTailwindModules)
 
@@ -64,7 +42,7 @@ main =
         }
 `
     );
-    const data = compileToStringSync([`Run.elm`], {});
+    const data = compileToStringSync([`Run${name}.elm`], {});
     if (data === "") {
       throw "Compiler error";
     }
@@ -74,12 +52,13 @@ main =
       console.warn = function () {};
 
       eval(data.toString());
-      const app = Elm.Run.init();
+      const app = Elm[`Run${name}`].init();
       app.ports.toJs.subscribe((generatedElmHtmlCode) => {
         fs.writeFileSync(
           `examples/${name}.elm`,
           `module ${name} exposing (result)
 
+import Css
 import Html.Attributes as Attr
 import Html.Styled exposing (..)
 import Html.Styled.Attributes exposing (attribute, css)
@@ -93,7 +72,6 @@ result =
     ${generatedElmHtmlCode}
 `
         );
-        delete Elm;
         resolve();
       });
       console.warn = warnOriginal;
@@ -105,7 +83,7 @@ result =
 
 const assert = require("chai").assert;
 
-describe("add()", function () {
+describe("generated code is valid", function () {
   testFiles().forEach((name) => {
     it(name, async function () {
       // const res = add(args);
@@ -113,17 +91,10 @@ describe("add()", function () {
       // assert.equal(name, "name");
 
       await runElm(fs.readFileSync(`./examples/${name}.html`).toString(), name);
-      exec(
+      execSync(
         `elm make ./examples/${name}.elm --output=/dev/null`,
         (error, stdout, stderr) => {
-          console.log(stdout);
-          console.log(stderr);
           assert.isNull(error, "Unexpected Elm compilation error.");
-          if (error !== null) {
-            // console.log(`exec error: ${error}`);
-
-            process.exitCode = 1;
-          }
         }
       );
     });

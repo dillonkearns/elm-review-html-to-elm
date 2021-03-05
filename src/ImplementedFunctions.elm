@@ -27,6 +27,14 @@ find predicate list =
                 find predicate rest
 
 
+cssHelpers : List String
+cssHelpers =
+    [ "focus"
+    , "group"
+    , "hover"
+    ]
+
+
 htmlTags =
     [ "body"
     , "section"

@@ -162,14 +162,26 @@ classAttributeToElm value =
                                 |> String.join ", "
 
                         else
-                            "Bp."
-                                ++ breakpoint
-                                ++ " [ "
-                                ++ (twClasses
-                                        |> List.map toTwClass
-                                        |> String.join ", "
-                                   )
-                                ++ " ]"
+                            case ImplementedFunctions.lookup ImplementedFunctions.cssHelpers breakpoint of
+                                Just functionName ->
+                                    "Css."
+                                        ++ functionName
+                                        ++ " [ "
+                                        ++ (twClasses
+                                                |> List.map toTwClass
+                                                |> String.join ", "
+                                           )
+                                        ++ " ]"
+
+                                Nothing ->
+                                    "Bp."
+                                        ++ breakpoint
+                                        ++ " [ "
+                                        ++ (twClasses
+                                                |> List.map toTwClass
+                                                |> String.join ", "
+                                           )
+                                        ++ " ]"
                     )
     in
     "css [ " ++ String.join ", " newThing ++ " ]"

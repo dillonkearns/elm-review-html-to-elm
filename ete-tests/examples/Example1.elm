@@ -1,5 +1,6 @@
 module Example1 exposing (result)
 
+import Css
 import Html.Attributes as Attr
 import Html.Styled exposing (..)
 import Html.Styled.Attributes exposing (attribute, css)
