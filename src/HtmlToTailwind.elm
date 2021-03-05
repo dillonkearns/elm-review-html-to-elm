@@ -71,7 +71,13 @@ nodeToElm indentLevel context node =
             in
             ( indentLevel
             , CommaSeparator
-            , elementName
+            , (if indentLevel == 1 then
+                "    "
+
+               else
+                ""
+              )
+                ++ elementName
                 ++ " ["
                 ++ (List.filterMap
                         (\attribute ->
@@ -88,7 +94,9 @@ nodeToElm indentLevel context node =
                         attributes
                         |> String.join ", "
                    )
-                ++ "] ["
+                ++ "]\n"
+                ++ indentation indentLevel
+                ++ "      ["
                 ++ (List.filterMap (nodeToElm (indentLevel + 1) context) children |> join |> surroundWithSpaces)
                 ++ "]\n"
                 ++ indentation indentLevel
