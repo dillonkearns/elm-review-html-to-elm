@@ -94,7 +94,7 @@ nodeToElm indentLevel context node =
                         context
 
                 filteredAttributes =
-                    List.filterMap
+                    List.concatMap
                         (\attribute ->
                             attribute
                                 |> attributeToElm (indentLevel + 1)
@@ -162,35 +162,48 @@ type Context
     | Svg
 
 
-attributeToElm : Int -> Context -> Html.Parser.Attribute -> Maybe String
+attributeToElm : Int -> Context -> Html.Parser.Attribute -> List String
 attributeToElm indentLevel context ( name, value ) =
     if name == "xmlns" then
-        Nothing
+        []
 
     else if name == "class" then
-        Just <|
-            classAttributeToElm indentLevel value
+        [ classAttributeToElm indentLevel value ]
 
     else if context == Svg then
-        svgAttr ( name, value )
+        [ svgAttr ( name, value ) ]
+
+    else if name == "style" then
+        value
+            |> String.split ";"
+            |> List.filter (not << String.isEmpty)
+            |> List.map
+                (\entry ->
+                    case entry |> String.split ":" of
+                        [ styleName, styleValue ] ->
+                            "Attr.style \"" ++ String.trim styleName ++ "\" \"" ++ String.trim styleValue ++ "\""
+
+                        _ ->
+                            "<Invalid" ++ entry ++ ">"
+                )
 
     else
         case ImplementedFunctions.lookup ImplementedFunctions.htmlAttributes name of
             Just functionName ->
-                Just <| "Attr." ++ functionName ++ " \"" ++ value ++ "\""
+                [ "Attr." ++ functionName ++ " \"" ++ value ++ "\"" ]
 
             Nothing ->
-                Just <| "attribute \"" ++ name ++ "\" \"" ++ value ++ "\""
+                [ "attribute \"" ++ name ++ "\" \"" ++ value ++ "\"" ]
 
 
-svgAttr : ( String, String ) -> Maybe String
+svgAttr : ( String, String ) -> String
 svgAttr ( name, value ) =
     case ImplementedFunctions.lookup ImplementedFunctions.svgAttributes name of
         Just functionName ->
-            Just <| "SvgAttr." ++ ImplementedFunctions.toCamelCase functionName ++ " \"" ++ value ++ "\""
+            "SvgAttr." ++ ImplementedFunctions.toCamelCase functionName ++ " \"" ++ value ++ "\""
 
         Nothing ->
-            Just <| "attribute \"" ++ name ++ "\" \"" ++ value ++ "\""
+            "attribute \"" ++ name ++ "\" \"" ++ value ++ "\""
 
 
 classAttributeToElm : Int -> String -> String
