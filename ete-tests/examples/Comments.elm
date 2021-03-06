@@ -1,4 +1,4 @@
-module Comments exposing (result)
+module Comments exposing (main)
 
 import Css
 import Html.Styled as Html exposing (..)
@@ -7,6 +7,9 @@ import Svg.Styled as Svg exposing (path, svg)
 import Svg.Styled.Attributes as SvgAttr
 import Tailwind.Breakpoints as Bp
 import Tailwind.Utilities as Tw
+
+main =
+    Html.toUnstyled result
 
 
 result =
