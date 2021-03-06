@@ -116,26 +116,45 @@ update msg model =
 
 view model =
     div
-        [--Attr.style "padding" "20px"
-        ]
-        [ navbar
-        , Html.textarea
-            [ Events.onInput OnInput
-            , Attr.value model.htmlInput
-            , Attr.spellcheck False
-            , Attr.autocomplete False
-            , Attr.style "width" "100%"
-            , Attr.style "height" "200px"
+        [ css
+            [ Tw.h_screen
+            , Tw.flex
+            , Tw.flex_col
             ]
-            []
-        , Html.pre []
-            [ Html.code []
+        ]
+        [ Css.Global.global Tw.globalStyles
+        , navbar
+        , div
+            [ css
+                [ Tw.flex
+                , Tw.h_full
+                ]
+            ]
+            [ Html.textarea
+                [ Events.onInput OnInput
+                , Attr.value model.htmlInput
+                , Attr.spellcheck False
+                , Attr.autocomplete False
+                , css
+                    [ Tw.flex_1
+                    ]
+                ]
+                []
+            , Html.textarea
+                [ css
+                    [ Tw.font_mono
+
+                    --, Tw.w_full
+                    , Tw.flex_1
+                    ]
+                ]
                 [ model.htmlInput
                     |> HtmlToTailwind.htmlToElmTailwindModules model.config
                     |> text
                 ]
             ]
-        , settingsPanel
+
+        --, settingsPanel
         ]
         |> Html.toUnstyled
 
@@ -238,8 +257,7 @@ settingsPanel =
     main_
         [ css [ Tw.relative ] ]
         [ {--}
-          Css.Global.global Tw.globalStyles
-        , example { moduleName = "Html", placeholder = "Html", onInputAlias = SetHtmlAlias, onInputExposing = SetHtmlExposing }
+          example { moduleName = "Html", placeholder = "Html", onInputAlias = SetHtmlAlias, onInputExposing = SetHtmlExposing }
         , example { moduleName = "Html.Attributes", placeholder = "Attr", onInputAlias = SetHtmlAttrAlias, onInputExposing = SetHtmlAttrExposing }
         , example { moduleName = "Svg", placeholder = "Svg", onInputAlias = SetSvgAlias, onInputExposing = SetSvgExposing }
         , example { moduleName = "Svg.Attributes", placeholder = "SvgAttr", onInputAlias = SetSvgAttrAlias, onInputExposing = SetSvgAttrExposing }
