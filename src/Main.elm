@@ -39,9 +39,10 @@ update msg model =
 
 view model =
     div
-        [ Attr.style "padding" "20px"
+        [--Attr.style "padding" "20px"
         ]
-        [ Html.textarea
+        [ navbar
+        , Html.textarea
             [ Events.onInput OnInput
             , Attr.value model.htmlInput
             , Attr.style "width" "100%"
@@ -67,6 +68,50 @@ main =
         , view = view
         , update = update
         }
+
+
+navbar : Html msg
+navbar =
+    nav
+        [ css
+            [ Tw.bg_gray_800
+            ]
+        ]
+        [ div
+            [ css
+                [ Tw.max_w_7xl
+                , Tw.mx_auto
+                , Tw.px_2
+                , Bp.lg
+                    [ Tw.px_8
+                    ]
+                , Bp.sm
+                    [ Tw.px_6
+                    ]
+                ]
+            ]
+            [ div
+                [ css
+                    [ Tw.relative
+                    , Tw.flex
+                    , Tw.items_center
+                    , Tw.justify_between
+                    , Tw.h_16
+                    ]
+                ]
+                [ h2
+                    [ css
+                        [ Tw.text_white
+                        , Tw.text_lg
+                        , Tw.font_bold
+                        , Tw.pl_2
+                        ]
+                    ]
+                    [ text "html-to-elm.com"
+                    ]
+                ]
+            ]
+        ]
 
 
 example { moduleName, placeholder } =
