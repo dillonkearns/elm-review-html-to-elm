@@ -58,31 +58,27 @@ nodeToElm config indentLevel context node =
                 Nothing
 
             else
-                ( CommaSeparator, "text \"" ++ trimmed ++ "\"" ) |> Just
+                ( CommaSeparator, Config.htmlTag config "text" ++ " \"" ++ trimmed ++ "\"" ) |> Just
 
         Html.Parser.Element elementName attributes children ->
             let
                 elementFunction =
                     case newContext of
                         Svg ->
-                            "Svg."
-                                ++ (case ImplementedFunctions.lookup ImplementedFunctions.svgTags elementName of
-                                        Just functionName ->
-                                            functionName
+                            case ImplementedFunctions.lookup ImplementedFunctions.svgTags elementName of
+                                Just functionName ->
+                                    Config.svgTag config functionName
 
-                                        Nothing ->
-                                            "node \"" ++ elementName ++ "\""
-                                   )
+                                Nothing ->
+                                    Config.svgTag config "node" ++ " \"" ++ elementName ++ "\""
 
                         Html ->
-                            ""
-                                ++ (case ImplementedFunctions.lookupWithDict ImplementedFunctions.htmlTagsDict ImplementedFunctions.htmlTags elementName of
-                                        Just functionName ->
-                                            Config.htmlTag config functionName
+                            case ImplementedFunctions.lookupWithDict ImplementedFunctions.htmlTagsDict ImplementedFunctions.htmlTags elementName of
+                                Just functionName ->
+                                    Config.htmlTag config functionName
 
-                                        Nothing ->
-                                            Config.htmlTag config "node" ++ " \"" ++ elementName ++ "\""
-                                   )
+                                Nothing ->
+                                    Config.htmlTag config "node" ++ " \"" ++ elementName ++ "\""
 
                 isSvg =
                     isSvgContext attributes
@@ -170,10 +166,10 @@ attributeToElm config indentLevel context ( name, value ) =
         []
 
     else if name == "class" then
-        [ classAttributeToElm context indentLevel value ]
+        [ classAttributeToElm config context indentLevel value ]
 
     else if context == Svg then
-        [ svgAttr ( name, value ) ]
+        [ svgAttr config ( name, value ) ]
 
     else if name == "style" then
         value
@@ -213,18 +209,18 @@ attributeToElm config indentLevel context ( name, value ) =
                                 [ Config.htmlAttr config "attribute" ++ " \"" ++ name ++ "\" \"" ++ value ++ "\"" ]
 
 
-svgAttr : ( String, String ) -> String
-svgAttr ( name, value ) =
+svgAttr : Config -> ( String, String ) -> String
+svgAttr config ( name, value ) =
     case ImplementedFunctions.lookup ImplementedFunctions.svgAttributes name of
         Just functionName ->
-            "SvgAttr." ++ ImplementedFunctions.toCamelCase functionName ++ " \"" ++ value ++ "\""
+            Config.svgAttr config (ImplementedFunctions.toCamelCase functionName) ++ " \"" ++ value ++ "\""
 
         Nothing ->
-            "attribute \"" ++ name ++ "\" \"" ++ value ++ "\""
+            Config.htmlAttr config "attribute" ++ " \"" ++ name ++ "\" \"" ++ value ++ "\""
 
 
-classAttributeToElm : Context -> Int -> String -> String
-classAttributeToElm context indentLevel value =
+classAttributeToElm : Config -> Context -> Int -> String -> String
+classAttributeToElm config context indentLevel value =
     let
         dict : Dict String (Dict String (List String))
         dict =
@@ -256,7 +252,7 @@ classAttributeToElm context indentLevel value =
                                         |> List.concat
                             in
                             allClasses
-                                |> List.map toTwClass
+                                |> List.map (toTwClass config)
 
                         else
                             twClasses
@@ -265,7 +261,7 @@ classAttributeToElm context indentLevel value =
                                     (\( pseudoclass, twClassList ) ->
                                         if pseudoclass == "" then
                                             twClassList
-                                                |> List.map toTwClass
+                                                |> List.map (toTwClass config)
 
                                         else
                                             case ImplementedFunctions.lookupWithDict ImplementedFunctions.pseudoClasses ImplementedFunctions.cssHelpers pseudoclass of
@@ -273,19 +269,18 @@ classAttributeToElm context indentLevel value =
                                                     [ "Css."
                                                         ++ functionName
                                                         ++ " "
-                                                        ++ indentedThingy (indentLevel + 3) toTwClass twClassList
+                                                        ++ indentedThingy (indentLevel + 3) (toTwClass config) twClassList
                                                     ]
 
                                                 Nothing ->
-                                                    [ "Bp."
-                                                        ++ breakpoint
-                                                        ++ indentedThingy (indentLevel + 3) toTwClass twClassList
+                                                    [ Config.bp config breakpoint
+                                                        ++ indentedThingy (indentLevel + 3) (toTwClass config) twClassList
                                                     ]
                                     )
                                 |> List.concat
                                 --|> List.map (\thing -> indentedThingy (indentLevel + 2) identity thing)
                                 |> (\thing ->
-                                        [ breakpointName breakpoint
+                                        [ breakpointName config breakpoint
                                             ++ indentedThingy (indentLevel + 2) identity thing
                                         ]
                                    )
@@ -295,27 +290,27 @@ classAttributeToElm context indentLevel value =
         cssFunction =
             case context of
                 Html ->
-                    "css"
+                    Config.htmlAttr config "css"
 
                 Svg ->
-                    "SvgAttr.css"
+                    Config.svgAttr config "css"
     in
     cssFunction ++ indentedThingy (indentLevel + 1) identity newThing
 
 
-breakpointName : String -> String
-breakpointName breakpoint =
+breakpointName : Config -> String -> String
+breakpointName config breakpoint =
     case ImplementedFunctions.lookupWithDict ImplementedFunctions.pseudoClasses ImplementedFunctions.cssHelpers breakpoint of
         Just functionName ->
             "Css." ++ functionName
 
         Nothing ->
-            "Bp." ++ breakpoint
+            Config.bp config breakpoint
 
 
-toTwClass : String -> String
-toTwClass twClass =
-    "Tw." ++ twClassToElmName twClass
+toTwClass : Config -> String -> String
+toTwClass config twClass =
+    Config.tw config (twClassToElmName twClass)
 
 
 {-| Mimics the rules in <https://github.com/matheus23/elm-tailwind-modules/blob/cd5809505934ff72c9b54fd1e181f67b53af8186/src/helpers.ts#L24-L59>

@@ -31,6 +31,10 @@ type Msg
     = OnInput String
     | SetHtmlAlias String
     | SetHtmlAttrAlias String
+    | SetSvgAlias String
+    | SetSvgAttrAlias String
+    | SetTwAlias String
+    | SetBpAlias String
 
 
 update : Msg -> Model -> Model
@@ -47,6 +51,26 @@ update msg model =
         SetHtmlAttrAlias string ->
             { model
                 | config = Config.updateHtmlAttrAlias model.config string
+            }
+
+        SetSvgAlias string ->
+            { model
+                | config = Config.updateSvgAlias model.config string
+            }
+
+        SetSvgAttrAlias string ->
+            { model
+                | config = Config.updateSvgAttrAlias model.config string
+            }
+
+        SetTwAlias string ->
+            { model
+                | config = Config.updateTwAlias model.config string
+            }
+
+        SetBpAlias string ->
+            { model
+                | config = Config.updateBpAlias model.config string
             }
 
 
@@ -178,10 +202,10 @@ settingsPanel =
           Css.Global.global Tw.globalStyles
         , example { moduleName = "Html", placeholder = "Html", onInputAlias = SetHtmlAlias }
         , example { moduleName = "Html.Attributes", placeholder = "Attr", onInputAlias = SetHtmlAttrAlias }
-        , example { moduleName = "Svg", placeholder = "Svg", onInputAlias = SetHtmlAlias }
-        , example { moduleName = "Svg.Attributes", placeholder = "SvgAttr", onInputAlias = SetHtmlAlias }
-        , example { moduleName = "Tailwind.Utilities", placeholder = "Tw", onInputAlias = SetHtmlAlias }
-        , example { moduleName = "Tailwind.Breakpoints", placeholder = "Bp", onInputAlias = SetHtmlAlias }
+        , example { moduleName = "Svg", placeholder = "Svg", onInputAlias = SetSvgAlias }
+        , example { moduleName = "Svg.Attributes", placeholder = "SvgAttr", onInputAlias = SetSvgAttrAlias }
+        , example { moduleName = "Tailwind.Utilities", placeholder = "Tw", onInputAlias = SetTwAlias }
+        , example { moduleName = "Tailwind.Breakpoints", placeholder = "Bp", onInputAlias = SetBpAlias }
         ]
 
 

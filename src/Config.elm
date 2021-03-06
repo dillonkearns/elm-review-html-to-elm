@@ -16,7 +16,7 @@ updateHtmlAlias config newAlias =
 
 
 updateSvgAlias config newAlias =
-    { config | htmlSvg = config.svg |> updateAlias "Svg" newAlias }
+    { config | svg = config.svg |> updateAlias "Svg" newAlias }
 
 
 updateHtmlAttrAlias config newAlias =
@@ -60,7 +60,7 @@ default =
 testConfig : Config
 testConfig =
     { htmlAs = ( "Html", All )
-    , htmlAttr = ( "Attr", Some [ "attribute" ] )
+    , htmlAttr = ( "Attr", Some [ "attribute", "css" ] )
     , svg = ( "Svg", None )
     , svgAttr = ( "SvgAttr", None )
     , tw = ( "Tw", None )
@@ -91,6 +91,26 @@ htmlTag =
 htmlAttr : Config -> String -> String
 htmlAttr =
     getter .htmlAttr
+
+
+svgTag : Config -> String -> String
+svgTag =
+    getter .svg
+
+
+svgAttr : Config -> String -> String
+svgAttr =
+    getter .svgAttr
+
+
+bp : Config -> String -> String
+bp =
+    getter .bp
+
+
+tw : Config -> String -> String
+tw =
+    getter .tw
 
 
 isExposed : String -> Exposing -> Bool
