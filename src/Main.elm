@@ -17,6 +17,7 @@ import Tailwind.Utilities as Tw
 type alias Model =
     { htmlInput : String
     , config : Config
+    , showSettings : Bool
     }
 
 
@@ -24,6 +25,7 @@ initialModel : Model
 initialModel =
     { htmlInput = """<a href="#" />"""
     , config = Config.default
+    , showSettings = False
     }
 
 
@@ -41,6 +43,7 @@ type Msg
     | SetSvgAttrExposing String
     | SetTwExposing String
     | SetBpExposing String
+    | ToggleShowSettings
 
 
 update : Msg -> Model -> Model
@@ -109,6 +112,11 @@ update msg model =
                 | config = Config.updateBpExposing model.config string
             }
 
+        ToggleShowSettings ->
+            { model
+                | showSettings = not model.showSettings
+            }
+
 
 
 --view : Model -> Html.Html Msg
@@ -130,16 +138,20 @@ view model =
                 , Tw.h_full
                 ]
             ]
-            [ Html.textarea
-                [ Events.onInput OnInput
-                , Attr.value model.htmlInput
-                , Attr.spellcheck False
-                , Attr.autocomplete False
-                , css
-                    [ Tw.flex_1
+            [ if model.showSettings then
+                settingsPanel
+
+              else
+                Html.textarea
+                    [ Events.onInput OnInput
+                    , Attr.value model.htmlInput
+                    , Attr.spellcheck False
+                    , Attr.autocomplete False
+                    , css
+                        [ Tw.flex_1
+                        ]
                     ]
-                ]
-                []
+                    []
             , Html.textarea
                 [ css
                     [ Tw.font_mono
@@ -168,7 +180,7 @@ main =
         }
 
 
-navbar : Html msg
+navbar : Html Msg
 navbar =
     nav
         [ css
@@ -208,7 +220,8 @@ navbar =
                     [ text "html-to-elm.com"
                     ]
                 , button
-                    [ css
+                    [ Events.onClick ToggleShowSettings
+                    , css
                         [ Tw.flex
                         , Tw.space_x_2
                         , Tw.items_center
