@@ -1,6 +1,7 @@
 module Main exposing (main)
 
 import Browser
+import Config exposing (Config)
 import Css
 import Css.Global
 import Html.Styled as Html exposing (..)
@@ -14,12 +15,18 @@ import Tailwind.Utilities as Tw
 
 
 type alias Model =
-    { htmlInput : String }
+    { htmlInput : String
+    , config : Config
+    }
 
 
 initialModel : Model
 initialModel =
-    { htmlInput = "" }
+    { htmlInput = ""
+    , config =
+        { htmlAs = ( "Html", Config.None )
+        }
+    }
 
 
 type Msg
@@ -52,7 +59,7 @@ view model =
         , Html.pre []
             [ Html.code []
                 [ model.htmlInput
-                    |> HtmlToTailwind.htmlToElmTailwindModules
+                    |> HtmlToTailwind.htmlToElmTailwindModules model.config
                     |> text
                 ]
             ]
