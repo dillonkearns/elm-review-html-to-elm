@@ -72,31 +72,39 @@ main =
 example { moduleName, placeholder } =
     div
         [ css
-            [ Tw.mb_16
+            [ Tw.mb_4
             , Tw.flex
             , Tw.items_center
             ]
         ]
-        [ p
-            [ css
-                [ Tw.font_mono
-                , Tw.items_center
-                , Tw.pr_2
+        [ div [ css [ Tw.flex_1 ] ]
+            [ p
+                [ css
+                    [ Tw.font_mono
+                    , Tw.items_center
+                    , Tw.pr_2
+
+                    --, Tw.text_right
+                    ]
                 ]
+                [ text <| "import " ++ moduleName ]
             ]
-            [ text <| "import " ++ moduleName ]
-        , inputWithInset
-            { placeholder = placeholder
-            , id = "html-tag-import"
-            , prefix = " as "
-            , paddingLeft = Tw.pl_9
-            }
-        , inputWithInsets
-            { placeholder = ".."
-            , id = "html-tag-expose"
-            , prefix = " exposing ("
-            , paddingLeft = Tw.pl_28
-            }
+        , div [ css [ Tw.flex_1 ] ]
+            [ inputWithInset
+                { placeholder = placeholder
+                , id = "html-tag-import"
+                , prefix = " as "
+                , paddingLeft = Tw.pl_9
+                }
+            ]
+        , div [ css [ Tw.flex_1 ] ]
+            [ inputWithInsets
+                { placeholder = ".."
+                , id = "html-tag-expose"
+                , prefix = " exposing ("
+                , paddingLeft = Tw.pl_28
+                }
+            ]
         ]
 
 
