@@ -2,7 +2,7 @@ module Config exposing (..)
 
 
 type alias Config =
-    { htmlAs : ( String, Exposing )
+    { html : ( String, Exposing )
     , htmlAttr : ( String, Exposing )
     , svg : ( String, Exposing )
     , svgAttr : ( String, Exposing )
@@ -12,7 +12,7 @@ type alias Config =
 
 
 updateHtmlAlias config newAlias =
-    { config | htmlAs = config.htmlAs |> updateAlias "Html" newAlias }
+    { config | html = config.html |> updateAlias "Html" newAlias }
 
 
 updateSvgAlias config newAlias =
@@ -48,7 +48,7 @@ updateAlias defaultAlias newAlias ( importAlias, importExposing ) =
 
 default : Config
 default =
-    { htmlAs = ( "Html", None )
+    { html = ( "Html", None )
     , htmlAttr = ( "Attr", None )
     , svg = ( "Svg", None )
     , svgAttr = ( "SvgAttr", None )
@@ -59,7 +59,7 @@ default =
 
 testConfig : Config
 testConfig =
-    { htmlAs = ( "Html", All )
+    { html = ( "Html", All )
     , htmlAttr = ( "Attr", Some [ "attribute", "css" ] )
     , svg = ( "Svg", None )
     , svgAttr = ( "SvgAttr", None )
@@ -85,7 +85,7 @@ getter getFn config tagName =
 
 htmlTag : Config -> String -> String
 htmlTag =
-    getter .htmlAs
+    getter .html
 
 
 htmlAttr : Config -> String -> String
