@@ -298,7 +298,7 @@ result =
                                 ]
                                   [                                 {- Heroicon name: solid/check -}
                                 Svg.svg
-                                    [ css
+                                    [ SvgAttr.css
                                         [ Tw.flex_shrink_0
                                         , Tw.h_5
                                         , Tw.w_5
@@ -334,7 +334,7 @@ result =
                                 ]
                                   [                                 {- Heroicon name: solid/check -}
                                 Svg.svg
-                                    [ css
+                                    [ SvgAttr.css
                                         [ Tw.flex_shrink_0
                                         , Tw.h_5
                                         , Tw.w_5
@@ -484,7 +484,7 @@ result =
                                 ]
                                   [                                 {- Heroicon name: solid/check -}
                                 Svg.svg
-                                    [ css
+                                    [ SvgAttr.css
                                         [ Tw.flex_shrink_0
                                         , Tw.h_5
                                         , Tw.w_5
@@ -520,7 +520,7 @@ result =
                                 ]
                                   [                                 {- Heroicon name: solid/check -}
                                 Svg.svg
-                                    [ css
+                                    [ SvgAttr.css
                                         [ Tw.flex_shrink_0
                                         , Tw.h_5
                                         , Tw.w_5
@@ -556,7 +556,7 @@ result =
                                 ]
                                   [                                 {- Heroicon name: solid/check -}
                                 Svg.svg
-                                    [ css
+                                    [ SvgAttr.css
                                         [ Tw.flex_shrink_0
                                         , Tw.h_5
                                         , Tw.w_5
@@ -706,7 +706,7 @@ result =
                                 ]
                                   [                                 {- Heroicon name: solid/check -}
                                 Svg.svg
-                                    [ css
+                                    [ SvgAttr.css
                                         [ Tw.flex_shrink_0
                                         , Tw.h_5
                                         , Tw.w_5
@@ -742,7 +742,7 @@ result =
                                 ]
                                   [                                 {- Heroicon name: solid/check -}
                                 Svg.svg
-                                    [ css
+                                    [ SvgAttr.css
                                         [ Tw.flex_shrink_0
                                         , Tw.h_5
                                         , Tw.w_5
@@ -778,7 +778,7 @@ result =
                                 ]
                                   [                                 {- Heroicon name: solid/check -}
                                 Svg.svg
-                                    [ css
+                                    [ SvgAttr.css
                                         [ Tw.flex_shrink_0
                                         , Tw.h_5
                                         , Tw.w_5
@@ -814,7 +814,7 @@ result =
                                 ]
                                   [                                 {- Heroicon name: solid/check -}
                                 Svg.svg
-                                    [ css
+                                    [ SvgAttr.css
                                         [ Tw.flex_shrink_0
                                         , Tw.h_5
                                         , Tw.w_5
@@ -964,7 +964,7 @@ result =
                                 ]
                                   [                                 {- Heroicon name: solid/check -}
                                 Svg.svg
-                                    [ css
+                                    [ SvgAttr.css
                                         [ Tw.flex_shrink_0
                                         , Tw.h_5
                                         , Tw.w_5
@@ -1000,7 +1000,7 @@ result =
                                 ]
                                   [                                 {- Heroicon name: solid/check -}
                                 Svg.svg
-                                    [ css
+                                    [ SvgAttr.css
                                         [ Tw.flex_shrink_0
                                         , Tw.h_5
                                         , Tw.w_5
@@ -1036,7 +1036,7 @@ result =
                                 ]
                                   [                                 {- Heroicon name: solid/check -}
                                 Svg.svg
-                                    [ css
+                                    [ SvgAttr.css
                                         [ Tw.flex_shrink_0
                                         , Tw.h_5
                                         , Tw.w_5
@@ -1072,7 +1072,7 @@ result =
                                 ]
                                   [                                 {- Heroicon name: solid/check -}
                                 Svg.svg
-                                    [ css
+                                    [ SvgAttr.css
                                         [ Tw.flex_shrink_0
                                         , Tw.h_5
                                         , Tw.w_5
@@ -1108,7 +1108,7 @@ result =
                                 ]
                                   [                                 {- Heroicon name: solid/check -}
                                 Svg.svg
-                                    [ css
+                                    [ SvgAttr.css
                                         [ Tw.flex_shrink_0
                                         , Tw.h_5
                                         , Tw.w_5
@@ -1144,7 +1144,7 @@ result =
                                 ]
                                   [                                 {- Heroicon name: solid/check -}
                                 Svg.svg
-                                    [ css
+                                    [ SvgAttr.css
                                         [ Tw.flex_shrink_0
                                         , Tw.h_5
                                         , Tw.w_5
@@ -1180,7 +1180,7 @@ result =
                                 ]
                                   [                                 {- Heroicon name: solid/check -}
                                 Svg.svg
-                                    [ css
+                                    [ SvgAttr.css
                                         [ Tw.flex_shrink_0
                                         , Tw.h_5
                                         , Tw.w_5

@@ -168,7 +168,7 @@ attributeToElm indentLevel context ( name, value ) =
         []
 
     else if name == "class" then
-        [ classAttributeToElm indentLevel value ]
+        [ classAttributeToElm context indentLevel value ]
 
     else if context == Svg then
         [ svgAttr ( name, value ) ]
@@ -216,8 +216,8 @@ svgAttr ( name, value ) =
             "attribute \"" ++ name ++ "\" \"" ++ value ++ "\""
 
 
-classAttributeToElm : Int -> String -> String
-classAttributeToElm indentLevel value =
+classAttributeToElm : Context -> Int -> String -> String
+classAttributeToElm context indentLevel value =
     let
         dict : Dict String (Dict String (List String))
         dict =
@@ -284,8 +284,16 @@ classAttributeToElm indentLevel value =
                                    )
                     )
                 |> List.concat
+
+        cssFunction =
+            case context of
+                Html ->
+                    "css"
+
+                Svg ->
+                    "SvgAttr.css"
     in
-    "css" ++ indentedThingy (indentLevel + 1) identity newThing
+    cssFunction ++ indentedThingy (indentLevel + 1) identity newThing
 
 
 breakpointName : String -> String

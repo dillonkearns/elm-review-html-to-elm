@@ -36,7 +36,7 @@ result =
                 ]
                   [                 {- Heroicon name: solid/exclamation -}
                 Svg.svg
-                    [ css
+                    [ SvgAttr.css
                         [ Tw.h_5
                         , Tw.w_5
                         , Tw.text_yellow_400
