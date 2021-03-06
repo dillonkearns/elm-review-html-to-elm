@@ -74,22 +74,23 @@ type Exposing
     | Some (List String)
 
 
-htmlTag : Config -> String -> String
-htmlTag config tagName =
-    if isExposed tagName (config.htmlAs |> Tuple.second) then
+getter : (Config -> ( String, Exposing )) -> Config -> String -> String
+getter getFn config tagName =
+    if isExposed tagName (config |> getFn |> Tuple.second) then
         tagName
 
     else
-        Tuple.first config.htmlAs ++ "." ++ tagName
+        Tuple.first (config |> getFn) ++ "." ++ tagName
+
+
+htmlTag : Config -> String -> String
+htmlTag =
+    getter .htmlAs
 
 
 htmlAttr : Config -> String -> String
-htmlAttr config tagName =
-    if isExposed tagName (config.htmlAttr |> Tuple.second) then
-        tagName
-
-    else
-        Tuple.first config.htmlAttr ++ "." ++ tagName
+htmlAttr =
+    getter .htmlAttr
 
 
 isExposed : String -> Exposing -> Bool
