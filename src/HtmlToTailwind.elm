@@ -1,10 +1,17 @@
 module HtmlToTailwind exposing (htmlToElmTailwindModules)
 
+import Config
 import Dict exposing (Dict)
 import Dict.Extra
 import Html.Parser
 import ImplementedFunctions
 import Regex
+
+
+config : Config.Config
+config =
+    { htmlAs = ( "Html", Config.All )
+    }
 
 
 htmlToElmTailwindModules : String -> String
@@ -77,10 +84,10 @@ nodeToElm indentLevel context node =
                             ""
                                 ++ (case ImplementedFunctions.lookupWithDict ImplementedFunctions.htmlTagsDict ImplementedFunctions.htmlTags elementName of
                                         Just functionName ->
-                                            functionName
+                                            Config.htmlTag config functionName
 
                                         Nothing ->
-                                            "node \"" ++ elementName ++ "\""
+                                            Config.htmlTag config "node" ++ " \"" ++ elementName ++ "\""
                                    )
 
                 isSvg =
