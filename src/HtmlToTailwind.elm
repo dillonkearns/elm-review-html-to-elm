@@ -98,7 +98,8 @@ nodeToElm config indentLevel context node =
                     List.concatMap
                         (\attribute ->
                             attribute
-                                |> attributeToElm (indentLevel + 1)
+                                |> attributeToElm config
+                                    (indentLevel + 1)
                                     newContext
                         )
                         attributes
@@ -163,8 +164,8 @@ type Context
     | Svg
 
 
-attributeToElm : Int -> Context -> Html.Parser.Attribute -> List String
-attributeToElm indentLevel context ( name, value ) =
+attributeToElm : Config -> Int -> Context -> Html.Parser.Attribute -> List String
+attributeToElm config indentLevel context ( name, value ) =
     if name == "xmlns" then
         []
 
@@ -182,7 +183,12 @@ attributeToElm indentLevel context ( name, value ) =
                 (\entry ->
                     case entry |> String.split ":" of
                         [ styleName, styleValue ] ->
-                            "Attr.style \"" ++ String.trim styleName ++ "\" \"" ++ String.trim styleValue ++ "\""
+                            Config.htmlAttr config "style"
+                                ++ " \""
+                                ++ String.trim styleName
+                                ++ "\" \""
+                                ++ String.trim styleValue
+                                ++ "\""
 
                         _ ->
                             "<Invalid" ++ entry ++ ">"
@@ -191,20 +197,20 @@ attributeToElm indentLevel context ( name, value ) =
     else
         case ImplementedFunctions.lookup ImplementedFunctions.boolAttributeFunctions name of
             Just boolFunction ->
-                [ "Attr." ++ boolFunction ++ " True" ]
+                [ Config.htmlAttr config boolFunction ++ " True" ]
 
             Nothing ->
                 case ImplementedFunctions.lookup ImplementedFunctions.intAttributeFunctions name of
                     Just intFunction ->
-                        [ "Attr." ++ intFunction ++ " " ++ value ]
+                        [ Config.htmlAttr config intFunction ++ " " ++ value ]
 
                     Nothing ->
                         case ImplementedFunctions.lookupWithDict ImplementedFunctions.htmlAttributeDict ImplementedFunctions.htmlAttributes name of
                             Just functionName ->
-                                [ "Attr." ++ functionName ++ " \"" ++ value ++ "\"" ]
+                                [ Config.htmlAttr config functionName ++ " \"" ++ value ++ "\"" ]
 
                             Nothing ->
-                                [ "attribute \"" ++ name ++ "\" \"" ++ value ++ "\"" ]
+                                [ Config.htmlAttr config "attribute" ++ " \"" ++ name ++ "\" \"" ++ value ++ "\"" ]
 
 
 svgAttr : ( String, String ) -> String

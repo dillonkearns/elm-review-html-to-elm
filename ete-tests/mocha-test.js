@@ -30,7 +30,7 @@ htmlInputString =
 
 result : String
 result =
-    htmlToElmTailwindModules Config.default htmlInputString
+    htmlToElmTailwindModules Config.testConfig htmlInputString
 
 port toJs : String -> Cmd msg
 

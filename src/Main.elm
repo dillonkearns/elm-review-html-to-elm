@@ -22,16 +22,15 @@ type alias Model =
 
 initialModel : Model
 initialModel =
-    { htmlInput = ""
-    , config =
-        { htmlAs = ( "Html", Config.None )
-        }
+    { htmlInput = """<a href="#" />"""
+    , config = Config.default
     }
 
 
 type Msg
     = OnInput String
     | SetHtmlAlias String
+    | SetHtmlAttrAlias String
 
 
 update : Msg -> Model -> Model
@@ -42,9 +41,12 @@ update msg model =
 
         SetHtmlAlias string ->
             { model
-                | config =
-                    { htmlAs = ( string, Config.None )
-                    }
+                | config = Config.updateHtmlAlias model.config string
+            }
+
+        SetHtmlAttrAlias string ->
+            { model
+                | config = Config.updateHtmlAttrAlias model.config string
             }
 
 
@@ -175,7 +177,7 @@ settingsPanel =
         [ {--}
           Css.Global.global Tw.globalStyles
         , example { moduleName = "Html", placeholder = "Html", onInputAlias = SetHtmlAlias }
-        , example { moduleName = "Html.Attributes", placeholder = "Attr", onInputAlias = SetHtmlAlias }
+        , example { moduleName = "Html.Attributes", placeholder = "Attr", onInputAlias = SetHtmlAttrAlias }
         , example { moduleName = "Svg", placeholder = "Svg", onInputAlias = SetHtmlAlias }
         , example { moduleName = "Svg.Attributes", placeholder = "SvgAttr", onInputAlias = SetHtmlAlias }
         , example { moduleName = "Tailwind.Utilities", placeholder = "Tw", onInputAlias = SetHtmlAlias }
