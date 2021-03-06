@@ -18,6 +18,7 @@ type alias Model =
     { htmlInput : String
     , config : Config
     , showSettings : Bool
+    , useTailwindClasses : Bool
     }
 
 
@@ -26,6 +27,7 @@ initialModel =
     { htmlInput = """<a href="#" />"""
     , config = Config.default
     , showSettings = False
+    , useTailwindClasses = True
     }
 
 
@@ -44,6 +46,7 @@ type Msg
     | SetTwExposing String
     | SetBpExposing String
     | ToggleShowSettings
+    | UseTailwindClasses
 
 
 update : Msg -> Model -> Model
@@ -117,6 +120,11 @@ update msg model =
                 | showSettings = not model.showSettings
             }
 
+        UseTailwindClasses ->
+            { model
+                | useTailwindClasses = not model.useTailwindClasses
+            }
+
 
 
 --view : Model -> Html.Html Msg
@@ -131,7 +139,7 @@ view model =
             ]
         ]
         [ Css.Global.global Tw.globalStyles
-        , navbar
+        , navbar model
         , div
             [ css
                 [ Tw.flex
@@ -193,8 +201,8 @@ main =
         }
 
 
-navbar : Html Msg
-navbar =
+navbar : Model -> Html Msg
+navbar model =
     nav
         [ css
             [ Tw.bg_gray_800
@@ -231,6 +239,20 @@ navbar =
                         ]
                     ]
                     [ text "html-to-elm.com"
+                    ]
+                , div
+                    [ css
+                        [ Tw.flex
+                        , Tw.space_x_3
+                        ]
+                    ]
+                    [ span
+                        [ css
+                            [ Tw.text_gray_300
+                            ]
+                        ]
+                        [ text "Use tailwind classes" ]
+                    , div [] [ toggle UseTailwindClasses model.useTailwindClasses ]
                     ]
                 , button
                     [ Events.onClick ToggleShowSettings
@@ -537,6 +559,70 @@ settingsIcon =
             , SvgAttr.strokeLinejoin "round"
             , SvgAttr.strokeWidth "2"
             , SvgAttr.d "M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
+            ]
+            []
+        ]
+
+
+toggle toggleMsg enabled =
+    Html.button
+        [ Attr.type_ "button"
+        , Events.onClick UseTailwindClasses
+        , Attr.css
+            [ if enabled then
+                Tw.bg_blue_600
+
+              else
+                Tw.bg_gray_200
+            , Tw.relative
+            , Tw.inline_flex
+            , Tw.flex_shrink_0
+            , Tw.h_6
+            , Tw.w_11
+            , Tw.border_2
+            , Tw.border_transparent
+            , Tw.rounded_full
+            , Tw.cursor_pointer
+            , Tw.transition_colors
+            , Tw.ease_in_out
+            , Tw.duration_200
+            , Css.focus
+                [ Tw.outline_none
+                , Tw.ring_2
+                , Tw.ring_offset_2
+                , Tw.ring_blue_500
+                ]
+            ]
+        , Attr.attribute "aria-pressed" "false"
+        ]
+        [ Html.span
+            [ Attr.css
+                [ Tw.sr_only
+                ]
+            ]
+            [ Html.text "Use setting" ]
+        , {- Enabled: "translate-x-5", Not Enabled: "translate-x-0" -}
+          Html.span
+            [ Attr.attribute "aria-hidden" "true"
+            , Attr.css
+                [ if enabled then
+                    Tw.translate_x_5 |> Css.important
+
+                  else
+                    Tw.translate_x_0 |> Css.important
+                , Tw.pointer_events_none
+                , Tw.inline_block
+                , Tw.h_5
+                , Tw.w_5
+                , Tw.rounded_full
+                , Tw.bg_white
+                , Tw.shadow
+                , Tw.transform
+                , Tw.ring_0
+                , Tw.transition
+                , Tw.ease_in_out
+                , Tw.duration_200
+                ]
             ]
             []
         ]
