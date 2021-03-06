@@ -31,6 +31,7 @@ initialModel =
 
 type Msg
     = OnInput String
+    | SetHtmlAlias String
 
 
 update : Msg -> Model -> Model
@@ -38,6 +39,13 @@ update msg model =
     case msg of
         OnInput newInput ->
             { model | htmlInput = newInput }
+
+        SetHtmlAlias string ->
+            { model
+                | config =
+                    { htmlAs = ( string, Config.None )
+                    }
+            }
 
 
 
@@ -212,6 +220,7 @@ inputWithInset { placeholder, id, prefix, paddingLeft } =
             , Attr.name id
             , Attr.id id
             , Attr.placeholder placeholder
+            , Events.onInput SetHtmlAlias
             , css
                 [ Tw.font_mono
                 , Tw.border_0 |> Css.important
