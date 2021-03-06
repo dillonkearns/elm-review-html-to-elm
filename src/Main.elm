@@ -249,7 +249,21 @@ navbar model =
                             [ Tw.text_gray_300
                             ]
                         ]
-                        [ text "Use tailwind classes" ]
+                        [ text "Use "
+                        , a
+                            [ Attr.href "https://github.com/matheus23/elm-tailwind-modules"
+                            , Attr.target "_blank"
+                            , Attr.rel "noopener"
+                            , css
+                                [ --text-indigo-600 hover:text-indigo-500
+                                  Tw.text_blue_300
+                                , Css.hover
+                                    [ Tw.text_blue_500
+                                    ]
+                                ]
+                            ]
+                            [ text "tailwind classes" ]
+                        ]
                     , div [] [ toggle UseTailwindClasses model.config.useTailwindModules ]
                     ]
                 , button
