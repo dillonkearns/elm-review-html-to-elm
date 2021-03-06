@@ -165,7 +165,7 @@ attributeToElm config indentLevel context ( name, value ) =
     if name == "xmlns" then
         []
 
-    else if name == "class" then
+    else if name == "class" && config.useTailwindModules then
         [ classAttributeToElm config context indentLevel value ]
 
     else if context == Svg then

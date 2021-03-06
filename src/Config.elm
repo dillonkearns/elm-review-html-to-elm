@@ -8,6 +8,7 @@ type alias Config =
     , svgAttr : ( String, Exposing )
     , tw : ( String, Exposing )
     , bp : ( String, Exposing )
+    , useTailwindModules : Bool
     }
 
 
@@ -100,6 +101,7 @@ default =
     , svgAttr = ( "SvgAttr", None )
     , tw = ( "Tw", None )
     , bp = ( "Bp", None )
+    , useTailwindModules = False
     }
 
 
@@ -111,7 +113,12 @@ testConfig =
     , svgAttr = ( "SvgAttr", None )
     , tw = ( "Tw", None )
     , bp = ( "Bp", None )
+    , useTailwindModules = True
     }
+
+
+toggleUseTailwindClasses config =
+    { config | useTailwindModules = not config.useTailwindModules }
 
 
 type Exposing

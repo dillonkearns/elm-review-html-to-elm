@@ -18,7 +18,6 @@ type alias Model =
     { htmlInput : String
     , config : Config
     , showSettings : Bool
-    , useTailwindClasses : Bool
     }
 
 
@@ -27,7 +26,6 @@ initialModel =
     { htmlInput = """<a href="#" />"""
     , config = Config.default
     , showSettings = False
-    , useTailwindClasses = True
     }
 
 
@@ -122,7 +120,7 @@ update msg model =
 
         UseTailwindClasses ->
             { model
-                | useTailwindClasses = not model.useTailwindClasses
+                | config = Config.toggleUseTailwindClasses model.config
             }
 
 
@@ -252,7 +250,7 @@ navbar model =
                             ]
                         ]
                         [ text "Use tailwind classes" ]
-                    , div [] [ toggle UseTailwindClasses model.useTailwindClasses ]
+                    , div [] [ toggle UseTailwindClasses model.config.useTailwindModules ]
                     ]
                 , button
                     [ Events.onClick ToggleShowSettings
