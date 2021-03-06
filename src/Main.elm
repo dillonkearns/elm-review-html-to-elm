@@ -129,7 +129,7 @@ navbar =
         ]
 
 
-example { moduleName, placeholder } =
+example { moduleName, placeholder, onInputAlias } =
     div
         [ css
             [ Tw.mb_4
@@ -155,6 +155,7 @@ example { moduleName, placeholder } =
                 , id = "html-tag-import"
                 , prefix = " as "
                 , paddingLeft = Tw.pl_9
+                , onInput = onInputAlias
                 }
             ]
         , div [ css [ Tw.flex_1 ] ]
@@ -173,16 +174,16 @@ settingsPanel =
         [ css [ Tw.relative ] ]
         [ {--}
           Css.Global.global Tw.globalStyles
-        , example { moduleName = "Html", placeholder = "Html" }
-        , example { moduleName = "Html.Attributes", placeholder = "Attr" }
-        , example { moduleName = "Svg", placeholder = "Svg" }
-        , example { moduleName = "Svg.Attributes", placeholder = "SvgAttr" }
-        , example { moduleName = "Tailwind.Utilities", placeholder = "Tw" }
-        , example { moduleName = "Tailwind.Breakpoints", placeholder = "Bp" }
+        , example { moduleName = "Html", placeholder = "Html", onInputAlias = SetHtmlAlias }
+        , example { moduleName = "Html.Attributes", placeholder = "Attr", onInputAlias = SetHtmlAlias }
+        , example { moduleName = "Svg", placeholder = "Svg", onInputAlias = SetHtmlAlias }
+        , example { moduleName = "Svg.Attributes", placeholder = "SvgAttr", onInputAlias = SetHtmlAlias }
+        , example { moduleName = "Tailwind.Utilities", placeholder = "Tw", onInputAlias = SetHtmlAlias }
+        , example { moduleName = "Tailwind.Breakpoints", placeholder = "Bp", onInputAlias = SetHtmlAlias }
         ]
 
 
-inputWithInset { placeholder, id, prefix, paddingLeft } =
+inputWithInset { placeholder, id, prefix, paddingLeft, onInput } =
     div
         [ css
             [ Tw.mt_1
@@ -220,7 +221,7 @@ inputWithInset { placeholder, id, prefix, paddingLeft } =
             , Attr.name id
             , Attr.id id
             , Attr.placeholder placeholder
-            , Events.onInput SetHtmlAlias
+            , Events.onInput onInput
             , css
                 [ Tw.font_mono
                 , Tw.border_0 |> Css.important
