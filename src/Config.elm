@@ -35,6 +35,30 @@ updateBpAlias config newAlias =
     { config | bp = config.bp |> updateAlias "Bp" newAlias }
 
 
+updateHtmlExposing config newExposing =
+    { config | html = config.html |> updateExposing All newExposing }
+
+
+updateSvgExposing config newExposing =
+    { config | svg = config.svg |> updateExposing (Some [ "path", "svg" ]) newExposing }
+
+
+updateHtmlAttrExposing config newExposing =
+    { config | htmlAttr = config.htmlAttr |> updateExposing None newExposing }
+
+
+updateSvgAttrExposing config newExposing =
+    { config | svgAttr = config.svgAttr |> updateExposing None newExposing }
+
+
+updateTwExposing config newExposing =
+    { config | tw = config.tw |> updateExposing None newExposing }
+
+
+updateBpExposing config newExposing =
+    { config | bp = config.bp |> updateExposing None newExposing }
+
+
 updateAlias : String -> String -> ( String, Exposing ) -> ( String, Exposing )
 updateAlias defaultAlias newAlias ( importAlias, importExposing ) =
     ( if newAlias == "" then
@@ -44,6 +68,28 @@ updateAlias defaultAlias newAlias ( importAlias, importExposing ) =
         newAlias
     , importExposing
     )
+
+
+updateExposing : Exposing -> String -> ( String, Exposing ) -> ( String, Exposing )
+updateExposing defaultExposing newExposing ( importAlias, importExposing ) =
+    ( importAlias
+    , parseExposing newExposing
+    )
+
+
+parseExposing : String -> Exposing
+parseExposing exposingString =
+    if exposingString == ".." then
+        All
+
+    else if exposingString == "" then
+        None
+
+    else
+        exposingString
+            |> String.split ","
+            |> List.map String.trim
+            |> Some
 
 
 default : Config

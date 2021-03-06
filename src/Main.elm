@@ -35,6 +35,12 @@ type Msg
     | SetSvgAttrAlias String
     | SetTwAlias String
     | SetBpAlias String
+    | SetHtmlExposing String
+    | SetHtmlAttrExposing String
+    | SetSvgExposing String
+    | SetSvgAttrExposing String
+    | SetTwExposing String
+    | SetBpExposing String
 
 
 update : Msg -> Model -> Model
@@ -73,6 +79,36 @@ update msg model =
                 | config = Config.updateBpAlias model.config string
             }
 
+        SetHtmlExposing string ->
+            { model
+                | config = Config.updateHtmlExposing model.config string
+            }
+
+        SetHtmlAttrExposing string ->
+            { model
+                | config = Config.updateHtmlAttrExposing model.config string
+            }
+
+        SetSvgExposing string ->
+            { model
+                | config = Config.updateSvgExposing model.config string
+            }
+
+        SetSvgAttrExposing string ->
+            { model
+                | config = Config.updateSvgAttrExposing model.config string
+            }
+
+        SetTwExposing string ->
+            { model
+                | config = Config.updateTwExposing model.config string
+            }
+
+        SetBpExposing string ->
+            { model
+                | config = Config.updateBpExposing model.config string
+            }
+
 
 
 --view : Model -> Html.Html Msg
@@ -86,6 +122,8 @@ view model =
         , Html.textarea
             [ Events.onInput OnInput
             , Attr.value model.htmlInput
+            , Attr.spellcheck False
+            , Attr.autocomplete False
             , Attr.style "width" "100%"
             , Attr.style "height" "200px"
             ]
@@ -155,7 +193,7 @@ navbar =
         ]
 
 
-example { moduleName, placeholder, onInputAlias } =
+example { moduleName, placeholder, onInputAlias, onInputExposing } =
     div
         [ css
             [ Tw.mb_4
@@ -190,6 +228,7 @@ example { moduleName, placeholder, onInputAlias } =
                 , id = "html-tag-expose"
                 , prefix = " exposing ("
                 , paddingLeft = Tw.pl_28
+                , onInput = onInputExposing
                 }
             ]
         ]
@@ -200,12 +239,12 @@ settingsPanel =
         [ css [ Tw.relative ] ]
         [ {--}
           Css.Global.global Tw.globalStyles
-        , example { moduleName = "Html", placeholder = "Html", onInputAlias = SetHtmlAlias }
-        , example { moduleName = "Html.Attributes", placeholder = "Attr", onInputAlias = SetHtmlAttrAlias }
-        , example { moduleName = "Svg", placeholder = "Svg", onInputAlias = SetSvgAlias }
-        , example { moduleName = "Svg.Attributes", placeholder = "SvgAttr", onInputAlias = SetSvgAttrAlias }
-        , example { moduleName = "Tailwind.Utilities", placeholder = "Tw", onInputAlias = SetTwAlias }
-        , example { moduleName = "Tailwind.Breakpoints", placeholder = "Bp", onInputAlias = SetBpAlias }
+        , example { moduleName = "Html", placeholder = "Html", onInputAlias = SetHtmlAlias, onInputExposing = SetHtmlExposing }
+        , example { moduleName = "Html.Attributes", placeholder = "Attr", onInputAlias = SetHtmlAttrAlias, onInputExposing = SetHtmlAttrExposing }
+        , example { moduleName = "Svg", placeholder = "Svg", onInputAlias = SetSvgAlias, onInputExposing = SetSvgExposing }
+        , example { moduleName = "Svg.Attributes", placeholder = "SvgAttr", onInputAlias = SetSvgAttrAlias, onInputExposing = SetSvgAttrExposing }
+        , example { moduleName = "Tailwind.Utilities", placeholder = "Tw", onInputAlias = SetTwAlias, onInputExposing = SetTwExposing }
+        , example { moduleName = "Tailwind.Breakpoints", placeholder = "Bp", onInputAlias = SetBpAlias, onInputExposing = SetBpExposing }
         ]
 
 
@@ -248,6 +287,8 @@ inputWithInset { placeholder, id, prefix, paddingLeft, onInput } =
             , Attr.id id
             , Attr.placeholder placeholder
             , Events.onInput onInput
+            , Attr.spellcheck False
+            , Attr.autocomplete False
             , css
                 [ Tw.font_mono
                 , Tw.border_0 |> Css.important
@@ -301,7 +342,7 @@ inputWithInset { placeholder, id, prefix, paddingLeft, onInput } =
         ]
 
 
-inputWithInsets { placeholder, id, prefix, paddingLeft } =
+inputWithInsets { placeholder, id, prefix, paddingLeft, onInput } =
     div
         [ css
             [ Tw.mt_1
@@ -339,6 +380,9 @@ inputWithInsets { placeholder, id, prefix, paddingLeft } =
             , Attr.name id
             , Attr.id id
             , Attr.placeholder placeholder
+            , Events.onInput onInput
+            , Attr.spellcheck False
+            , Attr.autocomplete False
             , css
                 [ Tw.font_mono
                 , Tw.border_0 |> Css.important
