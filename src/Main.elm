@@ -207,6 +207,28 @@ navbar =
                     ]
                     [ text "html-to-elm.com"
                     ]
+                , button
+                    [ css
+                        [ Tw.flex
+                        , Tw.space_x_2
+                        , Tw.items_center
+                        , Tw.text_gray_300
+                        , Tw.px_3
+                        , Tw.py_2
+                        , Tw.rounded_md
+                        , Tw.text_sm
+                        , Tw.font_medium
+                        , Css.hover
+                            [ Tw.bg_gray_700
+                            , Tw.text_white
+                            ]
+                        ]
+                    ]
+                    [ div
+                        []
+                        [ text "Settings" ]
+                    , settingsIcon
+                    ]
                 ]
             ]
         ]
@@ -473,4 +495,22 @@ inputWithInsets { placeholder, id, prefix, paddingLeft, onInput } =
                 ]
                 [ text ")" ]
             ]
+        ]
+
+
+settingsIcon : Html msg
+settingsIcon =
+    Svg.svg
+        [ SvgAttr.fill "none"
+        , SvgAttr.viewBox "0 0 24 24"
+        , SvgAttr.stroke "currentColor"
+        , SvgAttr.css [ Tw.h_6 ]
+        ]
+        [ Svg.path
+            [ SvgAttr.strokeLinecap "round"
+            , SvgAttr.strokeLinejoin "round"
+            , SvgAttr.strokeWidth "2"
+            , SvgAttr.d "M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
+            ]
+            []
         ]
