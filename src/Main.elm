@@ -138,20 +138,33 @@ view model =
                 , Tw.h_full
                 ]
             ]
-            [ if model.showSettings then
-                settingsPanel
+            [ div
+                [ css
+                    [ Tw.flex_1
+                    ]
+                ]
+                [ div
+                    [ css
+                        [ if model.showSettings then
+                            Css.batch []
 
-              else
-                Html.textarea
+                          else
+                            Tw.hidden
+                        ]
+                    ]
+                    [ settingsPanel ]
+                , Html.textarea
                     [ Events.onInput OnInput
                     , Attr.value model.htmlInput
                     , Attr.spellcheck False
                     , Attr.autocomplete False
                     , css
-                        [ Tw.flex_1
+                        [ Tw.h_full
+                        , Tw.w_full
                         ]
                     ]
                     []
+                ]
             , Html.textarea
                 [ css
                     [ Tw.font_mono
