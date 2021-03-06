@@ -6,6 +6,12 @@ type alias Config =
     }
 
 
+default : Config
+default =
+    { htmlAs = ( "Html", All )
+    }
+
+
 type Exposing
     = All
     | None

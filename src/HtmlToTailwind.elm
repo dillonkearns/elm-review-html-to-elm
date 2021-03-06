@@ -1,6 +1,6 @@
 module HtmlToTailwind exposing (htmlToElmTailwindModules)
 
-import Config
+import Config exposing (Config)
 import Dict exposing (Dict)
 import Dict.Extra
 import Html.Parser
@@ -8,20 +8,14 @@ import ImplementedFunctions
 import Regex
 
 
-config : Config.Config
-config =
-    { htmlAs = ( "Html", Config.All )
-    }
-
-
-htmlToElmTailwindModules : String -> String
-htmlToElmTailwindModules input =
+htmlToElmTailwindModules : Config.Config -> String -> String
+htmlToElmTailwindModules config input =
     case Html.Parser.run input of
         Err error ->
             "ERROR"
 
         Ok value ->
-            List.filterMap (nodeToElm 1 Html) value |> join
+            List.filterMap (nodeToElm config 1 Html) value |> join
 
 
 type Separator
@@ -47,8 +41,8 @@ join nodes =
                     node1 ++ ", " ++ join otherNodes
 
 
-nodeToElm : Int -> Context -> Html.Parser.Node -> Maybe ( Separator, String )
-nodeToElm indentLevel context node =
+nodeToElm : Config -> Int -> Context -> Html.Parser.Node -> Maybe ( Separator, String )
+nodeToElm config indentLevel context node =
     case node of
         Html.Parser.Text textBody ->
             let
@@ -120,7 +114,7 @@ nodeToElm indentLevel context node =
                 ++ (indentedThingy (indentLevel + 1) identity filteredAttributes
                         ++ indentation indentLevel
                         ++ "      ["
-                        ++ (List.filterMap (nodeToElm (indentLevel + 1) newContext) children |> join |> surroundWithSpaces)
+                        ++ (List.filterMap (nodeToElm config (indentLevel + 1) newContext) children |> join |> surroundWithSpaces)
                         ++ "]\n"
                         ++ indentation indentLevel
                    )

@@ -20,6 +20,7 @@ async function runElm(htmlInput, name) {
       `Run${name}.elm`,
       `port module Run${name} exposing (main)
 
+import Config
 import HtmlToTailwind exposing (htmlToElmTailwindModules)
 
 htmlInputString : String
@@ -29,7 +30,7 @@ htmlInputString =
 
 result : String
 result =
-    htmlToElmTailwindModules htmlInputString
+    htmlToElmTailwindModules Config.default htmlInputString
 
 port toJs : String -> Cmd msg
 
