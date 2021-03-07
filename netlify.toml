@@ -1,8 +1,8 @@
 # example netlify.toml
 [build]
-  command = "npm install && npx elm make src/Main.elm --output dist/index.html"
+  command = "npm install && npx elm make src/Main.elm --output elm.js"
   functions = "functions"
-  publish = "dist"
+  publish = "."
 
 [dev]
   command = "npx elm-live src/Main.elm"
