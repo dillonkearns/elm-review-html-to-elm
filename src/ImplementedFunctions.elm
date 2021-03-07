@@ -76,12 +76,14 @@ pseudoClasses =
         ]
 
 
+htmlTagsDict : Dict String String
 htmlTagsDict =
     Dict.fromList
         [ ( "main", "main_" )
         ]
 
 
+htmlTags : List String
 htmlTags =
     [ "body"
     , "section"
@@ -264,6 +266,7 @@ htmlAttributeDict =
     Dict.fromList [ ( "type", "type_" ) ]
 
 
+htmlAttributes : List String
 htmlAttributes =
     [ "key"
     , -- "style",   -- style is disabled as it requires special parsing
@@ -333,6 +336,7 @@ htmlAttributes =
     ]
 
 
+svgAttributes : List String
 svgAttributes =
     [ "accent-height"
     , "accelerate"

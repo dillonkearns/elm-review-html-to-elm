@@ -49,57 +49,68 @@ exposingToString importExposing =
 
         Some list ->
             list
-                --|> List.filter (\value -> String.trim value /= "")
                 |> String.join ", "
 
         All ->
             ".."
 
 
+updateHtmlAlias : Config -> String -> Config
 updateHtmlAlias config newAlias =
     { config | html = config.html |> updateAlias "Html" newAlias }
 
 
+updateSvgAlias : Config -> String -> Config
 updateSvgAlias config newAlias =
     { config | svg = config.svg |> updateAlias "Svg" newAlias }
 
 
+updateHtmlAttrAlias : Config -> String -> Config
 updateHtmlAttrAlias config newAlias =
     { config | htmlAttr = config.htmlAttr |> updateAlias "Attr" newAlias }
 
 
+updateSvgAttrAlias : Config -> String -> Config
 updateSvgAttrAlias config newAlias =
     { config | svgAttr = config.svgAttr |> updateAlias "SvgAttr" newAlias }
 
 
+updateTwAlias : Config -> String -> Config
 updateTwAlias config newAlias =
     { config | tw = config.tw |> updateAlias "Tw" newAlias }
 
 
+updateBpAlias : Config -> String -> Config
 updateBpAlias config newAlias =
     { config | bp = config.bp |> updateAlias "Bp" newAlias }
 
 
+updateHtmlExposing : Config -> String -> Config
 updateHtmlExposing config newExposing =
     { config | html = config.html |> updateExposing All newExposing }
 
 
+updateSvgExposing : Config -> String -> Config
 updateSvgExposing config newExposing =
     { config | svg = config.svg |> updateExposing (Some [ "path", "svg" ]) newExposing }
 
 
+updateHtmlAttrExposing : Config -> String -> Config
 updateHtmlAttrExposing config newExposing =
     { config | htmlAttr = config.htmlAttr |> updateExposing None newExposing }
 
 
+updateSvgAttrExposing : Config -> String -> Config
 updateSvgAttrExposing config newExposing =
     { config | svgAttr = config.svgAttr |> updateExposing None newExposing }
 
 
+updateTwExposing : Config -> String -> Config
 updateTwExposing config newExposing =
     { config | tw = config.tw |> updateExposing None newExposing }
 
 
+updateBpExposing : Config -> String -> Config
 updateBpExposing config newExposing =
     { config | bp = config.bp |> updateExposing None newExposing }
 
@@ -161,6 +172,7 @@ testConfig =
     }
 
 
+toggleUseTailwindClasses : Config -> Config
 toggleUseTailwindClasses config =
     { config | useTailwindModules = not config.useTailwindModules }
 

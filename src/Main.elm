@@ -4,7 +4,8 @@ import Browser
 import Config exposing (Config)
 import Css
 import Css.Global
-import Html.Styled as Html exposing (..)
+import Html
+import Html.Styled exposing (..)
 import Html.Styled.Attributes as Attr exposing (attribute, css)
 import Html.Styled.Events as Events
 import HtmlToTailwind
@@ -51,6 +52,7 @@ type Msg
     | CopyGeneratedCode
 
 
+noCmd : Model -> ( Model, Cmd msg )
 noCmd model =
     ( model, Cmd.none )
 
@@ -152,10 +154,7 @@ update msg model =
             )
 
 
-
---view : Model -> Html.Html Msg
-
-
+view : Model -> Html.Html Msg
 view model =
     div
         [ css
@@ -344,6 +343,11 @@ navbar model =
         ]
 
 
+example :
+    Model
+    -> { moduleName : String, placeholder : String, onInputAlias : String -> Msg, onInputExposing : String -> Msg }
+    -> (Config -> ( String, Config.Exposing ))
+    -> Html Msg
 example model { moduleName, placeholder, onInputAlias, onInputExposing } getter =
     div
         [ css
@@ -420,6 +424,14 @@ settingsPanel model =
         ]
 
 
+inputWithInset :
+    { placeholder : String
+    , id : String
+    , prefix : String
+    , paddingLeft : Css.Style
+    , onInput : String -> Msg
+    }
+    -> Html Msg
 inputWithInset { placeholder, id, prefix, paddingLeft, onInput } =
     div
         [ css
@@ -465,45 +477,15 @@ inputWithInset { placeholder, id, prefix, paddingLeft, onInput } =
                 [ Tw.font_mono
                 , Tw.border_0 |> Css.important
                 , Tw.border_b_2 |> Css.important
-
-                --, Tw.border_b_8
-                --,  Tw.border_blue_800
-                --, Tw.border
-                --, Tw.border_transparent |> Css.important
-                --, Tw.border_gray_300
-                --, Tw.rounded_md
-                --, Tw.shadow_sm
-                --, Tw.py_2
-                --, Tw.px_3
-                --, Css.focus
-                --    [ Tw.outline_none
-                --    , Tw.ring_blue_500
-                --    , Tw.border_blue_500
-                --    ]
-                --, Bp.sm
-                --    [ Tw.text_sm
-                --    ]
                 , Tw.block |> Css.important
                 , Tw.w_full |> Css.important
-
-                --, Tw.pl_9 |> Css.important
                 , paddingLeft |> Css.important
                 , Tw.pr_12 |> Css.important
                 , Tw.outline_none |> Css.important
                 , Tw.ring_0 |> Css.important
                 , Tw.ring_transparent |> Css.important
-
-                --, Tw.border_gray_400 |> Css.important
-                --, Tw.rounded_md |> Css.important
                 , Css.focus
-                    [ --Tw.ring_blue_500
-                      --Tw.ring_b_b
-                      --, Tw.border_blue_500
-                      --, Tw.blue_500_b
-                      Tw.border_blue_500
-
-                    --, Tw.border_0 |> Css.important
-                    --, Tw.border_b_4 |> Css.important
+                    [ Tw.border_blue_500
                     ]
                 , Bp.sm
                     [ Tw.text_sm
@@ -514,6 +496,15 @@ inputWithInset { placeholder, id, prefix, paddingLeft, onInput } =
         ]
 
 
+inputWithInsets :
+    { placeholder : String
+    , id : String
+    , prefix : String
+    , paddingLeft : Css.Style
+    , onInput : String -> Msg
+    , value : String
+    }
+    -> Html Msg
 inputWithInsets { placeholder, id, prefix, paddingLeft, onInput, value } =
     div
         [ css
@@ -560,45 +551,15 @@ inputWithInsets { placeholder, id, prefix, paddingLeft, onInput, value } =
                 [ Tw.font_mono
                 , Tw.border_0 |> Css.important
                 , Tw.border_b_2 |> Css.important
-
-                --, Tw.border_b_8
-                --,  Tw.border_blue_800
-                --, Tw.border
-                --, Tw.border_transparent |> Css.important
-                --, Tw.border_gray_300
-                --, Tw.rounded_md
-                --, Tw.shadow_sm
-                --, Tw.py_2
-                --, Tw.px_3
-                --, Css.focus
-                --    [ Tw.outline_none
-                --    , Tw.ring_blue_500
-                --    , Tw.border_blue_500
-                --    ]
-                --, Bp.sm
-                --    [ Tw.text_sm
-                --    ]
                 , Tw.block |> Css.important
                 , Tw.w_full |> Css.important
-
-                --, Tw.pl_9 |> Css.important
                 , paddingLeft |> Css.important
                 , Tw.pr_12 |> Css.important
                 , Tw.outline_none |> Css.important
                 , Tw.ring_0 |> Css.important
                 , Tw.ring_transparent |> Css.important
-
-                --, Tw.border_gray_400 |> Css.important
-                --, Tw.rounded_md |> Css.important
                 , Css.focus
-                    [ --Tw.ring_blue_500
-                      --Tw.ring_b_b
-                      --, Tw.border_blue_500
-                      --, Tw.blue_500_b
-                      Css.borderBottomColor (Css.rgb 59 130 246) |> Css.important
-
-                    --, Tw.border_0 |> Css.important
-                    --, Tw.border_b_4 |> Css.important
+                    [ Css.borderBottomColor (Css.rgb 59 130 246) |> Css.important
                     ]
                 , Bp.sm
                     [ Tw.text_sm
@@ -649,10 +610,11 @@ settingsIcon =
         ]
 
 
+toggle : Msg -> Bool -> Html Msg
 toggle toggleMsg enabled =
     button
         [ Attr.type_ "button"
-        , Events.onClick UseTailwindClasses
+        , Events.onClick toggleMsg
         , css
             [ if enabled then
                 Tw.bg_blue_600
@@ -686,8 +648,7 @@ toggle toggleMsg enabled =
                 ]
             ]
             [ text "Use setting" ]
-        , {- Enabled: "translate-x-5", Not Enabled: "translate-x-0" -}
-          span
+        , span
             [ attribute "aria-hidden" "true"
             , css
                 [ if enabled then

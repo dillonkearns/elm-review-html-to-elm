@@ -315,6 +315,7 @@ toTwClass config twClass =
 
 {-| Mimics the rules in <https://github.com/matheus23/elm-tailwind-modules/blob/cd5809505934ff72c9b54fd1e181f67b53af8186/src/helpers.ts#L24-L59>
 -}
+twClassToElmName : String -> String
 twClassToElmName twClass =
     twClass
         |> Regex.replace (Regex.fromString "^-([a-z])" |> Maybe.withDefault Regex.never)
