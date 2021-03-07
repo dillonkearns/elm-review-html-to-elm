@@ -33,6 +33,7 @@ config : List Rule
 config =
     [ NoUnused.Modules.rule
     , NoUnused.Exports.rule
+        |> Review.Rule.ignoreErrorsForFiles [ "src/Config.elm" ]
     , NoUnused.Dependencies.rule
     , NoUnused.CustomTypeConstructorArgs.rule
 

@@ -8,6 +8,7 @@ module Config exposing
     , htmlTag
     , svgAttr
     , svgTag
+    , testConfig
     , toggleUseTailwindClasses
     , tw
     , updateBpAlias
