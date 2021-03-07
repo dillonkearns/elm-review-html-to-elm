@@ -16,33 +16,17 @@ main =
 result =
         {- This example requires Tailwind CSS v2.0+ -}
         div
-        [ css
-            [ Tw.rounded_md
-            , Tw.bg_yellow_50
-            , Tw.p_4
-            ]
-
+        [ css [ Tw.rounded_md, Tw.bg_yellow_50, Tw.p_4 ]
         ]
           [ div
-            [ css
-                [ Tw.flex
-                ]
-
+            [ css [ Tw.flex ]
             ]
               [ div
-                [ css
-                    [ Tw.flex_shrink_0
-                    ]
-
+                [ css [ Tw.flex_shrink_0 ]
                 ]
                   [                 {- Heroicon name: solid/exclamation -}
                 Svg.svg
-                    [ SvgAttr.css
-                        [ Tw.h_5
-                        , Tw.w_5
-                        , Tw.text_yellow_400
-                        ]
-
+                    [ SvgAttr.css [ Tw.h_5, Tw.w_5, Tw.text_yellow_400 ]
                     , SvgAttr.viewBox "0 0 20 20"
                     , SvgAttr.fill "currentColor"
                     , attribute "aria-hidden" "true"
@@ -56,27 +40,14 @@ result =
                      ]
                  ]
             , div
-                [ css
-                    [ Tw.ml_3
-                    ]
-
+                [ css [ Tw.ml_3 ]
                 ]
                   [ h3
-                    [ css
-                        [ Tw.text_sm
-                        , Tw.font_medium
-                        , Tw.text_yellow_800
-                        ]
-
+                    [ css [ Tw.text_sm, Tw.font_medium, Tw.text_yellow_800 ]
                     ]
                       [ text "Attention needed" ]
                 , div
-                    [ css
-                        [ Tw.mt_2
-                        , Tw.text_sm
-                        , Tw.text_yellow_700
-                        ]
-
+                    [ css [ Tw.mt_2, Tw.text_sm, Tw.text_yellow_700 ]
                     ]
                       [ p []
                           [ text "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid pariatur, ipsum similique veniam quo totam eius aperiam dolorum." ]

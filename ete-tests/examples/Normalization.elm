@@ -16,17 +16,11 @@ main =
 result =
         main_ []
           [ div
-            [ css
-                [ Tw.neg_mt_8
-                ]
-
+            [ css [ Tw.neg_mt_8 ]
             ]
               []
         , div
-            [ css
-                [ Tw.h_1over2
-                ]
-
+            [ css [ Tw.h_1over2 ]
             ]
               []
          ]

@@ -277,7 +277,7 @@ classAttributeToElm config context indentLevel value =
                                 )
                     )
 
-        newThing : List String
+        newThing : List Expression
         newThing =
             dict
                 |> Dict.toList
@@ -292,7 +292,7 @@ classAttributeToElm config context indentLevel value =
                                         |> List.concat
                             in
                             allClasses
-                                |> List.map (toTwClass config)
+                                |> List.map (toTwClassExpr config)
 
                         else
                             twClasses
@@ -339,9 +339,6 @@ classAttributeToElm config context indentLevel value =
                                                 |> Expression.ListExpr
                                                 |> toNode
                                             ]
-                                            |> print
-
-                                        --++ indentedThingy (indentLevel + 2) identity thing
                                         ]
                                    )
                     )
@@ -354,13 +351,15 @@ classAttributeToElm config context indentLevel value =
 
                 Svg ->
                     Config.svgAttr config "css"
-
-        asExpr =
-            Expression.Application
-                [ cssFunction |> toNode
-                ]
     in
-    print cssFunction ++ indentedThingy (indentLevel + 1) identity newThing
+    Expression.Application
+        [ cssFunction |> toNode
+        , newThing
+            |> List.map toNode
+            |> Expression.ListExpr
+            |> toNode
+        ]
+        |> print
 
 
 breakpointNameExpr : Config -> String -> Expression
