@@ -97,6 +97,22 @@ describe("generated code is valid", function () {
           assert.isNull(error, "Unexpected Elm compilation error.");
         }
       );
+
+      try {
+        execSync(
+          `git diff --exit-code examples/${name}.elm`,
+          (error, stdout, stderr) => {
+            assert.isNull(
+              error,
+              `The generated output changed. Restore the output format, or commit the changed file to approve it.\n\n${stdout}${stderr}`
+            );
+          }
+        );
+      } catch (error) {
+        assert.fail(
+          `The generated output changed. Restore the output format, or commit the changed file to approve it.\n\n${error.stdout}`
+        );
+      }
     });
   });
 });
