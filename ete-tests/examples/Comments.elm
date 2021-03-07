@@ -14,11 +14,8 @@ main =
 
 
 result =
-        {- Outer comment -}
         div []
-          [         {- Inner comment 1 -}
-                {- Inner comment 2 -}
-        span []
+          [ span []
               [ text "1" ]
         , span []
               [ text "2" ]

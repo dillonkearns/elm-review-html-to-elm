@@ -58,8 +58,7 @@ result =
                 ]
                   [ text "It was a dark and stormy night..." ]
              ]
-        ,         {- The second value will be selected initially -}
-        select
+        , select
             [ Attr.name "choice"
             , Attr.size 2
             ]

@@ -133,7 +133,9 @@ nodeToElm config indentLevel context node =
                 |> Just
 
         Html.Parser.Comment string ->
-            Just <| ( NoSeparator, indentation indentLevel ++ "{-" ++ string ++ "-}\n" ++ indentation indentLevel )
+            -- TODO is there a way to generate comments with `elm-syntax-dsl`?
+            --Just <| ( NoSeparator, indentation indentLevel ++ "{-" ++ string ++ "-}\n" ++ indentation indentLevel )
+            Nothing
 
 
 expression : Expression
