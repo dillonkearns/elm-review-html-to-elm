@@ -4,7 +4,7 @@
   "description": "Convert HTML to Elm, including tailwind utilities.",
   "scripts": {
     "start": "ntl dev --port 3000",
-    "test": "mocha ete-tests/mocha-test.js",
+    "test": "mocha ete-tests/mocha-test.js --timeout 5000",
     "postinstall": "elm-tooling install"
   },
   "repository": {
