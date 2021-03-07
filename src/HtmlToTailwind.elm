@@ -205,7 +205,9 @@ attributeToElm config indentLevel context ( name, value ) =
         []
 
     else if name == "class" && config.useTailwindModules then
-        [ classAttributeToElm config context indentLevel value ]
+        [ classAttributeToElm config context indentLevel value
+            |> print
+        ]
 
     else if context == Svg then
         [ svgAttr config ( name, value ) ]
@@ -258,7 +260,7 @@ svgAttr config ( name, value ) =
             print (Config.htmlAttr config "attribute") ++ " \"" ++ name ++ "\" \"" ++ value ++ "\""
 
 
-classAttributeToElm : Config -> Context -> Int -> String -> String
+classAttributeToElm : Config -> Context -> Int -> String -> Expression
 classAttributeToElm config context indentLevel value =
     let
         dict : Dict String (Dict String (List String))
@@ -359,7 +361,6 @@ classAttributeToElm config context indentLevel value =
             |> Expression.ListExpr
             |> toNode
         ]
-        |> print
 
 
 breakpointNameExpr : Config -> String -> Expression
