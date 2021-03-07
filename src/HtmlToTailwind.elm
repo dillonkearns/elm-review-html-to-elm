@@ -182,7 +182,7 @@ print : Expression -> String
 print exp =
     exp
         |> Elm.Pretty.prettyExpression
-        |> Pretty.pretty 80
+        |> Pretty.pretty 50
 
 
 indentedThingy : Int -> (a -> String) -> List a -> String
