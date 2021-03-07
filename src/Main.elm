@@ -186,7 +186,7 @@ view model =
                             Tw.hidden
                         ]
                     ]
-                    [ settingsPanel ]
+                    [ settingsPanel model ]
                 , Html.textarea
                     [ Events.onInput OnInput
                     , Attr.value model.htmlInput
@@ -213,8 +213,6 @@ view model =
                     |> text
                 ]
             ]
-
-        --, settingsPanel
         ]
         |> Html.toUnstyled
 
@@ -346,7 +344,7 @@ navbar model =
         ]
 
 
-example { moduleName, placeholder, onInputAlias, onInputExposing } =
+example model { moduleName, placeholder, onInputAlias, onInputExposing } getter =
     div
         [ css
             [ Tw.mb_4
@@ -377,26 +375,40 @@ example { moduleName, placeholder, onInputAlias, onInputExposing } =
             ]
         , div [ css [ Tw.flex_1 ] ]
             [ inputWithInsets
-                { placeholder = ".."
+                { placeholder = ""
                 , id = "html-tag-expose"
                 , prefix = " exposing ("
                 , paddingLeft = Tw.pl_28
                 , onInput = onInputExposing
+                , value = getter model.config |> Config.getExposingString
                 }
             ]
         ]
 
 
-settingsPanel =
+settingsPanel : Model -> Html Msg
+settingsPanel model =
     main_
         [ css [ Tw.relative ] ]
         [ {--}
-          example { moduleName = "Html", placeholder = "Html", onInputAlias = SetHtmlAlias, onInputExposing = SetHtmlExposing }
-        , example { moduleName = "Html.Attributes", placeholder = "Attr", onInputAlias = SetHtmlAttrAlias, onInputExposing = SetHtmlAttrExposing }
-        , example { moduleName = "Svg", placeholder = "Svg", onInputAlias = SetSvgAlias, onInputExposing = SetSvgExposing }
-        , example { moduleName = "Svg.Attributes", placeholder = "SvgAttr", onInputAlias = SetSvgAttrAlias, onInputExposing = SetSvgAttrExposing }
-        , example { moduleName = "Tailwind.Utilities", placeholder = "Tw", onInputAlias = SetTwAlias, onInputExposing = SetTwExposing }
-        , example { moduleName = "Tailwind.Breakpoints", placeholder = "Bp", onInputAlias = SetBpAlias, onInputExposing = SetBpExposing }
+          example model
+            { moduleName = "Html", placeholder = "Html", onInputAlias = SetHtmlAlias, onInputExposing = SetHtmlExposing }
+            .html
+        , example model
+            { moduleName = "Html.Attributes", placeholder = "Attr", onInputAlias = SetHtmlAttrAlias, onInputExposing = SetHtmlAttrExposing }
+            .htmlAttr
+        , example model
+            { moduleName = "Svg", placeholder = "Svg", onInputAlias = SetSvgAlias, onInputExposing = SetSvgExposing }
+            .svg
+        , example model
+            { moduleName = "Svg.Attributes", placeholder = "SvgAttr", onInputAlias = SetSvgAttrAlias, onInputExposing = SetSvgAttrExposing }
+            .svgAttr
+        , example model
+            { moduleName = "Tailwind.Utilities", placeholder = "Tw", onInputAlias = SetTwAlias, onInputExposing = SetTwExposing }
+            .tw
+        , example model
+            { moduleName = "Tailwind.Breakpoints", placeholder = "Bp", onInputAlias = SetBpAlias, onInputExposing = SetBpExposing }
+            .bp
         ]
 
 
@@ -494,7 +506,7 @@ inputWithInset { placeholder, id, prefix, paddingLeft, onInput } =
         ]
 
 
-inputWithInsets { placeholder, id, prefix, paddingLeft, onInput } =
+inputWithInsets { placeholder, id, prefix, paddingLeft, onInput, value } =
     div
         [ css
             [ Tw.mt_1
@@ -535,6 +547,7 @@ inputWithInsets { placeholder, id, prefix, paddingLeft, onInput } =
             , Events.onInput onInput
             , Attr.spellcheck False
             , Attr.autocomplete False
+            , Attr.value value
             , css
                 [ Tw.font_mono
                 , Tw.border_0 |> Css.important

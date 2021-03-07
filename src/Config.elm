@@ -12,6 +12,26 @@ type alias Config =
     }
 
 
+getExposingString : ( String, Exposing ) -> String
+getExposingString ( importAlias, importExposing ) =
+    exposingToString importExposing
+
+
+exposingToString : Exposing -> String
+exposingToString importExposing =
+    case importExposing of
+        None ->
+            ""
+
+        Some list ->
+            list
+                --|> List.filter (\value -> String.trim value /= "")
+                |> String.join ", "
+
+        All ->
+            ".."
+
+
 updateHtmlAlias config newAlias =
     { config | html = config.html |> updateAlias "Html" newAlias }
 
@@ -95,9 +115,9 @@ parseExposing exposingString =
 
 default : Config
 default =
-    { html = ( "Html", None )
-    , htmlAttr = ( "Attr", None )
-    , svg = ( "Svg", None )
+    { html = ( "Html", All )
+    , htmlAttr = ( "Attr", Some [ "css" ] )
+    , svg = ( "Svg", Some [ "svg", "path" ] )
     , svgAttr = ( "SvgAttr", None )
     , tw = ( "Tw", None )
     , bp = ( "Bp", None )
