@@ -277,6 +277,7 @@ classAttributeToElm config context indentLevel value =
                                 )
                     )
 
+        newThing : List String
         newThing =
             dict
                 |> Dict.toList
@@ -305,16 +306,35 @@ classAttributeToElm config context indentLevel value =
                                         else
                                             case ImplementedFunctions.lookupWithDict ImplementedFunctions.pseudoClasses ImplementedFunctions.cssHelpers pseudoclass of
                                                 Just functionName ->
-                                                    [ "Css."
-                                                        ++ functionName
-                                                        ++ " "
-                                                        ++ indentedThingy (indentLevel + 3) (toTwClass config) twClassList
-                                                    ]
+                                                    --[ "Css."
+                                                    --    ++ functionName
+                                                    --    ++ " "
+                                                    --    ++ indentedThingy (indentLevel + 3) (toTwClass config) twClassList
+                                                    --]
+                                                    Expression.Application
+                                                        [ Expression.FunctionOrValue [ "Css" ] functionName
+                                                            |> toNode
+                                                        , twClassList
+                                                            |> List.map (toTwClassExpr config)
+                                                            |> List.map toNode
+                                                            |> Expression.ListExpr
+                                                            |> toNode
+                                                        ]
+                                                        |> print
+                                                        |> List.singleton
 
                                                 Nothing ->
-                                                    [ print (Config.bp config breakpoint)
-                                                        ++ indentedThingy (indentLevel + 3) (toTwClass config) twClassList
-                                                    ]
+                                                    Expression.Application
+                                                        [ Config.bp config breakpoint
+                                                            |> toNode
+                                                        , twClassList
+                                                            |> List.map (toTwClassExpr config)
+                                                            |> List.map toNode
+                                                            |> Expression.ListExpr
+                                                            |> toNode
+                                                        ]
+                                                        |> print
+                                                        |> List.singleton
                                     )
                                 |> List.concat
                                 --|> List.map (\thing -> indentedThingy (indentLevel + 2) identity thing)
@@ -333,6 +353,11 @@ classAttributeToElm config context indentLevel value =
 
                 Svg ->
                     Config.svgAttr config "css"
+
+        asExpr =
+            Expression.Application
+                [ cssFunction |> toNode
+                ]
     in
     print cssFunction ++ indentedThingy (indentLevel + 1) identity newThing
 
@@ -350,6 +375,11 @@ breakpointName config breakpoint =
 toTwClass : Config -> String -> String
 toTwClass config twClass =
     print <| Config.tw config (twClassToElmName twClass)
+
+
+toTwClassExpr : Config -> String -> Expression
+toTwClassExpr config twClass =
+    Config.tw config (twClassToElmName twClass)
 
 
 {-| Mimics the rules in <https://github.com/matheus23/elm-tailwind-modules/blob/cd5809505934ff72c9b54fd1e181f67b53af8186/src/helpers.ts#L24-L59>

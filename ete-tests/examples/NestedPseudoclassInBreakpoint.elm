@@ -20,10 +20,7 @@ result =
                 [ Tw.bg_gray_100
                 , Bp.lg
                     [ Tw.bg_white
-                    , Css.hover 
-                        [ Tw.bg_gray_200
-                        ]
-
+                    , Css.hover [ Tw.bg_gray_200 ]
                     ]
 
                 ]
