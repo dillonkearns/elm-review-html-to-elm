@@ -2,6 +2,7 @@
     "type": "application",
     "source-directories": [
         "../src",
+        "examples/",
         "../vendor/html-parser/src"
     ],
     "elm-version": "0.19.1",
