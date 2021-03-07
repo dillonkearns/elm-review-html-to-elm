@@ -25,10 +25,15 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
 
-        var app = Elm.Main.init({ node: document.querySelector('main') })
+        var app = Elm.Main.init({ node: document.querySelector('main'),
+        flags: localStorage.getItem('html-to-elm-config')
+     })
         app.ports.copyGeneratedCode.subscribe(generatedCode => {
             document.querySelector("#generated-elm").select();
             document.execCommand("copy");
+        })
+        app.ports.saveConfig.subscribe(configJsonString => {
+            localStorage.setItem('html-to-elm-config', configJsonString);
         })
 
         })

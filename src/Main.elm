@@ -1,6 +1,7 @@
 port module Main exposing (main)
 
 import Browser
+import Codec
 import Config exposing (Config)
 import Css
 import Css.Global
@@ -9,6 +10,7 @@ import Html.Styled exposing (..)
 import Html.Styled.Attributes as Attr exposing (attribute, css)
 import Html.Styled.Events as Events
 import HtmlToTailwind
+import Json.Encode
 import Svg.Styled as Svg
 import Svg.Styled.Attributes as SvgAttr
 import Tailwind.Breakpoints as Bp
@@ -18,6 +20,9 @@ import Tailwind.Utilities as Tw
 port copyGeneratedCode : () -> Cmd msg
 
 
+port saveConfig : String -> Cmd msg
+
+
 type alias Model =
     { htmlInput : String
     , config : Config
@@ -25,12 +30,17 @@ type alias Model =
     }
 
 
-initialModel : Model
-initialModel =
-    { htmlInput = """<a href="#" />"""
-    , config = Config.default
-    , showSettings = False
-    }
+initialModel : String -> ( Model, Cmd msg )
+initialModel configJsonString =
+    ( { htmlInput = """<a href="#" />"""
+      , config =
+            configJsonString
+                |> Codec.decodeString Config.codec
+                |> Result.withDefault Config.default
+      , showSettings = False
+      }
+    , Cmd.none
+    )
 
 
 type Msg
@@ -54,7 +64,9 @@ type Msg
 
 noCmd : Model -> ( Model, Cmd msg )
 noCmd model =
-    ( model, Cmd.none )
+    ( model
+    , saveConfig (Codec.encodeToString 0 Config.codec model.config)
+    )
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -216,10 +228,11 @@ view model =
         |> toUnstyled
 
 
-main : Program () Model Msg
+main : Program String Model Msg
 main =
     Browser.document
-        { init = \_ -> initialModel |> noCmd
+        { init =
+            initialModel
         , view = \model -> { title = "html-to-elm", body = [ view model ] }
         , update = update
         , subscriptions = \_ -> Sub.none

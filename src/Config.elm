@@ -2,6 +2,7 @@ module Config exposing
     ( Config
     , Exposing(..)
     , bp
+    , codec
     , default
     , getExposingString
     , htmlAttr
@@ -25,6 +26,8 @@ module Config exposing
     , updateTwExposing
     )
 
+import Codec exposing (Codec)
+
 
 type alias Config =
     { html : ( String, Exposing )
@@ -35,6 +38,27 @@ type alias Config =
     , bp : ( String, Exposing )
     , useTailwindModules : Bool
     }
+
+
+importCodec : Codec ( String, Exposing )
+importCodec =
+    Codec.tuple Codec.string
+        (Codec.string
+            |> Codec.map parseExposing exposingToString
+        )
+
+
+codec : Codec Config
+codec =
+    Codec.object Config
+        |> Codec.field "html" .html importCodec
+        |> Codec.field "htmlAttr" .htmlAttr importCodec
+        |> Codec.field "svg" .svg importCodec
+        |> Codec.field "svgAttr" .svgAttr importCodec
+        |> Codec.field "tw" .tw importCodec
+        |> Codec.field "bp" .bp importCodec
+        |> Codec.field "useTailwindModules" .useTailwindModules Codec.bool
+        |> Codec.buildObject
 
 
 getExposingString : ( String, Exposing ) -> String
