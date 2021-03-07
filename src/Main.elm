@@ -480,7 +480,7 @@ inputWithInset { placeholder, id, prefix, paddingLeft, onInput } =
                       --Tw.ring_b_b
                       --, Tw.border_blue_500
                       --, Tw.blue_500_b
-                      Css.borderBottomColor (Css.rgb 59 130 246) |> Css.important
+                      Tw.border_blue_500
 
                     --, Tw.border_0 |> Css.important
                     --, Tw.border_b_4 |> Css.important
