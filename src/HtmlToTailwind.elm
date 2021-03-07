@@ -210,7 +210,9 @@ attributeToElm config indentLevel context ( name, value ) =
         ]
 
     else if context == Svg then
-        [ svgAttr config ( name, value ) ]
+        [ svgAttr config ( name, value )
+            |> print
+        ]
 
     else if name == "style" then
         value
@@ -250,14 +252,21 @@ attributeToElm config indentLevel context ( name, value ) =
                                 [ print (Config.htmlAttr config "attribute") ++ " \"" ++ name ++ "\" \"" ++ value ++ "\"" ]
 
 
-svgAttr : Config -> ( String, String ) -> String
+svgAttr : Config -> ( String, String ) -> Expression
 svgAttr config ( name, value ) =
     case ImplementedFunctions.lookup ImplementedFunctions.svgAttributes name of
         Just functionName ->
-            print (Config.svgAttr config (ImplementedFunctions.toCamelCase functionName)) ++ " \"" ++ value ++ "\""
+            Expression.Application
+                [ Config.svgAttr config (ImplementedFunctions.toCamelCase functionName) |> toNode
+                , Expression.Literal value |> toNode
+                ]
 
         Nothing ->
-            print (Config.htmlAttr config "attribute") ++ " \"" ++ name ++ "\" \"" ++ value ++ "\""
+            Expression.Application
+                [ Config.htmlAttr config "attribute" |> toNode
+                , Expression.Literal name |> toNode
+                , Expression.Literal value |> toNode
+                ]
 
 
 classAttributeToElm : Config -> Context -> Int -> String -> Expression
@@ -361,6 +370,14 @@ classAttributeToElm config context indentLevel value =
             |> Expression.ListExpr
             |> toNode
         ]
+
+
+application : ( List String, String ) -> List Expression -> Expression
+application ( functionModule, functionName ) expressions =
+    Expression.Application
+        (toNode (Expression.FunctionOrValue functionModule functionName)
+            :: List.map toNode expressions
+        )
 
 
 breakpointNameExpr : Config -> String -> Expression
