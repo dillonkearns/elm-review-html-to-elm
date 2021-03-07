@@ -160,22 +160,9 @@ nodeToElm config indentLevel context node =
             Nothing
 
 
-expression : Expression
-expression =
-    Expression.Application
-        [ Expression.FunctionOrValue [] "" |> toNode
-        , Expression.ListExpr [] |> toNode
-        ]
-
-
+toNode : a -> Node a
 toNode =
     Node Elm.Syntax.Range.emptyRange
-
-
-stringThing : String
-stringThing =
-    Expression.FunctionOrValue [] "myFun"
-        |> print
 
 
 print : Expression -> String

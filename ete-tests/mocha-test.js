@@ -73,7 +73,10 @@ main =
 
 
 result =
-    ${generatedElmHtmlCode}
+${generatedElmHtmlCode
+  .split("\n")
+  .map((line) => `    ${line}`)
+  .join("\n")}
 `
         );
         resolve();

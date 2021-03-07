@@ -14,4 +14,6 @@ main =
 
 
 result =
-    main_ [] [ div [] [], div [] [ text "NO WHITESPACE" ] ]
+    main_
+        []
+        [ div [] [], div [] [ text "NO WHITESPACE" ] ]

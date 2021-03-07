@@ -15,19 +15,19 @@ main =
 
 result =
     main_
-    []
-    [ div
-        [ Attr.style "transition-duration" "1.5s"
-        , Attr.style "line-height" "1.5"
-        , Attr.style "margin" "15px"
-        ]
         []
-    , div
-        [ Attr.style "transition-duration" "1.5s"
-        , Attr.style "line-height" "1.5"
-        , Attr.style "margin" "15px"
+        [ div
+            [ Attr.style "transition-duration" "1.5s"
+            , Attr.style "line-height" "1.5"
+            , Attr.style "margin" "15px"
+            ]
+            []
+        , div
+            [ Attr.style "transition-duration" "1.5s"
+            , Attr.style "line-height" "1.5"
+            , Attr.style "margin" "15px"
+            ]
+            []
+        , div [ Attr.style "line-height" "1.5" ] []
+        , div [ Attr.style "line-height" "1.5" ] []
         ]
-        []
-    , div [ Attr.style "line-height" "1.5" ] []
-    , div [ Attr.style "line-height" "1.5" ] []
-    ]

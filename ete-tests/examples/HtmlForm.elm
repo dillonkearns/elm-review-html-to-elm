@@ -15,28 +15,39 @@ main =
 
 result =
     form
-    [ Attr.action "", Attr.method "get" ]
-    [ div
-        []
-        [ label [ Attr.for "name" ] [ text "Enter your name:" ]
-        , input
-            [ Attr.type_ "text"
-            , Attr.name "name"
-            , Attr.id "name"
-            , Attr.required True
-            ]
+        [ Attr.action "", Attr.method "get" ]
+        [ div
             []
-        ]
-    , div
-        []
-        [ label [ Attr.for "email" ] [ text "Enter your email:" ]
-        , input
-            [ Attr.type_ "email"
-            , Attr.name "email"
-            , Attr.id "email"
-            , Attr.required True
+            [ label
+                [ Attr.for "name" ]
+                [ text "Enter your name:" ]
+            , input
+                [ Attr.type_ "text"
+                , Attr.name "name"
+                , Attr.id "name"
+                , Attr.required True
+                ]
+                []
             ]
+        , div
             []
+            [ label
+                [ Attr.for "email" ]
+                [ text "Enter your email:" ]
+            , input
+                [ Attr.type_ "email"
+                , Attr.name "email"
+                , Attr.id "email"
+                , Attr.required True
+                ]
+                []
+            ]
+        , div
+            []
+            [ input
+                [ Attr.type_ "submit"
+                , Attr.value "Subscribe!"
+                ]
+                []
+            ]
         ]
-    , div [] [ input [ Attr.type_ "submit", Attr.value "Subscribe!" ] [] ]
-    ]
