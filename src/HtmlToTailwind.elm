@@ -122,7 +122,7 @@ nodeToElm config indentLevel context node =
                 ""
               )
                 ++ elementFunction
-                ++ (indentedThingy (indentLevel + 1) identity filteredAttributes
+                ++ (indentedThingy (indentLevel + 1) print filteredAttributes
                         ++ indentation indentLevel
                         ++ "      ["
                         ++ (List.filterMap (nodeToElm config (indentLevel + 1) newContext) children |> join |> surroundWithSpaces)
@@ -199,19 +199,17 @@ type Context
     | Svg
 
 
-attributeToElm : Config -> Int -> Context -> Html.Parser.Attribute -> List String
+attributeToElm : Config -> Int -> Context -> Html.Parser.Attribute -> List Expression
 attributeToElm config indentLevel context ( name, value ) =
     if name == "xmlns" then
         []
 
     else if name == "class" && config.useTailwindModules then
         [ classAttributeToElm config context indentLevel value
-            |> print
         ]
 
     else if context == Svg then
         [ svgAttr config ( name, value )
-            |> print
         ]
 
     else if name == "style" then
@@ -222,34 +220,53 @@ attributeToElm config indentLevel context ( name, value ) =
                 (\entry ->
                     case entry |> String.split ":" of
                         [ styleName, styleValue ] ->
-                            print (Config.htmlAttr config "style")
-                                ++ " \""
-                                ++ String.trim styleName
-                                ++ "\" \""
-                                ++ String.trim styleValue
-                                ++ "\""
+                            Expression.Application
+                                [ Config.htmlAttr config "style" |> toNode
+                                , String.trim styleName |> Expression.Literal |> toNode
+                                , String.trim styleValue |> Expression.Literal |> toNode
+                                ]
 
                         _ ->
-                            "<Invalid" ++ entry ++ ">"
+                            Expression.Application
+                                [ Expression.FunctionOrValue [ "Debug" ] "todo" |> toNode
+                                , Expression.Literal ("<Invalid" ++ entry ++ ">") |> toNode
+                                ]
                 )
 
     else
         case ImplementedFunctions.lookup ImplementedFunctions.boolAttributeFunctions name of
             Just boolFunction ->
-                [ print (Config.htmlAttr config boolFunction) ++ " True" ]
+                [ Expression.Application
+                    [ Config.htmlAttr config boolFunction |> toNode
+                    , Expression.FunctionOrValue [] "True" |> toNode
+                    ]
+                ]
 
             Nothing ->
                 case ImplementedFunctions.lookup ImplementedFunctions.intAttributeFunctions name of
                     Just intFunction ->
-                        [ print (Config.htmlAttr config intFunction) ++ " " ++ value ]
+                        [ Expression.Application
+                            [ Config.htmlAttr config intFunction |> toNode
+                            , Expression.Integer (value |> String.toInt |> Maybe.withDefault -1) |> toNode
+                            ]
+                        ]
 
                     Nothing ->
                         case ImplementedFunctions.lookupWithDict ImplementedFunctions.htmlAttributeDict ImplementedFunctions.htmlAttributes name of
                             Just functionName ->
-                                [ print (Config.htmlAttr config functionName) ++ " \"" ++ value ++ "\"" ]
+                                [ Expression.Application
+                                    [ Config.htmlAttr config functionName |> toNode
+                                    , Expression.Literal value |> toNode
+                                    ]
+                                ]
 
                             Nothing ->
-                                [ print (Config.htmlAttr config "attribute") ++ " \"" ++ name ++ "\" \"" ++ value ++ "\"" ]
+                                [ Expression.Application
+                                    [ Config.htmlAttr config "attribute" |> toNode
+                                    , Expression.Literal name |> toNode
+                                    , Expression.Literal value |> toNode
+                                    ]
+                                ]
 
 
 svgAttr : Config -> ( String, String ) -> Expression
