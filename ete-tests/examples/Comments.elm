@@ -14,12 +14,4 @@ main =
 
 
 result =
-        div []
-          [ span []
-              [ text "1" ]
-        , span []
-              [ text "2" ]
-        , span []
-              [ text "3" ]
-         ]
-    
+    div [] [ span [] [ text "1" ], span [] [ text "2" ], span [] [ text "3" ] ]

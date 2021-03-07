@@ -14,14 +14,13 @@ main =
 
 
 result =
-        main_ []
-          [ div
-            [ css [ Tw.flex, Tw.flex_col, Bp.md [ Tw.flex_row ] ]
-            ]
-              [ text "Single breakpoint" ]
-        , div
-            [ css [ Tw.flex, Tw.flex_col, Bp.md [ Tw.font_extrabold, Tw.flex_row ] ]
-            ]
-              [ text "Multiple breakpoints" ]
-         ]
-    
+    main_
+    []
+    [ div
+        [ css [ Tw.flex, Tw.flex_col, Bp.md [ Tw.flex_row ] ] ]
+        [ text "Single breakpoint" ]
+    , div
+        [ css [ Tw.flex, Tw.flex_col, Bp.md [ Tw.font_extrabold, Tw.flex_row ] ]
+        ]
+        [ text "Multiple breakpoints" ]
+    ]

@@ -20,7 +20,12 @@ htmlToElmTailwindModules config input =
             "ERROR"
 
         Ok value ->
-            List.filterMap (nodeToElm config 1 Html) value |> join
+            case List.filterMap (nodeToElm config 1 Html) value of
+                [ singleNode ] ->
+                    singleNode |> print
+
+                _ ->
+                    "TODO"
 
 
 type Separator
@@ -46,7 +51,7 @@ join nodes =
                     node1 ++ ", " ++ join otherNodes
 
 
-nodeToElm : Config -> Int -> Context -> Html.Parser.Node -> Maybe ( Separator, String )
+nodeToElm : Config -> Int -> Context -> Html.Parser.Node -> Maybe Expression
 nodeToElm config indentLevel context node =
     case node of
         Html.Parser.Text textBody ->
@@ -63,7 +68,7 @@ nodeToElm config indentLevel context node =
                 Nothing
 
             else
-                ( CommaSeparator, print (Config.htmlTag config "text") ++ " \"" ++ trimmed ++ "\"" ) |> Just
+                Expression.Application [ Config.htmlTag config "text" |> toNode, Expression.Literal trimmed |> toNode ] |> Just
 
         Html.Parser.Element elementName attributes children ->
             let
@@ -72,18 +77,24 @@ nodeToElm config indentLevel context node =
                         Svg ->
                             case ImplementedFunctions.lookup ImplementedFunctions.svgTags elementName of
                                 Just functionName ->
-                                    print (Config.svgTag config functionName)
+                                    Config.svgTag config functionName
 
                                 Nothing ->
-                                    print (Config.svgTag config "node") ++ " \"" ++ elementName ++ "\""
+                                    Expression.Application
+                                        [ Config.svgTag config "node" |> toNode
+                                        , Expression.Literal elementName |> toNode
+                                        ]
 
                         Html ->
                             case ImplementedFunctions.lookupWithDict ImplementedFunctions.htmlTagsDict ImplementedFunctions.htmlTags elementName of
                                 Just functionName ->
-                                    print (Config.htmlTag config functionName)
+                                    Config.htmlTag config functionName
 
                                 Nothing ->
-                                    print (Config.htmlTag config "node") ++ " \"" ++ elementName ++ "\""
+                                    Expression.Application
+                                        [ Config.htmlTag config "node" |> toNode
+                                        , Expression.Literal elementName |> toNode
+                                        ]
 
                 isSvg =
                     isSvgContext attributes
@@ -95,6 +106,7 @@ nodeToElm config indentLevel context node =
                     else
                         context
 
+                filteredAttributes : List Expression
                 filteredAttributes =
                     List.concatMap
                         (\attribute ->
@@ -105,30 +117,40 @@ nodeToElm config indentLevel context node =
                         )
                         attributes
 
-                functionExpr =
-                    Expression.FunctionOrValue [] elementFunction |> toNode
-
-                exprThing =
-                    Expression.Application
-                        [ Expression.FunctionOrValue [] elementFunction |> toNode
-                        , Expression.ListExpr [] |> toNode
-                        ]
+                --functionExpr =
+                --    Expression.FunctionOrValue [] elementFunction |> toNode
+                --
+                --exprThing =
+                --    Expression.Application
+                --        [ Expression.FunctionOrValue [] elementFunction |> toNode
+                --        , Expression.ListExpr [] |> toNode
+                --        ]
             in
-            ( CommaSeparator
-            , (if indentLevel == 1 then
-                "    "
-
-               else
-                ""
-              )
-                ++ elementFunction
-                ++ (indentedThingy (indentLevel + 1) print filteredAttributes
-                        ++ indentation indentLevel
-                        ++ "      ["
-                        ++ (List.filterMap (nodeToElm config (indentLevel + 1) newContext) children |> join |> surroundWithSpaces)
-                        ++ "]\n"
-                        ++ indentation indentLevel
-                   )
+            (--(if indentLevel == 1 then
+             --   "    "
+             --
+             --  else
+             --   ""
+             -- )
+             --   ++ elementFunction
+             --   ++ (indentedThingy (indentLevel + 1) print filteredAttributes
+             --           ++ indentation indentLevel
+             --           ++ "      ["
+             --           ++ (List.filterMap (nodeToElm config (indentLevel + 1) newContext) children |> join |> surroundWithSpaces)
+             --           ++ "]\n"
+             --           ++ indentation indentLevel
+             --      )
+             Expression.Application
+                [ elementFunction |> toNode
+                , filteredAttributes
+                    |> List.map toNode
+                    |> Expression.ListExpr
+                    |> toNode
+                , List.filterMap (nodeToElm config (indentLevel + 1) newContext) children
+                    |> List.map toNode
+                    |> Expression.ListExpr
+                    |> toNode
+                ]
             )
                 |> Just
 

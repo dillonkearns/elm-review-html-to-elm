@@ -14,14 +14,18 @@ main =
 
 
 result =
-        main_ []
-          [ div
-            [ css [ Tw.bg_gray_100, Bp.lg [ Tw.bg_white, Css.hover [ Tw.bg_gray_200 ] ] ]
+    main_
+    []
+    [ div
+        [ css
+            [ Tw.bg_gray_100
+            , Bp.lg [ Tw.bg_white, Css.hover [ Tw.bg_gray_200 ] ]
             ]
-              []
-        , div
-            [ css [ Tw.bg_gray_100, Css.hover [ Tw.bg_gray_900, Tw.border_gray_800 ] ]
-            ]
-              []
-         ]
-    
+        ]
+        []
+    , div
+        [ css
+            [ Tw.bg_gray_100, Css.hover [ Tw.bg_gray_900, Tw.border_gray_800 ] ]
+        ]
+        []
+    ]
