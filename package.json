@@ -2,10 +2,9 @@
   "name": "html-to-elm-tailwind-modules",
   "version": "1.0.0",
   "description": "Convert HTML to Elm, including tailwind utilities.",
-  "main": "index.js",
   "scripts": {
     "start": "ntl dev --port 3000",
-    "test": "(cd ete-tests && npm test)",
+    "test": "mocha ete-tests/mocha-test.js",
     "postinstall": "elm-tooling install"
   },
   "repository": {
@@ -20,8 +19,11 @@
   },
   "homepage": "https://html-to-elm.com",
   "devDependencies": {
+    "chai": "^4.3.3",
     "elm-live": "^4.0.2",
     "elm-test": "^0.19.1-revision6",
-    "elm-tooling": "^1.2.0"
+    "elm-tooling": "^1.2.0",
+    "mocha": "^8.3.1",
+    "node-elm-compiler": "^5.0.5"
   }
 }

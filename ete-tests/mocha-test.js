@@ -89,10 +89,7 @@ const assert = require("chai").assert;
 describe("generated code is valid", function () {
   testFiles().forEach((name) => {
     it(name, async function () {
-      // const res = add(args);
-
-      // assert.equal(name, "name");
-
+      process.chdir(__dirname);
       await runElm(fs.readFileSync(`./examples/${name}.html`).toString(), name);
       execSync(
         `elm make ./examples/${name}.elm --output=/dev/null`,
