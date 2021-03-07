@@ -1,4 +1,28 @@
-module Config exposing (..)
+module Config exposing
+    ( Config
+    , Exposing(..)
+    , bp
+    , default
+    , getExposingString
+    , htmlAttr
+    , htmlTag
+    , svgAttr
+    , svgTag
+    , toggleUseTailwindClasses
+    , tw
+    , updateBpAlias
+    , updateBpExposing
+    , updateHtmlAlias
+    , updateHtmlAttrAlias
+    , updateHtmlAttrExposing
+    , updateHtmlExposing
+    , updateSvgAlias
+    , updateSvgAttrAlias
+    , updateSvgAttrExposing
+    , updateSvgExposing
+    , updateTwAlias
+    , updateTwExposing
+    )
 
 
 type alias Config =

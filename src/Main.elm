@@ -187,7 +187,7 @@ view model =
                         ]
                     ]
                     [ settingsPanel model ]
-                , Html.textarea
+                , textarea
                     [ Events.onInput OnInput
                     , Attr.value model.htmlInput
                     , Attr.spellcheck False
@@ -199,7 +199,7 @@ view model =
                     ]
                     []
                 ]
-            , Html.textarea
+            , textarea
                 [ css
                     [ Tw.font_mono
 
@@ -214,7 +214,7 @@ view model =
                 ]
             ]
         ]
-        |> Html.toUnstyled
+        |> toUnstyled
 
 
 main : Program () Model Msg
@@ -650,10 +650,10 @@ settingsIcon =
 
 
 toggle toggleMsg enabled =
-    Html.button
+    button
         [ Attr.type_ "button"
         , Events.onClick UseTailwindClasses
-        , Attr.css
+        , css
             [ if enabled then
                 Tw.bg_blue_600
 
@@ -678,18 +678,18 @@ toggle toggleMsg enabled =
                 , Tw.ring_blue_500
                 ]
             ]
-        , Attr.attribute "aria-pressed" "false"
+        , attribute "aria-pressed" "false"
         ]
-        [ Html.span
-            [ Attr.css
+        [ span
+            [ css
                 [ Tw.sr_only
                 ]
             ]
-            [ Html.text "Use setting" ]
+            [ text "Use setting" ]
         , {- Enabled: "translate-x-5", Not Enabled: "translate-x-0" -}
-          Html.span
-            [ Attr.attribute "aria-hidden" "true"
-            , Attr.css
+          span
+            [ attribute "aria-hidden" "true"
+            , css
                 [ if enabled then
                     Tw.translate_x_5 |> Css.important
 

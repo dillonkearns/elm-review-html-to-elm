@@ -1,4 +1,18 @@
-module ImplementedFunctions exposing (..)
+module ImplementedFunctions exposing
+    ( boolAttributeFunctions
+    , cssHelpers
+    , htmlAttributeDict
+    , htmlAttributes
+    , htmlTags
+    , htmlTagsDict
+    , intAttributeFunctions
+    , lookup
+    , lookupWithDict
+    , pseudoClasses
+    , svgAttributes
+    , svgTags
+    , toCamelCase
+    )
 
 {-| Thank you mbylstra for the code from this repo: <https://github.com/mbylstra/html-to-elm/blob/c3c4b9a3f8c8c8b15150bd04f72ad89c4b11462e/elm-src/HtmlToElm/ElmHtmlWhitelists.elm>
 -}

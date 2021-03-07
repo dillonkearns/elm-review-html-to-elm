@@ -8,7 +8,7 @@ import ImplementedFunctions
 import Regex
 
 
-htmlToElmTailwindModules : Config.Config -> String -> String
+htmlToElmTailwindModules : Config -> String -> String
 htmlToElmTailwindModules config input =
     case Html.Parser.run input of
         Err error ->
