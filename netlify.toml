@@ -1,12 +1,12 @@
 # example netlify.toml
 [build]
-  command = "npm install && npx elm make src/Main.elm --output elm.js"
+  command = "cp index.html public/ && npm install && npx elm make src/Main.elm --output=public/elm.js"
   functions = "functions"
-  publish = "."
+  publish = "public"
 
 [dev]
-  command = "npx elm-live src/Main.elm"
+  command = "npx elm-live src/Main.elm --output=elm.js"
   targetPort = 8000
-  publish = "dist"
+  publish = "public"
   autoLaunch = true
   framework = "#custom"
