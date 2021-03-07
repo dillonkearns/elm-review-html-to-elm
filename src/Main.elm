@@ -388,6 +388,7 @@ example model { moduleName, placeholder, onInputAlias, onInputExposing } getter 
                 , prefix = " as "
                 , paddingLeft = Tw.pl_9
                 , onInput = onInputAlias
+                , value = getter model.config |> Tuple.first
                 }
             ]
         , div [ css [ Tw.flex_1 ] ]
@@ -443,9 +444,10 @@ inputWithInset :
     , prefix : String
     , paddingLeft : Css.Style
     , onInput : String -> Msg
+    , value : String
     }
     -> Html Msg
-inputWithInset { placeholder, id, prefix, paddingLeft, onInput } =
+inputWithInset { placeholder, id, prefix, paddingLeft, onInput, value } =
     div
         [ css
             [ Tw.mt_1
@@ -486,6 +488,7 @@ inputWithInset { placeholder, id, prefix, paddingLeft, onInput } =
             , Events.onInput onInput
             , Attr.spellcheck False
             , Attr.autocomplete False
+            , Attr.value value
             , css
                 [ Tw.font_mono
                 , Tw.border_0 |> Css.important
