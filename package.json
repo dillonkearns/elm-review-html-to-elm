@@ -1,5 +1,5 @@
 {
-  "name": "html-to-elm-tailwind-modules",
+  "name": "html-to-elm",
   "version": "1.0.0",
   "description": "Convert HTML to Elm, including tailwind utilities.",
   "scripts": {
@@ -9,13 +9,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dillonkearns/html-to-elm-tailwind-modules.git"
+    "url": "git+https://github.com/dillonkearns/html-to-elm.git"
   },
   "keywords": [],
   "author": "Dillon Kearns",
   "license": "BSD-3",
   "bugs": {
-    "url": "https://github.com/dillonkearns/html-to-elm-tailwind-modules/issues"
+    "url": "https://github.com/dillonkearns/html-to-elm/issues"
   },
   "homepage": "https://html-to-elm.com",
   "devDependencies": {
