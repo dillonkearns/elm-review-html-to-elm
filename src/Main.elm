@@ -403,12 +403,20 @@ settingsPanel model =
         , example model
             { moduleName = "Svg.Attributes", placeholder = "SvgAttr", onInputAlias = SetSvgAttrAlias, onInputExposing = SetSvgAttrExposing }
             .svgAttr
-        , example model
-            { moduleName = "Tailwind.Utilities", placeholder = "Tw", onInputAlias = SetTwAlias, onInputExposing = SetTwExposing }
-            .tw
-        , example model
-            { moduleName = "Tailwind.Breakpoints", placeholder = "Bp", onInputAlias = SetBpAlias, onInputExposing = SetBpExposing }
-            .bp
+        , if model.config.useTailwindModules then
+            example model
+                { moduleName = "Tailwind.Utilities", placeholder = "Tw", onInputAlias = SetTwAlias, onInputExposing = SetTwExposing }
+                .tw
+
+          else
+            text ""
+        , if model.config.useTailwindModules then
+            example model
+                { moduleName = "Tailwind.Breakpoints", placeholder = "Bp", onInputAlias = SetBpAlias, onInputExposing = SetBpExposing }
+                .bp
+
+          else
+            text ""
         ]
 
 
