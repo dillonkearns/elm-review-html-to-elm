@@ -27,6 +27,7 @@ module Config exposing
     )
 
 import Codec exposing (Codec)
+import Elm.Syntax.Expression as Expression exposing (Expression)
 
 
 type alias Config =
@@ -208,41 +209,46 @@ type Exposing
     | Some (List String)
 
 
-getter : (Config -> ( String, Exposing )) -> Config -> String -> String
+getter : (Config -> ( String, Exposing )) -> Config -> String -> Expression
 getter getFn config tagName =
     if isExposed tagName (config |> getFn |> Tuple.second) then
-        tagName
+        --tagName
+        Expression.FunctionOrValue [] tagName
 
     else
-        Tuple.first (config |> getFn) ++ "." ++ tagName
+        --Tuple.first (config |> getFn) ++ "." ++ tagName
+        Expression.FunctionOrValue
+            [ Tuple.first (config |> getFn)
+            ]
+            tagName
 
 
-htmlTag : Config -> String -> String
+htmlTag : Config -> String -> Expression
 htmlTag =
     getter .html
 
 
-htmlAttr : Config -> String -> String
+htmlAttr : Config -> String -> Expression
 htmlAttr =
     getter .htmlAttr
 
 
-svgTag : Config -> String -> String
+svgTag : Config -> String -> Expression
 svgTag =
     getter .svg
 
 
-svgAttr : Config -> String -> String
+svgAttr : Config -> String -> Expression
 svgAttr =
     getter .svgAttr
 
 
-bp : Config -> String -> String
+bp : Config -> String -> Expression
 bp =
     getter .bp
 
 
-tw : Config -> String -> String
+tw : Config -> String -> Expression
 tw =
     getter .tw
 
