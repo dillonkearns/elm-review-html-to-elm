@@ -19,10 +19,7 @@ result =
               [ div
                 [ css
                     [ Tw.transform
-                    , Css.firstChild
-                        [ Tw.rotate_45
-                        ]
-
+                    , Css.firstChild [ Tw.rotate_45 ]
                     ]
 
                 ]
@@ -30,10 +27,7 @@ result =
             , div
                 [ css
                     [ Tw.transform
-                    , Css.firstChild
-                        [ Tw.rotate_45
-                        ]
-
+                    , Css.firstChild [ Tw.rotate_45 ]
                     ]
 
                 ]
@@ -41,10 +35,7 @@ result =
             , div
                 [ css
                     [ Tw.transform
-                    , Css.firstChild
-                        [ Tw.rotate_45
-                        ]
-
+                    , Css.firstChild [ Tw.rotate_45 ]
                     ]
 
                 ]
@@ -54,10 +45,7 @@ result =
               [ div
                 [ css
                     [ Tw.transform
-                    , Css.nthChild "odd"
-                        [ Tw.rotate_45
-                        ]
-
+                    , Css.nthChild "odd" [ Tw.rotate_45 ]
                     ]
 
                 ]
@@ -65,10 +53,7 @@ result =
             , div
                 [ css
                     [ Tw.transform
-                    , Css.nthChild "odd"
-                        [ Tw.rotate_45
-                        ]
-
+                    , Css.nthChild "odd" [ Tw.rotate_45 ]
                     ]
 
                 ]
@@ -76,10 +61,7 @@ result =
             , div
                 [ css
                     [ Tw.transform
-                    , Css.nthChild "odd"
-                        [ Tw.rotate_45
-                        ]
-
+                    , Css.nthChild "odd" [ Tw.rotate_45 ]
                     ]
 
                 ]
@@ -89,10 +71,7 @@ result =
               [ div
                 [ css
                     [ Tw.transform
-                    , Css.lastChild
-                        [ Tw.rotate_45
-                        ]
-
+                    , Css.lastChild [ Tw.rotate_45 ]
                     ]
 
                 ]
@@ -100,10 +79,7 @@ result =
             , div
                 [ css
                     [ Tw.transform
-                    , Css.lastChild
-                        [ Tw.rotate_45
-                        ]
-
+                    , Css.lastChild [ Tw.rotate_45 ]
                     ]
 
                 ]
@@ -111,10 +87,7 @@ result =
             , div
                 [ css
                     [ Tw.transform
-                    , Css.lastChild
-                        [ Tw.rotate_45
-                        ]
-
+                    , Css.lastChild [ Tw.rotate_45 ]
                     ]
 
                 ]
@@ -124,10 +97,7 @@ result =
               [ div
                 [ css
                     [ Tw.transform
-                    , Css.nthChild "even"
-                        [ Tw.rotate_45
-                        ]
-
+                    , Css.nthChild "even" [ Tw.rotate_45 ]
                     ]
 
                 ]
@@ -135,10 +105,7 @@ result =
             , div
                 [ css
                     [ Tw.transform
-                    , Css.nthChild "even"
-                        [ Tw.rotate_45
-                        ]
-
+                    , Css.nthChild "even" [ Tw.rotate_45 ]
                     ]
 
                 ]
@@ -146,10 +113,7 @@ result =
             , div
                 [ css
                     [ Tw.transform
-                    , Css.nthChild "even"
-                        [ Tw.rotate_45
-                        ]
-
+                    , Css.nthChild "even" [ Tw.rotate_45 ]
                     ]
 
                 ]

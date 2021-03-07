@@ -158,7 +158,7 @@ print : Expression -> String
 print exp =
     exp
         |> Elm.Pretty.prettyExpression
-        |> Pretty.pretty 120
+        |> Pretty.pretty 80
 
 
 indentedThingy : Int -> (a -> String) -> List a -> String
@@ -301,16 +301,12 @@ classAttributeToElm config context indentLevel value =
                                     (\( pseudoclass, twClassList ) ->
                                         if pseudoclass == "" then
                                             twClassList
-                                                |> List.map (toTwClass config)
+                                                |> List.map (toTwClassExpr config)
 
                                         else
                                             case ImplementedFunctions.lookupWithDict ImplementedFunctions.pseudoClasses ImplementedFunctions.cssHelpers pseudoclass of
                                                 Just functionName ->
-                                                    --[ "Css."
-                                                    --    ++ functionName
-                                                    --    ++ " "
-                                                    --    ++ indentedThingy (indentLevel + 3) (toTwClass config) twClassList
-                                                    --]
+                                                    --
                                                     Expression.Application
                                                         [ Expression.FunctionOrValue [ "Css" ] functionName
                                                             |> toNode
@@ -320,7 +316,6 @@ classAttributeToElm config context indentLevel value =
                                                             |> Expression.ListExpr
                                                             |> toNode
                                                         ]
-                                                        |> print
                                                         |> List.singleton
 
                                                 Nothing ->
@@ -333,14 +328,20 @@ classAttributeToElm config context indentLevel value =
                                                             |> Expression.ListExpr
                                                             |> toNode
                                                         ]
-                                                        |> print
                                                         |> List.singleton
                                     )
                                 |> List.concat
-                                --|> List.map (\thing -> indentedThingy (indentLevel + 2) identity thing)
                                 |> (\thing ->
-                                        [ breakpointName config breakpoint
-                                            ++ indentedThingy (indentLevel + 2) identity thing
+                                        [ Expression.Application
+                                            [ breakpointNameExpr config breakpoint |> toNode
+                                            , thing
+                                                |> List.map toNode
+                                                |> Expression.ListExpr
+                                                |> toNode
+                                            ]
+                                            |> print
+
+                                        --++ indentedThingy (indentLevel + 2) identity thing
                                         ]
                                    )
                     )
@@ -362,14 +363,14 @@ classAttributeToElm config context indentLevel value =
     print cssFunction ++ indentedThingy (indentLevel + 1) identity newThing
 
 
-breakpointName : Config -> String -> String
-breakpointName config breakpoint =
+breakpointNameExpr : Config -> String -> Expression
+breakpointNameExpr config breakpoint =
     case ImplementedFunctions.lookupWithDict ImplementedFunctions.pseudoClasses ImplementedFunctions.cssHelpers breakpoint of
         Just functionName ->
-            "Css." ++ functionName
+            Expression.FunctionOrValue [ "Css" ] functionName
 
         Nothing ->
-            print <| Config.bp config breakpoint
+            Config.bp config breakpoint
 
 
 toTwClass : Config -> String -> String

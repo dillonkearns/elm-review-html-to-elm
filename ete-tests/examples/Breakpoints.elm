@@ -19,10 +19,7 @@ result =
             [ css
                 [ Tw.flex
                 , Tw.flex_col
-                , Bp.md
-                    [ Tw.flex_row
-                    ]
-
+                , Bp.md [ Tw.flex_row ]
                 ]
 
             ]
@@ -31,11 +28,7 @@ result =
             [ css
                 [ Tw.flex
                 , Tw.flex_col
-                , Bp.md
-                    [ Tw.font_extrabold
-                    , Tw.flex_row
-                    ]
-
+                , Bp.md [ Tw.font_extrabold, Tw.flex_row ]
                 ]
 
             ]
