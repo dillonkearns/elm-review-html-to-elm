@@ -47,81 +47,100 @@ type Msg
     | UseTailwindClasses
 
 
-update : Msg -> Model -> Model
+noCmd model =
+    ( model, Cmd.none )
+
+
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         OnInput newInput ->
             { model | htmlInput = newInput }
+                |> noCmd
 
         SetHtmlAlias string ->
             { model
                 | config = Config.updateHtmlAlias model.config string
             }
+                |> noCmd
 
         SetHtmlAttrAlias string ->
             { model
                 | config = Config.updateHtmlAttrAlias model.config string
             }
+                |> noCmd
 
         SetSvgAlias string ->
             { model
                 | config = Config.updateSvgAlias model.config string
             }
+                |> noCmd
 
         SetSvgAttrAlias string ->
             { model
                 | config = Config.updateSvgAttrAlias model.config string
             }
+                |> noCmd
 
         SetTwAlias string ->
             { model
                 | config = Config.updateTwAlias model.config string
             }
+                |> noCmd
 
         SetBpAlias string ->
             { model
                 | config = Config.updateBpAlias model.config string
             }
+                |> noCmd
 
         SetHtmlExposing string ->
             { model
                 | config = Config.updateHtmlExposing model.config string
             }
+                |> noCmd
 
         SetHtmlAttrExposing string ->
             { model
                 | config = Config.updateHtmlAttrExposing model.config string
             }
+                |> noCmd
 
         SetSvgExposing string ->
             { model
                 | config = Config.updateSvgExposing model.config string
             }
+                |> noCmd
 
         SetSvgAttrExposing string ->
             { model
                 | config = Config.updateSvgAttrExposing model.config string
             }
+                |> noCmd
 
         SetTwExposing string ->
             { model
                 | config = Config.updateTwExposing model.config string
             }
+                |> noCmd
 
         SetBpExposing string ->
             { model
                 | config = Config.updateBpExposing model.config string
             }
+                |> noCmd
 
         ToggleShowSettings ->
             { model
                 | showSettings = not model.showSettings
             }
+                |> noCmd
 
         UseTailwindClasses ->
             { model
                 | config = Config.toggleUseTailwindClasses model.config
             }
+                |> noCmd
 
 
 
@@ -192,10 +211,11 @@ view model =
 
 main : Program () Model Msg
 main =
-    Browser.sandbox
-        { init = initialModel
-        , view = view
+    Browser.document
+        { init = \_ -> initialModel |> noCmd
+        , view = \model -> { title = "html-to-elm", body = [ view model ] }
         , update = update
+        , subscriptions = \_ -> Sub.none
         }
 
 
