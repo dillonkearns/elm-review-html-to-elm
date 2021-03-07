@@ -1,4 +1,4 @@
-module Main exposing (main)
+port module Main exposing (main)
 
 import Browser
 import Config exposing (Config)
@@ -12,6 +12,9 @@ import Svg.Styled as Svg
 import Svg.Styled.Attributes as SvgAttr
 import Tailwind.Breakpoints as Bp
 import Tailwind.Utilities as Tw
+
+
+port copyGeneratedCode : () -> Cmd msg
 
 
 type alias Model =
@@ -45,6 +48,7 @@ type Msg
     | SetBpExposing String
     | ToggleShowSettings
     | UseTailwindClasses
+    | CopyGeneratedCode
 
 
 noCmd model =
@@ -141,6 +145,11 @@ update msg model =
                 | config = Config.toggleUseTailwindClasses model.config
             }
                 |> noCmd
+
+        CopyGeneratedCode ->
+            ( model
+            , copyGeneratedCode ()
+            )
 
 
 
@@ -276,8 +285,7 @@ navbar model =
                             , Attr.target "_blank"
                             , Attr.rel "noopener"
                             , css
-                                [ --text-indigo-600 hover:text-indigo-500
-                                  Tw.text_blue_300
+                                [ Tw.text_blue_300
                                 , Css.hover
                                     [ Tw.text_blue_500
                                     ]
@@ -309,6 +317,29 @@ navbar model =
                         []
                         [ text "Settings" ]
                     , settingsIcon
+                    ]
+                , button
+                    [ Events.onClick CopyGeneratedCode
+                    , css
+                        [ Tw.flex
+                        , Tw.space_x_2
+                        , Tw.items_center
+                        , Tw.text_gray_300
+                        , Tw.px_3
+                        , Tw.py_2
+                        , Tw.rounded_md
+                        , Tw.text_sm
+                        , Tw.font_medium
+                        , Css.hover
+                            [ Tw.bg_gray_700
+                            , Tw.text_white
+                            ]
+                        ]
+                    ]
+                    [ div
+                        []
+                        [ text "Copy" ]
+                    , copyIcon
                     ]
                 ]
             ]
@@ -656,6 +687,24 @@ toggle toggleMsg enabled =
                 , Tw.ease_in_out
                 , Tw.duration_200
                 ]
+            ]
+            []
+        ]
+
+
+copyIcon : Html msg
+copyIcon =
+    Svg.svg
+        [ SvgAttr.fill "none"
+        , SvgAttr.viewBox "0 0 24 24"
+        , SvgAttr.stroke "currentColor"
+        , SvgAttr.css [ Tw.h_6 ]
+        ]
+        [ Svg.path
+            [ SvgAttr.strokeLinecap "round"
+            , SvgAttr.strokeLinejoin "round"
+            , SvgAttr.strokeWidth "2"
+            , SvgAttr.d "M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"
             ]
             []
         ]

@@ -18,6 +18,11 @@
         document.addEventListener("DOMContentLoaded", function () {
 
         var app = Elm.Main.init({ node: document.querySelector('main') })
+        app.ports.copyGeneratedCode.subscribe(generatedCode => {
+            document.querySelector("#generated-elm").select();
+            document.execCommand("copy");
+        })
+
         })
     </script>
 </head>
