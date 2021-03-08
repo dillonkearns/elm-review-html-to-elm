@@ -1,0 +1,6 @@
+node_modules
+elm-stuff
+elm.js
+
+# Local Netlify folder
+.netlify

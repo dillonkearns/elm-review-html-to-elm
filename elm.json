@@ -1,44 +1,29 @@
 {
-    "type": "application",
-    "source-directories": [
-        "src",
-        "vendor/html-parser/src"
+    "type": "package",
+    "name": "dillonkearns/elm-review-html-to-elm",
+    "summary": "",
+    "license": "BSD-3-Clause",
+    "version": "1.0.0",
+    "exposed-modules": [
+        "HtmlToElm"
     ],
-    "elm-version": "0.19.1",
+    "elm-version": "0.19.0 <= v < 0.20.0",
     "dependencies": {
-        "direct": {
-            "elm/browser": "1.0.2",
-            "elm/core": "1.0.5",
-            "elm/html": "1.0.0",
-            "elm/json": "1.1.3",
-            "elm/parser": "1.1.0",
-            "elm/regex": "1.0.0",
-            "elm-community/dict-extra": "2.4.0",
-            "matheus23/elm-default-tailwind-modules": "1.0.0",
-            "miniBill/elm-codec": "2.0.0",
-            "rtfeldman/elm-css": "16.1.0",
-            "rtfeldman/elm-hex": "1.0.0",
-            "stil4m/elm-syntax": "7.2.1",
-            "the-sett/elm-pretty-printer": "2.2.3",
-            "the-sett/elm-syntax-dsl": "5.2.0"
-        },
-        "indirect": {
-            "Chadtech/elm-bool-extra": "2.4.2",
-            "elm/time": "1.0.0",
-            "elm/url": "1.0.0",
-            "elm/virtual-dom": "1.0.2",
-            "elm-community/basics-extra": "4.1.0",
-            "elm-community/list-extra": "8.3.0",
-            "elm-community/maybe-extra": "5.2.0",
-            "stil4m/structured-writer": "1.0.3"
-        }
+        "elm/core": "1.0.2 <= v < 2.0.0",
+        "elm/parser": "1.1.0 <= v < 2.0.0",
+        "elm/project-metadata-utils": "1.0.1 <= v < 2.0.0",
+        "elm/regex": "1.0.0 <= v < 2.0.0",
+        "elm-community/dict-extra": "2.4.0 <= v < 3.0.0",
+        "erlandsona/assoc-set": "1.1.0 <= v < 2.0.0",
+        "jfmengels/elm-review": "2.3.8 <= v < 3.0.0",
+        "miniBill/elm-codec": "2.0.0 <= v < 3.0.0",
+        "pzp1997/assoc-list": "1.0.0 <= v < 2.0.0",
+        "rtfeldman/elm-hex": "1.0.0 <= v < 2.0.0",
+        "stil4m/elm-syntax": "7.2.1 <= v < 8.0.0",
+        "the-sett/elm-pretty-printer": "2.2.3 <= v < 3.0.0",
+        "the-sett/elm-syntax-dsl": "5.2.0 <= v < 6.0.0"
     },
     "test-dependencies": {
-        "direct": {
-            "elm-explorations/test": "1.2.2"
-        },
-        "indirect": {
-            "elm/random": "1.0.0"
-        }
+        "elm-explorations/test": "1.2.2 <= v < 2.0.0"
     }
 }
