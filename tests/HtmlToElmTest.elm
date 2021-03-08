@@ -20,7 +20,9 @@ import Html
 
 view : Html msg
 view =
-    div [] []
+        div []
+          []
+    
 """
                             |> String.replace "\u{000D}" ""
                 in
@@ -30,12 +32,12 @@ import Html
 
 
 view : Html msg
-view = Debug.todo "<main><div></div></main>"
+view = Debug.todo "<div></div>"
 """
                     |> String.replace "\u{000D}" ""
                     |> Review.Test.run HtmlToElm.rule
                     |> Review.Test.expectErrors
-                        [ Review.Test.error { message = "Here's my attempt to complete this stub", details = [ "" ], under = "view : Html msg\nview = Debug.todo \"<main><div></div></main>\"" }
+                        [ Review.Test.error { message = "Here's my attempt to complete this stub", details = [ "" ], under = "view : Html msg\nview = Debug.todo \"<div></div>\"" }
                             |> Review.Test.whenFixed expected
                         ]
         ]
