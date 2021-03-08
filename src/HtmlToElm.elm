@@ -391,7 +391,7 @@ getCodecTodo context declarationRange function =
     in
     case function.signature of
         Just (Node _ signature) ->
-            case typeAnnotationReturnValue signature.typeAnnotation |> Debug.log "annotation" of
+            case typeAnnotationReturnValue signature.typeAnnotation of
                 Node _ (TypeAnnotation.Typed (Node _ ( [ "Html" ], "Html" )) [ Node _ (TypeAnnotation.Typed _ _) ]) ->
                     newThing signature
 
@@ -409,10 +409,6 @@ hasDebugTodo : { a | expression : Node Expression } -> Bool
 hasDebugTodo declaration =
     case declaration.expression of
         Node _ (Expression.Application ((Node _ (Expression.FunctionOrValue [ "Debug" ] "todo")) :: (Node _ (Expression.Literal debugString)) :: _)) ->
-            let
-                _ =
-                    Debug.log "debugString" debugString
-            in
             True
 
         _ ->
@@ -423,10 +419,6 @@ hasHtmlDebugTodo : { a | expression : Node Expression } -> Maybe String
 hasHtmlDebugTodo declaration =
     case declaration.expression of
         Node _ (Expression.Application ((Node _ (Expression.FunctionOrValue [ "Debug" ] "todo")) :: (Node _ (Expression.Literal debugString)) :: _)) ->
-            let
-                _ =
-                    Debug.log "debugString" debugString
-            in
             Just debugString
 
         _ ->
@@ -499,7 +491,7 @@ generateHtmlTodoDefinition projectContext htmlTodo =
 
 htmlToElm htmlString =
     --"div [] []"
-    HtmlToTailwind.htmlToElmTailwindModules Config.default htmlString
+    HtmlToTailwind.htmlToElmTailwindModules Config.testConfig htmlString
 
 
 writeDeclaration : Function -> String
