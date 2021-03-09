@@ -12,7 +12,9 @@ import Config
 import Elm.Pretty
 import Elm.Project
 import Elm.Syntax.Declaration as Declaration exposing (Declaration)
+import Elm.Syntax.Exposing as Exposing
 import Elm.Syntax.Expression as Expression exposing (Expression, Function)
+import Elm.Syntax.Import exposing (Import)
 import Elm.Syntax.Infix as Infix exposing (InfixDirection(..))
 import Elm.Syntax.ModuleName exposing (ModuleName)
 import Elm.Syntax.Node as Node exposing (Node(..))
@@ -82,10 +84,74 @@ rule =
 -- MODULE VISITOR
 
 
+importVisitor : Node Import -> ModuleContext -> ( List (Error {}), ModuleContext )
+importVisitor importNode context =
+    let
+        importThing =
+            Node.value importNode
+    in
+    case Node.value importNode |> .moduleName |> Node.value of
+        modName ->
+            let
+                nameOrAlias =
+                    importThing.moduleAlias
+                        |> Maybe.map Node.value
+                        |> Maybe.withDefault modName
+                        |> Debug.log "nameOrAlias"
+
+                exposingList =
+                    importThing.exposingList
+                        --|> Debug.log "exposingList"
+                        |> Maybe.map Node.value
+                        |> (\exposingL ->
+                                case exposingL of
+                                    Just (Exposing.All _) ->
+                                        Config.All
+
+                                    Just (Exposing.Explicit exposed) ->
+                                        exposed
+                                            |> List.map Node.value
+                                            |> List.filterMap
+                                                (\exposedItem ->
+                                                    case exposedItem of
+                                                        Exposing.FunctionExpose name ->
+                                                            Just name
+
+                                                        _ ->
+                                                            Nothing
+                                                )
+                                            |> Config.Some
+
+                                    Nothing ->
+                                        Config.None
+                           )
+
+                setField value config =
+                    case modName of
+                        [ "Html" ] ->
+                            { config | html = value }
+
+                        [ "Html", "Attributes" ] ->
+                            { config | htmlAttr = value }
+
+                        _ ->
+                            config
+            in
+            ( []
+            , context
+                |> updateConfig (setField ( nameOrAlias |> String.join ".", exposingList ))
+            )
+
+
+updateConfig updateFn context =
+    { context | config = updateFn context.config }
+
+
 moduleVisitor : Rule.ModuleRuleSchema {} ModuleContext -> Rule.ModuleRuleSchema { hasAtLeastOneVisitor : () } ModuleContext
 moduleVisitor schema =
     schema
         |> Rule.withDeclarationListVisitor declarationVisitor
+        |> Rule.withImportVisitor importVisitor
 
 
 
@@ -106,6 +172,7 @@ type alias HtmlTodoData =
     , parameters : List (Node Pattern)
     , signature : Signature
     , todoText : String
+    , config : Config.Config
     }
 
 
@@ -120,6 +187,7 @@ type alias ModuleContext =
     , todos : List Todo
     , currentModule : ModuleName
     , moduleLookupTable : ModuleNameLookupTable
+    , config : Config.Config
     }
 
 
@@ -156,6 +224,7 @@ fromProjectToModule lookupTable metadata projectContext =
             projectContext.todos
     , currentModule = moduleName
     , moduleLookupTable = lookupTable
+    , config = Config.testConfig
     }
 
 
@@ -385,6 +454,7 @@ getCodecTodo context declarationRange function =
                             , parameters = declaration.arguments
                             , signature = signature
                             , todoText = todoText
+                            , config = context.config
                             }
                             |> Just
                     )
@@ -486,12 +556,12 @@ generateHtmlTodoDefinition projectContext htmlTodo =
      }
         |> writeDeclaration
     )
-        ++ htmlToElm htmlTodo.todoText
+        ++ htmlToElm htmlTodo.config htmlTodo.todoText
 
 
-htmlToElm htmlString =
-    --"div [] []"
-    HtmlToTailwind.htmlToElmTailwindModules Config.testConfig htmlString
+htmlToElm : Config.Config -> String -> String
+htmlToElm config htmlString =
+    HtmlToTailwind.htmlToElmTailwindModules config htmlString
 
 
 writeDeclaration : Function -> String

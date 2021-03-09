@@ -11,33 +11,39 @@ all =
         [ test "html-to-elm" <|
             \_ ->
                 let
+                    errorThing =
+                        """view : Html msg
+view = Debug.todo \"\"\"<a href="#">Link</a>\"\"\""""
+
                     expected : String
                     expected =
                         """module A exposing (..)
 
-import Html
+import Html exposing (..)
+import Html.Attributes as Attr
 
 
 view : Html msg
 view =
-        div []
-          []
-    
-"""
+        a
+        [ Attr.href "#"
+        ]
+          [ text "Link" ]
+    """
                             |> String.replace "\u{000D}" ""
                 in
                 """module A exposing (..)
 
-import Html
+import Html exposing (..)
+import Html.Attributes as Attr
 
 
-view : Html msg
-view = Debug.todo "<div></div>"
 """
+                    ++ errorThing
                     |> String.replace "\u{000D}" ""
                     |> Review.Test.run HtmlToElm.rule
                     |> Review.Test.expectErrors
-                        [ Review.Test.error { message = "Here's my attempt to complete this stub", details = [ "" ], under = "view : Html msg\nview = Debug.todo \"<div></div>\"" }
+                        [ Review.Test.error { message = "Here's my attempt to complete this stub", details = [ "" ], under = errorThing }
                             |> Review.Test.whenFixed expected
                         ]
         ]
