@@ -1,3 +1,0 @@
-[submodule "vendor/html-parser"]
-	path = vendor/html-parser
-	url = git@github.com:dillonkearns/html-parser.git
