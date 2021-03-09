@@ -242,6 +242,8 @@ classAttributeToElm config context indentLevel value =
         dict =
             value
                 |> String.split " "
+                |> List.map String.trim
+                |> List.filter (\item -> not (String.isEmpty item))
                 |> List.map splitOutBreakpoints
                 |> Dict.Extra.groupBy .breakpoint
                 |> Dict.map
