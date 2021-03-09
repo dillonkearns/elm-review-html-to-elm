@@ -23,6 +23,7 @@ import Dict exposing (Dict)
 lookup : List String -> String -> Maybe String
 lookup list name =
     let
+        lowerName : String
         lowerName =
             String.toLower name
     in
@@ -37,6 +38,7 @@ lookupWithDict dict list name =
 
         Nothing ->
             let
+                lowerName : String
                 lowerName =
                     String.toLower name
             in

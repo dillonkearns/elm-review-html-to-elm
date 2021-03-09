@@ -93,11 +93,13 @@ importVisitor importNode context =
     case Node.value importNode |> .moduleName |> Node.value of
         modName ->
             let
+                nameOrAlias : ModuleName
                 nameOrAlias =
                     importThing.moduleAlias
                         |> Maybe.map Node.value
                         |> Maybe.withDefault modName
 
+                exposingList : Config.Exposing
                 exposingList =
                     importThing.exposingList
                         |> Maybe.map Node.value
@@ -124,9 +126,11 @@ importVisitor importNode context =
                                         Config.None
                            )
 
+                isTailwindImport : Bool
                 isTailwindImport =
                     modName == [ "Tailwind", "Utilities" ] || modName == [ "Tailwind", "Breakpoints" ]
 
+                setField : ( String, Config.Exposing ) -> Config.Config -> Config.Config
                 setField value config =
                     case modName of
                         [ "Svg" ] ->
@@ -828,6 +832,7 @@ node =
     Node Elm.Syntax.Range.emptyRange
 
 
+application : List (Node Expression) -> Node Expression
 application =
     Expression.Application >> node
 

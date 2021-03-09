@@ -68,6 +68,7 @@ view =
         ]
 
 
+testCase : String -> String -> String -> String -> Test
 testCase name imports errorThing expectedBody =
     test name <|
         \_ ->

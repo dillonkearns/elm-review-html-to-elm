@@ -84,9 +84,11 @@ nodeToElm config indentLevel context node =
                                 Nothing ->
                                     print (Config.htmlTag config "node") ++ " \"" ++ elementName ++ "\""
 
+                isSvg : Bool
                 isSvg =
                     isSvgContext attributes
 
+                newContext : Context
                 newContext =
                     if isSvg then
                         Svg
@@ -94,6 +96,7 @@ nodeToElm config indentLevel context node =
                     else
                         context
 
+                filteredAttributes : List String
                 filteredAttributes =
                     List.concatMap
                         (\attribute ->
@@ -249,6 +252,7 @@ classAttributeToElm config context indentLevel value =
                                 )
                     )
 
+        newThing : List String
         newThing =
             dict
                 |> Dict.toList
@@ -298,6 +302,7 @@ classAttributeToElm config context indentLevel value =
                     )
                 |> List.concat
 
+        cssFunction : Expression
         cssFunction =
             case context of
                 Html ->
