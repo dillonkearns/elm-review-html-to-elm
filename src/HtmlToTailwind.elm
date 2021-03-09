@@ -50,6 +50,7 @@ nodeToElm config indentLevel context node =
     case node of
         Html.Parser.Text textBody ->
             let
+                trimmed : String
                 trimmed =
                     String.trim textBody
                         |> Regex.replace
@@ -66,6 +67,7 @@ nodeToElm config indentLevel context node =
 
         Html.Parser.Element elementName attributes children ->
             let
+                elementFunction : String
                 elementFunction =
                     case newContext of
                         Svg ->

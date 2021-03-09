@@ -87,6 +87,7 @@ rule =
 importVisitor : Node Import -> ModuleContext -> ( List (Error {}), ModuleContext )
 importVisitor importNode context =
     let
+        importThing : Import
         importThing =
             Node.value importNode
     in
@@ -180,6 +181,7 @@ importVisitor importNode context =
             )
 
 
+updateConfig : (Config.Config -> Config.Config) -> ModuleContext -> ModuleContext
 updateConfig updateFn context =
     { context | config = updateFn context.config }
 
@@ -240,6 +242,7 @@ initialProjectContext =
 fromProjectToModule : ModuleNameLookupTable -> Rule.Metadata -> ProjectContext -> ModuleContext
 fromProjectToModule lookupTable metadata projectContext =
     let
+        moduleName : ModuleName
         moduleName =
             Rule.moduleNameFromMetadata metadata
     in
@@ -378,6 +381,7 @@ convertType moduleContext type_ =
 declarationVisitor : List (Node Declaration) -> ModuleContext -> ( List a, ModuleContext )
 declarationVisitor declarations context =
     let
+        context2 : ModuleContext
         context2 =
             { context
                 | types =
@@ -478,9 +482,11 @@ typeAnnotationReturnValue typeAnnotation =
 getCodecTodo : ModuleContext -> Range -> Function -> Maybe Todo
 getCodecTodo context declarationRange function =
     let
+        declaration : Expression.FunctionImplementation
         declaration =
             Node.value function.declaration
 
+        newThing : { name : Node String, typeAnnotation : Node TypeAnnotation } -> Maybe Todo
         newThing signature =
             hasHtmlDebugTodo declaration
                 |> Maybe.andThen
@@ -580,8 +586,8 @@ varFromInt =
         >> String.fromChar
 
 
-generateHtmlTodoDefinition : ProjectContext -> HtmlTodoData -> String
-generateHtmlTodoDefinition projectContext htmlTodo =
+generateHtmlTodoDefinition : HtmlTodoData -> String
+generateHtmlTodoDefinition htmlTodo =
     ({ documentation = Nothing
      , signature = node htmlTodo.signature |> Just
      , declaration =
@@ -723,6 +729,7 @@ getTypesFromTypeAnnotation projectContext typeModuleName collectedTypes typeAnno
     case typeAnnotation of
         Typed_ qualifiedType typeParameters ->
             let
+                collectedTypes_ : Set QualifiedType
                 collectedTypes_ =
                     if QualifiedType.isPrimitiveType qualifiedType then
                         collectedTypes
@@ -796,11 +803,7 @@ finalProjectEvaluation projectContext =
                                         let
                                             fix : String
                                             fix =
-                                                generateHtmlTodoDefinition projectContext htmlTodo
-
-                                            --                                                """view : Html msg
-                                            --view =
-                                            --    div [] []"""
+                                                generateHtmlTodoDefinition htmlTodo
                                         in
                                         Rule.errorForModuleWithFix
                                             moduleKey
@@ -828,6 +831,7 @@ finalProjectEvaluation projectContext =
     todoFixes
 
 
+node : a -> Node a
 node =
     Node Elm.Syntax.Range.emptyRange
 
