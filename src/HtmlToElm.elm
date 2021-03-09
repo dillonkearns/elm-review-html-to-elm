@@ -97,11 +97,9 @@ importVisitor importNode context =
                     importThing.moduleAlias
                         |> Maybe.map Node.value
                         |> Maybe.withDefault modName
-                        |> Debug.log "nameOrAlias"
 
                 exposingList =
                     importThing.exposingList
-                        --|> Debug.log "exposingList"
                         |> Maybe.map Node.value
                         |> (\exposingL ->
                                 case exposingL of
@@ -126,13 +124,40 @@ importVisitor importNode context =
                                         Config.None
                            )
 
+                isTailwindImport =
+                    modName == [ "Tailwind", "Utilities" ] || modName == [ "Tailwind", "Breakpoints" ]
+
                 setField value config =
                     case modName of
+                        [ "Svg" ] ->
+                            { config | svg = value }
+
+                        [ "Svg", "Attributes" ] ->
+                            { config | svgAttr = value }
+
                         [ "Html" ] ->
                             { config | html = value }
 
                         [ "Html", "Attributes" ] ->
                             { config | htmlAttr = value }
+
+                        [ "Html", "Styled" ] ->
+                            { config | html = value }
+
+                        [ "Html", "Styled", "Attributes" ] ->
+                            { config | htmlAttr = value }
+
+                        [ "Svg", "Styled" ] ->
+                            { config | svg = value }
+
+                        [ "Svg", "Styled", "Attributes" ] ->
+                            { config | svgAttr = value }
+
+                        [ "Tailwind", "Utilities" ] ->
+                            { config | tw = value }
+
+                        [ "Tailwind", "Breakpoints" ] ->
+                            { config | bp = value }
 
                         _ ->
                             config
@@ -140,6 +165,14 @@ importVisitor importNode context =
             ( []
             , context
                 |> updateConfig (setField ( nameOrAlias |> String.join ".", exposingList ))
+                |> updateConfig
+                    (\config ->
+                        if isTailwindImport then
+                            { config | useTailwindModules = True }
+
+                        else
+                            config
+                    )
             )
 
 
@@ -224,7 +257,7 @@ fromProjectToModule lookupTable metadata projectContext =
             projectContext.todos
     , currentModule = moduleName
     , moduleLookupTable = lookupTable
-    , config = Config.testConfig
+    , config = Config.default
     }
 
 
