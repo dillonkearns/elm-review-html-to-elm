@@ -286,75 +286,82 @@ navbar model =
                 , div
                     [ css
                         [ Tw.flex
-                        , Tw.space_x_3
+                        , Tw.items_center
                         ]
                     ]
-                    [ span
+                    [ div
                         [ css
-                            [ Tw.text_gray_300
+                            [ Tw.flex
+                            , Tw.space_x_3
                             ]
                         ]
-                        [ text "Use "
-                        , a
-                            [ Attr.href "https://github.com/matheus23/elm-tailwind-modules"
-                            , Attr.target "_blank"
-                            , Attr.rel "noopener"
-                            , css
-                                [ Tw.text_blue_300
-                                , Css.hover
-                                    [ Tw.text_blue_500
-                                    ]
+                        [ span
+                            [ css
+                                [ Tw.text_gray_300
                                 ]
                             ]
-                            [ text "tailwind classes" ]
+                            [ text "Use "
+                            , a
+                                [ Attr.href "https://github.com/matheus23/elm-tailwind-modules"
+                                , Attr.target "_blank"
+                                , Attr.rel "noopener"
+                                , css
+                                    [ Tw.text_blue_300
+                                    , Css.hover
+                                        [ Tw.text_blue_500
+                                        ]
+                                    ]
+                                ]
+                                [ text "tailwind classes" ]
+                            ]
+                        , div [] [ toggle UseTailwindClasses model.config.useTailwindModules ]
                         ]
-                    , div [] [ toggle UseTailwindClasses model.config.useTailwindModules ]
-                    ]
-                , button
-                    [ Events.onClick ToggleShowSettings
-                    , css
-                        [ Tw.flex
-                        , Tw.space_x_2
-                        , Tw.items_center
-                        , Tw.text_gray_300
-                        , Tw.px_3
-                        , Tw.py_2
-                        , Tw.rounded_md
-                        , Tw.text_sm
-                        , Tw.font_medium
-                        , Css.hover
-                            [ Tw.bg_gray_700
-                            , Tw.text_white
+                    , button
+                        [ Events.onClick ToggleShowSettings
+                        , css
+                            [ Tw.flex
+                            , Tw.space_x_2
+                            , Tw.items_center
+                            , Tw.text_gray_300
+                            , Tw.px_3
+                            , Tw.py_2
+                            , Tw.rounded_md
+                            , Tw.text_sm
+                            , Tw.font_medium
+                            , Css.hover
+                                [ Tw.bg_gray_700
+                                , Tw.text_white
+                                ]
                             ]
                         ]
-                    ]
-                    [ div
-                        []
-                        [ text "Settings" ]
-                    , settingsIcon
-                    ]
-                , button
-                    [ Events.onClick CopyGeneratedCode
-                    , css
-                        [ Tw.flex
-                        , Tw.space_x_2
-                        , Tw.items_center
-                        , Tw.text_gray_300
-                        , Tw.px_3
-                        , Tw.py_2
-                        , Tw.rounded_md
-                        , Tw.text_sm
-                        , Tw.font_medium
-                        , Css.hover
-                            [ Tw.bg_gray_700
-                            , Tw.text_white
+                        [ div
+                            []
+                            [ text "Settings" ]
+                        , settingsIcon
+                        ]
+                    , button
+                        [ Events.onClick CopyGeneratedCode
+                        , css
+                            [ Tw.flex
+                            , Tw.space_x_2
+                            , Tw.items_center
+                            , Tw.text_gray_300
+                            , Tw.px_3
+                            , Tw.py_2
+                            , Tw.rounded_md
+                            , Tw.text_sm
+                            , Tw.font_medium
+                            , Css.hover
+                                [ Tw.bg_gray_700
+                                , Tw.text_white
+                                ]
                             ]
                         ]
-                    ]
-                    [ div
-                        []
-                        [ text "Copy" ]
-                    , copyIcon
+                        [ div
+                            []
+                            [ text "Copy" ]
+                        , copyIcon
+                        ]
                     ]
                 ]
             ]
