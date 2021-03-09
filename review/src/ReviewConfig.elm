@@ -52,3 +52,9 @@ config =
     , NoUnused.Patterns.rule
     , NoUnused.Variables.rule
     ]
+        |> List.map
+            (\rule ->
+                rule
+                    |> Rule.ignoreErrorsForDirectories [ "vendor/", "src/Html/" ]
+                    |> Rule.ignoreErrorsForFiles [ "src/Config.elm" ]
+            )
