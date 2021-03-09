@@ -2,6 +2,8 @@
 
 Provides an [`elm-review`](https://package.elm-lang.org/packages/jfmengels/elm-review/latest/) rule to convert an HTML String into compiling Elm code.
 
+You can also run this scaffolding tool with the web UI at [html-to-elm.com](https://html-to-elm.com/).
+
 
 ## Provided rules
 
