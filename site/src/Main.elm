@@ -280,6 +280,8 @@ navbar model =
                         , Tw.text_lg
                         , Tw.font_bold
                         , Tw.pl_2
+                        , Bp.sm [ Tw.block ]
+                        , Tw.hidden
                         ]
                     ]
                     [ text "html-to-elm.com"
@@ -294,6 +296,7 @@ navbar model =
                         [ css
                             [ Tw.flex
                             , Tw.space_x_3
+                            , Tw.items_center
                             ]
                         ]
                         [ span
