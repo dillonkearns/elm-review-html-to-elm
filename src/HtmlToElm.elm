@@ -46,9 +46,9 @@ in a `Debug.todo` call into compiling Elm code!
     import Html
     import Html.Attributes as Attr
 
-    navbarView : Html
+    navbarView : Html msg
     navbarView =
-        """<ul class="flex"><li><a href="/">Home</a></li></ul>"""
+        Debug.todo """<ul class="flex"><li><a href="/">Home</a></li></ul>"""
 
 
 ## After fix
@@ -56,7 +56,7 @@ in a `Debug.todo` call into compiling Elm code!
     import Html
     import Html.Attributes as Attr
 
-    navbarView : Html
+    navbarView : Html msg
     navbarView =
         Html.ul
             [ Attr.class "flex"
@@ -83,9 +83,9 @@ then this fix will turn your `class` attributes into `elm-tailwind-modules` attr
     import Tailwind.Breakpoints as Bp
     import Tailwind.Utilities as Tw
 
-    navbarView : Html
+    navbarView : Html msg
     navbarView =
-        """<ul><li><a href="/">Home</a></li></ul>"""
+        Debug.todo """<ul><li><a href="/">Home</a></li></ul>"""
 
 
 ## After fix
@@ -95,7 +95,7 @@ then this fix will turn your `class` attributes into `elm-tailwind-modules` attr
     import Tailwind.Breakpoints
     import Tailwind.Utilities
 
-    navbarView : Html
+    navbarView : Html msg
     navbarView =
         Html.ul
             [ Attr.css
