@@ -274,17 +274,35 @@ navbar model =
                     , Tw.h_16
                     ]
                 ]
-                [ h2
+                [ div
                     [ css
-                        [ Tw.text_white
-                        , Tw.text_lg
-                        , Tw.font_bold
-                        , Tw.pl_2
-                        , Bp.sm [ Tw.block ]
+                        [ Tw.space_x_4
+                        , Tw.items_center
+                        , Bp.sm [ Tw.flex ]
                         , Tw.hidden
                         ]
                     ]
-                    [ text "html-to-elm.com"
+                    [ h2
+                        [ css
+                            [ Tw.text_white
+                            , Tw.text_lg
+                            , Tw.font_bold
+                            , Tw.pl_2
+                            ]
+                        ]
+                        [ text "html-to-elm.com"
+                        ]
+                    , a
+                        [ Attr.href "https://github.com/dillonkearns/elm-review-html-to-elm/tree/master/site"
+                        , Attr.target "_blank"
+                        , Attr.rel "noopener"
+                        ]
+                        [ img
+                            [ Attr.alt "GitHub Repo stars"
+                            , Attr.src "https://img.shields.io/github/stars/dillonkearns/elm-review-html-to-elm?label=Star&style=social"
+                            ]
+                            []
+                        ]
                     ]
                 , div
                     [ css
