@@ -65,6 +65,49 @@ view =
 
         ]
           []"""
+        , testCase "documentation example with tailwind"
+            """
+import Html.Styled as Html exposing (text)
+import Html.Styled.Attributes as Attr
+import Tailwind.Utilities
+import Tailwind.Breakpoints
+"""
+            """view : Html msg
+view = Debug.todo \"\"\"<ul class="flex"><li><a href="/">Home</a></li></ul>\"\"\""""
+            """view : Html msg
+view =
+        Html.ul
+        [ Attr.css
+            [ Tailwind.Utilities.flex
+            ]
+
+        ]
+          [ Html.li []
+              [ Html.a
+                [ Attr.href "/"
+                ]
+                  [ text "Home" ]
+             ]
+         ]"""
+        , testCase "documentation example without tailwind"
+            """
+import Html exposing (text)
+import Html.Attributes as Attr
+"""
+            """view : Html msg
+view = Debug.todo \"\"\"<ul class="flex"><li><a href="/">Home</a></li></ul>\"\"\""""
+            """view : Html msg
+view =
+        Html.ul
+        [ Attr.class "flex"
+        ]
+          [ Html.li []
+              [ Html.a
+                [ Attr.href "/"
+                ]
+                  [ text "Home" ]
+             ]
+         ]"""
         ]
 
 

@@ -31,29 +31,87 @@ import Review.ModuleNameLookupTable as ModuleNameLookupTable exposing (ModuleNam
 import Review.Rule as Rule exposing (Error, ModuleKey, Rule)
 
 
-{-| Reports... REPLACEME
+{-| Generates Elm code from HTML Strings
 
     config =
         [ HtmlToElm.rule
         ]
 
 
-## Fail
+## Before fix
 
-    a =
-        "REPLACEME example to replace"
+The fix runs on top-level values with an Html type annotation. It turns the HTML within the String
+in a `Debug.todo` call into compiling Elm code!
+
+    import Html
+    import Html.Attributes as Attr
+
+    navbarView : Html
+    navbarView =
+        """<ul class="flex"><li><a href="/">Home</a></li></ul>"""
 
 
-## Success
+## After fix
 
-    a =
-        "REPLACEME example to replace"
+    import Html
+    import Html.Attributes as Attr
+
+    navbarView : Html
+    navbarView =
+        Html.ul
+            [ Attr.class "flex"
+            ]
+            [ Html.li []
+                [ Html.a
+                    [ Attr.href "/"
+                    ]
+                    [ Html.text "Home" ]
+                ]
+            ]
+
+Note that the imports in our module are used for the auto-generated Elm code.
+So be sure to set up your imports the way you like them before scaffolding a HTML code!
 
 
-## When (not) to enable this rule
+## With `elm-tailwind-modules`
 
-This rule is useful when REPLACEME.
-This rule is not useful when REPLACEME.
+If your imports include modules from [`elm-tailwind-modules`](https://github.com/matheus23/elm-tailwind-modules),
+then this fix will turn your `class` attributes into `elm-tailwind-modules` attributes.
+
+    import Html.Styled exposing (..)
+    import Html.Styled.Attributes as Attr
+    import Tailwind.Breakpoints as Bp
+    import Tailwind.Utilities as Tw
+
+    navbarView : Html
+    navbarView =
+        """<ul><li><a href="/">Home</a></li></ul>"""
+
+
+## After fix
+
+    import Html.Styled exposing (..)
+    import Html.Styled.Attributes as Attr
+    import Tailwind.Breakpoints
+    import Tailwind.Utilities
+
+    navbarView : Html
+    navbarView =
+        Html.ul
+            [ Attr.css
+                [ Tailwind.Utilities.flex
+                ]
+            ]
+            [ Html.li []
+                [ Html.a
+                    [ Attr.href "/"
+                    ]
+                    [ text "Home" ]
+                ]
+            ]
+
+Note that the example that first example didn't have `import Tailwind.Utilities`, and therefore `class="flex"` was
+interpreted as a plain CSS class, not a Tailwind class.
 
 
 ## Try it out
