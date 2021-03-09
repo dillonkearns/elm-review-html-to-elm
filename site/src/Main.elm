@@ -775,7 +775,21 @@ footerView =
                             , Tw.text_base
                             ]
                         ]
-                        [ text "Brought to you by Dillon Kearns. Check out more of my work at incrementalelm.com." ]
+                        [ text "Brought to you by Dillon Kearns. Check out more of my work at "
+                        , a
+                            [ Attr.href "https://incrementalelm.com"
+                            , Attr.rel "noopener"
+                            , Attr.target "_blank"
+                            , css
+                                [ Tw.text_blue_500
+                                , Css.hover
+                                    [ Tw.text_blue_700
+                                    ]
+                                ]
+                            ]
+                            [ text "incrementalelm.com" ]
+                        , text "."
+                        ]
                     , div
                         [ css
                             [ Tw.flex
