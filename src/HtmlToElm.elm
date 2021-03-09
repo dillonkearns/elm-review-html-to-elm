@@ -511,7 +511,7 @@ getCodecTodo context declarationRange function =
 hasDebugTodo : { a | expression : Node Expression } -> Bool
 hasDebugTodo declaration =
     case declaration.expression of
-        Node _ (Expression.Application ((Node _ (Expression.FunctionOrValue [ "Debug" ] "todo")) :: (Node _ (Expression.Literal debugString)) :: _)) ->
+        Node _ (Expression.Application ((Node _ (Expression.FunctionOrValue [ "Debug" ] "todo")) :: (Node _ (Expression.Literal _)) :: _)) ->
             True
 
         _ ->

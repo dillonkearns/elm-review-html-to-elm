@@ -1,4 +1,4 @@
-module QualifiedType exposing (QualifiedType, TypeAnnotation_(..), TypeOrTypeAlias(..), Type_, ValueConstructor_, create, getTypeData, isPrimitiveType, name, qualifiedPath, toString, typeOrTypeAliasName)
+module QualifiedType exposing (QualifiedType, TypeAnnotation_(..), TypeOrTypeAlias(..), Type_, ValueConstructor_, create, getTypeData, isPrimitiveType, name)
 
 import Elm.Syntax.ModuleName exposing (ModuleName)
 import Elm.Syntax.Node exposing (Node(..))
@@ -33,16 +33,6 @@ qualifiedPath (QualifiedType a) =
 name : QualifiedType -> String
 name (QualifiedType a) =
     a.name
-
-
-toString : QualifiedType -> String
-toString (QualifiedType a) =
-    moduleNameToString a.qualifiedPath a.name
-
-
-moduleNameToString : ModuleName -> String -> String
-moduleNameToString moduleName name_ =
-    String.join "." (moduleName ++ [ name_ ])
 
 
 getTypeData : List ( ModuleName, TypeOrTypeAlias ) -> QualifiedType -> Maybe ( ModuleName, TypeOrTypeAlias )
@@ -100,16 +90,6 @@ type TypeAnnotation_
 type TypeOrTypeAlias
     = TypeValue Type_
     | TypeAliasValue String (List ( String, TypeAnnotation_ ))
-
-
-typeOrTypeAliasName : TypeOrTypeAlias -> String
-typeOrTypeAliasName typeOrTypeAlias =
-    case typeOrTypeAlias of
-        TypeValue type_ ->
-            type_.name
-
-        TypeAliasValue name_ _ ->
-            name_
 
 
 isPrimitiveType : QualifiedType -> Bool

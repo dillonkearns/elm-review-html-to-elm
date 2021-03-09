@@ -4,9 +4,8 @@ import Config exposing (Config)
 import Dict exposing (Dict)
 import Dict.Extra
 import Elm.Pretty
-import Elm.Syntax.Expression as Expression exposing (Expression)
+import Elm.Syntax.Expression exposing (Expression)
 import Elm.Syntax.Node exposing (Node(..))
-import Elm.Syntax.Range
 import Html.Parser
 import ImplementedFunctions
 import Pretty
@@ -16,7 +15,7 @@ import Regex
 htmlToElmTailwindModules : Config -> String -> String
 htmlToElmTailwindModules config input =
     case Html.Parser.run input of
-        Err error ->
+        Err _ ->
             "ERROR"
 
         Ok value ->
@@ -34,7 +33,7 @@ join nodes =
         [] ->
             ""
 
-        [ ( separator, singleNode ) ] ->
+        [ ( _, singleNode ) ] ->
             singleNode
 
         ( separator1, node1 ) :: otherNodes ->
@@ -104,15 +103,6 @@ nodeToElm config indentLevel context node =
                                     newContext
                         )
                         attributes
-
-                functionExpr =
-                    Expression.FunctionOrValue [] elementFunction |> toNode
-
-                exprThing =
-                    Expression.Application
-                        [ Expression.FunctionOrValue [] elementFunction |> toNode
-                        , Expression.ListExpr [] |> toNode
-                        ]
             in
             ( CommaSeparator
             , (if indentLevel == 1 then
@@ -134,24 +124,6 @@ nodeToElm config indentLevel context node =
 
         Html.Parser.Comment string ->
             Just <| ( NoSeparator, indentation indentLevel ++ "{-" ++ string ++ "-}\n" ++ indentation indentLevel )
-
-
-expression : Expression
-expression =
-    Expression.Application
-        [ Expression.FunctionOrValue [] "" |> toNode
-        , Expression.ListExpr [] |> toNode
-        ]
-
-
-toNode =
-    Node Elm.Syntax.Range.emptyRange
-
-
-stringThing : String
-stringThing =
-    Expression.FunctionOrValue [] "myFun"
-        |> print
 
 
 print : Expression -> String
@@ -191,7 +163,7 @@ indentation level =
 isSvgContext : List ( String, String ) -> Bool
 isSvgContext attributes =
     attributes
-        |> List.any (\( key, value ) -> key == "xmlns")
+        |> List.any (\( key, _ ) -> key == "xmlns")
 
 
 type Context
@@ -268,11 +240,11 @@ classAttributeToElm config context indentLevel value =
                 |> List.map splitOutBreakpoints
                 |> Dict.Extra.groupBy .breakpoint
                 |> Dict.map
-                    (\k v ->
+                    (\_ v ->
                         v
                             |> Dict.Extra.groupBy .pseudoClass
                             |> Dict.map
-                                (\k2 v2 ->
+                                (\_ v2 ->
                                     List.map .tailwindClass v2
                                 )
                     )
@@ -362,7 +334,7 @@ twClassToElmName twClass =
                 "neg_" ++ (match.submatches |> List.head |> Maybe.andThen identity |> Maybe.withDefault "")
             )
         |> Regex.replace (Regex.fromString "\\." |> Maybe.withDefault Regex.never)
-            (\match ->
+            (\_ ->
                 "_dot_"
             )
         |> String.replace "/" "over"
