@@ -33,9 +33,9 @@ in a `Debug.todo` call into compiling Elm code!
 import Html exposing (Html)
 import Html.Attributes as Attr
 
-navbarView : Html
+navbarView : Html msg
 navbarView =
-    """<ul class="flex"><li><a href="/">Home</a></li></ul>"""
+    Debug.todo """<ul class="flex"><li><a href="/">Home</a></li></ul>"""
 ```
 
 
@@ -45,7 +45,7 @@ navbarView =
 import Html exposing (Html)
 import Html.Attributes as Attr
 
-navbarView : Html
+navbarView : Html msg
 navbarView =
     Html.ul
         [ Attr.class "flex"
@@ -74,9 +74,9 @@ import Html.Styled.Attributes as Attr
 import Tailwind.Breakpoints as Bp
 import Tailwind.Utilities as Tw
 
-navbarView : Html
+navbarView : Html msg
 navbarView =
-    """<ul><li><a href="/">Home</a></li></ul>"""
+    Debug.todo """<ul><li><a href="/">Home</a></li></ul>"""
 ```
 
 ## After fix with Tailwind import
@@ -87,7 +87,7 @@ import Html.Styled.Attributes as Attr
 import Tailwind.Breakpoints
 import Tailwind.Utilities
 
-navbarView : Html
+navbarView : Html msg
 navbarView =
     Html.ul
         [ Attr.css
