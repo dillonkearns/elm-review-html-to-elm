@@ -11,15 +11,13 @@ when inside the directory containing this file.
 
 -}
 
-import Documentation.ReadmeLinksPointToCurrentVersion
 import NoDebug.Log
 import NoDebug.TodoOrToString
 import NoExposingEverything
-import NoForbiddenWords
 import NoImportingEverything
+import NoInconsistentAliases
 import NoMissingTypeAnnotation
-import NoMissingTypeAnnotationInLetIn
-import NoMissingTypeExpose
+import NoModuleOnExposedNames
 import NoUnused.CustomTypeConstructorArgs
 import NoUnused.CustomTypeConstructors
 import NoUnused.Dependencies
@@ -28,33 +26,40 @@ import NoUnused.Modules
 import NoUnused.Parameters
 import NoUnused.Patterns
 import NoUnused.Variables
-import Review.Rule as Rule exposing (Rule)
+import Review.Rule exposing (Rule)
 
 
 config : List Rule
 config =
-    [ Documentation.ReadmeLinksPointToCurrentVersion.rule
+    [ NoUnused.Modules.rule
+    , NoUnused.Exports.rule
+        |> Review.Rule.ignoreErrorsForFiles [ "src/Config.elm" ]
+    , NoUnused.Dependencies.rule
+    , NoUnused.CustomTypeConstructorArgs.rule
+
+    --, NoUnused.Variables.rule
+    -- , NoUnused.CustomTypeConstructors.rule []
+    --, NoUnused.Parameters.rule
+    --, NoUnused.Patterns.rule
     , NoDebug.Log.rule
     , NoDebug.TodoOrToString.rule
-        |> Rule.ignoreErrorsForDirectories [ "tests/" ]
+        |> Review.Rule.ignoreErrorsForDirectories [ "tests" ]
     , NoExposingEverything.rule
-    , NoForbiddenWords.rule [ "REPLACEME" ]
-    , NoImportingEverything.rule []
+
+    --, NoImportingEverything.rule []
     , NoMissingTypeAnnotation.rule
-    , NoMissingTypeAnnotationInLetIn.rule
-    , NoMissingTypeExpose.rule
-    , NoUnused.CustomTypeConstructors.rule []
-    , NoUnused.CustomTypeConstructorArgs.rule
-    , NoUnused.Dependencies.rule
-    , NoUnused.Exports.rule
-    , NoUnused.Modules.rule
-    , NoUnused.Parameters.rule
-    , NoUnused.Patterns.rule
-    , NoUnused.Variables.rule
+
+    --, NoInconsistentAliases.config
+    --    [ ( "Html.Attributes", "Attr" )
+    --    , ( "Json.Decode", "Decode" )
+    --    , ( "Json.Encode", "Encode" )
+    --    ]
+    --    |> NoInconsistentAliases.noMissingAliases
+    --    |> NoInconsistentAliases.rule
+    , NoModuleOnExposedNames.rule
     ]
         |> List.map
             (\rule ->
                 rule
-                    |> Rule.ignoreErrorsForDirectories [ "vendor/", "src/Html/" ]
-                    |> Rule.ignoreErrorsForFiles [ "src/Config.elm", "src/QualifiedType.elm" ]
+                    |> Review.Rule.ignoreErrorsForDirectories [ "vendor" ]
             )

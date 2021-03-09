@@ -10,6 +10,7 @@ import Html.Styled exposing (..)
 import Html.Styled.Attributes as Attr exposing (attribute, css)
 import Html.Styled.Events as Events
 import HtmlToTailwind
+import Json.Decode
 import Json.Encode
 import Svg.Styled as Svg
 import Svg.Styled.Attributes as SvgAttr
@@ -30,12 +31,17 @@ type alias Model =
     }
 
 
-initialModel : String -> ( Model, Cmd msg )
-initialModel configJsonString =
+init : Maybe String -> ( Model, Cmd msg )
+init configJsonString =
     ( { htmlInput = """<a href="#" />"""
       , config =
             configJsonString
-                |> Codec.decodeString Config.codec
+                |> Result.fromMaybe "No initial config"
+                |> Result.andThen
+                    (\jsonString ->
+                        Codec.decodeString Config.codec jsonString
+                            |> Result.mapError Json.Decode.errorToString
+                    )
                 |> Result.withDefault Config.default
       , showSettings = False
       }
@@ -228,11 +234,10 @@ view model =
         |> toUnstyled
 
 
-main : Program String Model Msg
+main : Program (Maybe String) Model Msg
 main =
     Browser.document
-        { init =
-            initialModel
+        { init = init
         , view = \model -> { title = "html-to-elm", body = [ view model ] }
         , update = update
         , subscriptions = \_ -> Sub.none
