@@ -1,11 +1,11 @@
 # elm-review-html-to-elm
 
-Provides [`elm-review`](https://package.elm-lang.org/packages/jfmengels/elm-review/latest/) rules to REPLACEME.
+Provides an [`elm-review`](https://package.elm-lang.org/packages/jfmengels/elm-review/latest/) rule to convert an HTML String into compiling Elm code.
 
 
 ## Provided rules
 
-- [`HtmlToElm`](https://package.elm-lang.org/packages/dillonkearns/elm-review-html-to-elm/1.0.0/HtmlToElm) - Reports REPLACEME.
+- [`HtmlToElm`](https://package.elm-lang.org/packages/dillonkearns/elm-review-html-to-elm/1.0.0/HtmlToElm)
 
 
 ## Configuration
