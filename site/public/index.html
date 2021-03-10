@@ -29,8 +29,7 @@
         flags: localStorage.getItem('html-to-elm-config')
      })
         app.ports.copyGeneratedCode.subscribe(generatedCode => {
-            document.querySelector("#generated-elm").select();
-            document.execCommand("copy");
+            navigator.clipboard.writeText(generatedCode);
         })
         app.ports.saveConfig.subscribe(configJsonString => {
             localStorage.setItem('html-to-elm-config', configJsonString);

@@ -18,7 +18,7 @@ import Tailwind.Breakpoints as Bp
 import Tailwind.Utilities as Tw
 
 
-port copyGeneratedCode : () -> Cmd msg
+port copyGeneratedCode : String -> Cmd msg
 
 
 port saveConfig : String -> Cmd msg
@@ -168,7 +168,9 @@ update msg model =
 
         CopyGeneratedCode ->
             ( model
-            , copyGeneratedCode ()
+            , model.htmlInput
+                |> HtmlToTailwind.htmlToElmTailwindModules model.config
+                |> copyGeneratedCode
             )
 
 
@@ -227,11 +229,11 @@ view model =
                     ]
                 , Attr.id "generated-elm"
                 , Attr.readonly True
-                ]
-                [ model.htmlInput
+                , model.htmlInput
                     |> HtmlToTailwind.htmlToElmTailwindModules model.config
-                    |> text
+                    |> Attr.value
                 ]
+                []
             ]
         , footerView
         ]
