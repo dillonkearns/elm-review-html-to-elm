@@ -192,6 +192,8 @@ view model =
             [ div
                 [ css
                     [ Tw.flex_1
+                    , Tw.flex
+                    , Tw.flex_col
                     ]
                 ]
                 [ div
