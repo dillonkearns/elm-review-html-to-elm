@@ -224,6 +224,7 @@ view model =
                     , Tw.flex_1
                     ]
                 , Attr.id "generated-elm"
+                , Attr.readonly True
                 ]
                 [ model.htmlInput
                     |> HtmlToTailwind.htmlToElmTailwindModules model.config
