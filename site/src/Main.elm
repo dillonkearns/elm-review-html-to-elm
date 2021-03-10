@@ -183,7 +183,7 @@ view model =
         ]
         [ Css.Global.global Tw.globalStyles
         , navbar model
-        , div
+        , main_
             [ css
                 [ Tw.flex
                 , Tw.h_full
@@ -440,7 +440,7 @@ example model { moduleName, placeholder, onInputAlias, onInputExposing } getter 
 
 settingsPanel : Model -> Html Msg
 settingsPanel model =
-    main_
+    div
         [ css [ Tw.relative ] ]
         [ {--}
           example model
