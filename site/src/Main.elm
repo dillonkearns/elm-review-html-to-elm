@@ -796,6 +796,7 @@ footerView =
                         [ Tw.space_x_8
                         , Tw.flex
                         , Tw.items_center
+                        , Css.property "aspect-ratio" "1"
                         ]
                     ]
                     [ img
