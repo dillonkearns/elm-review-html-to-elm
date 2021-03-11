@@ -838,6 +838,8 @@ footerView =
                             ]
                         , Attr.src "https://res.cloudinary.com/dillonkearns/image/upload/v1614626535/Incremental_Elm_Logo_aeb8qs.png"
                         , Attr.alt "Incremental Elm"
+                        , Attr.height 10
+                        , Attr.width 10
                         ]
                         []
                     , p
