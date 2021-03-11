@@ -256,9 +256,10 @@ moduleVisitor schema =
 expressionVisitor : Node Expression -> ModuleContext -> ( List (Error {}), ModuleContext )
 expressionVisitor expression context =
     case Node.value expression of
-        Expression.Application [ Node _ (Expression.FunctionOrValue [ "Debug" ] "todo"), Node stringRange (Expression.Literal literalString) ] ->
+        Expression.Application [ Node _ (Expression.FunctionOrValue [ "Debug" ] "todo"), Node _ (Expression.Literal literalString) ] ->
             if literalString |> String.startsWith "@html" then
                 let
+                    htmlString : String
                     htmlString =
                         literalString |> Regex.replace (Regex.fromString "^@html" |> Maybe.withDefault Regex.never) (\_ -> "")
                 in
