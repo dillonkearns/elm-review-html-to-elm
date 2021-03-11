@@ -833,6 +833,7 @@ footerView =
                     [ img
                         [ css
                             [ Tw.h_6
+                            , Tw.w_6
                             ]
                         , Attr.src "https://res.cloudinary.com/dillonkearns/image/upload/v1614626535/Incremental_Elm_Logo_aeb8qs.png"
                         , Attr.alt "Incremental Elm"
