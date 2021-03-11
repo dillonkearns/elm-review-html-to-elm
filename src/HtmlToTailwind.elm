@@ -1,6 +1,7 @@
 module HtmlToTailwind exposing (htmlToElmTailwindModules)
 
 import Config exposing (Config)
+import Context exposing (Context(..))
 import Dict exposing (Dict)
 import Dict.Extra
 import FormattedElm exposing (indentation, indentedThingy)
@@ -132,11 +133,6 @@ isSvgContext : List ( String, String ) -> Bool
 isSvgContext attributes =
     attributes
         |> List.any (\( key, _ ) -> key == "xmlns")
-
-
-type Context
-    = Html
-    | Svg
 
 
 escapedString : String -> String
