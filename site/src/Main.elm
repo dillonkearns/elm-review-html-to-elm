@@ -817,7 +817,7 @@ footerView =
                             , Attr.rel "noopener"
                             , Attr.target "_blank"
                             , css
-                                [ Tw.text_blue_500
+                                [ Css.color (Css.rgb 0 54 249)
                                 , Css.hover
                                     [ Tw.text_blue_700
                                     ]
