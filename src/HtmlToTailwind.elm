@@ -108,10 +108,10 @@ nodeToElm config indentLevel context node =
             in
             ( CommaSeparator
             , (if indentLevel == 1 then
-                "    "
+                indentation 1
 
                else
-                ""
+                indentation 0
               )
                 ++ elementFunction
                 ++ (indentedThingy (indentLevel + 1) identity filteredAttributes
