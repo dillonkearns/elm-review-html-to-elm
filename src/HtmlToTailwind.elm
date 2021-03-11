@@ -176,6 +176,13 @@ type Context
     | Svg
 
 
+escapedString : String -> String
+escapedString string =
+    string
+        |> String.replace "\"" "\\\""
+        |> String.replace "\n" "\\n"
+
+
 attributeToElm : Config -> Int -> Context -> Html.Parser.Attribute -> List String
 attributeToElm config indentLevel context ( name, value ) =
     if name == "xmlns" then
@@ -199,7 +206,7 @@ attributeToElm config indentLevel context ( name, value ) =
                                 ++ " \""
                                 ++ String.trim styleName
                                 ++ "\" \""
-                                ++ String.trim styleValue
+                                ++ escapedString (String.trim styleValue)
                                 ++ "\""
 
                         _ ->
@@ -222,7 +229,7 @@ attributeToElm config indentLevel context ( name, value ) =
                                 [ print (Config.htmlAttr config functionName) ++ " \"" ++ value ++ "\"" ]
 
                             Nothing ->
-                                [ print (Config.htmlAttr config "attribute") ++ " \"" ++ name ++ "\" \"" ++ value ++ "\"" ]
+                                [ print (Config.htmlAttr config "attribute") ++ " \"" ++ name ++ "\" \"" ++ escapedString value ++ "\"" ]
 
 
 svgAttr : Config -> ( String, String ) -> String
