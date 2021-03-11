@@ -115,8 +115,9 @@ nodeToElm config indentLevel context node =
               )
                 ++ elementFunction
                 ++ (indentedThingy (indentLevel + 1) identity filteredAttributes
-                        ++ indentation indentLevel
-                        ++ "      ["
+                        ++ "\n"
+                        ++ indentation (indentLevel + 1)
+                        ++ "["
                         ++ (List.filterMap (nodeToElm config (indentLevel + 1) newContext) children |> join |> surroundWithSpaces)
                         ++ "]\n"
                         ++ indentation indentLevel

@@ -4,7 +4,7 @@ module FormattedElm exposing (indentation, indentedThingy)
 indentedThingy : Int -> (a -> String) -> List a -> String
 indentedThingy indentLevel function list =
     if List.isEmpty list then
-        " []\n"
+        " []"
 
     else
         (list
@@ -20,7 +20,7 @@ indentedThingy indentLevel function list =
         )
             ++ "\n"
             ++ indentation indentLevel
-            ++ "]\n"
+            ++ "]"
 
 
 indentation : Int -> String

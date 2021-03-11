@@ -16,13 +16,13 @@ main =
 result =
         {- Outer comment -}
         div []
-          [         {- Inner comment 1 -}
+        [         {- Inner comment 1 -}
                 {- Inner comment 2 -}
         span []
-              [ text "1" ]
+            [ text "1" ]
         , span []
-              [ text "2" ]
+            [ text "2" ]
         , span []
-              [ text "3" ]
+            [ text "3" ]
          ]
     

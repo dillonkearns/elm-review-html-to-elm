@@ -15,7 +15,7 @@ main =
 
 result =
         main_ []
-          [ div
+        [ div
             [ css
                 [ Tw.bg_gray_100
                 , Bp.lg
@@ -23,13 +23,10 @@ result =
                     , Css.hover 
                         [ Tw.bg_gray_200
                         ]
-
                     ]
-
                 ]
-
             ]
-              []
+            []
         , div
             [ css
                 [ Tw.bg_gray_100
@@ -37,10 +34,8 @@ result =
                     [ Tw.bg_gray_900
                     , Tw.border_gray_800
                     ]
-
                 ]
-
             ]
-              []
+            []
          ]
     

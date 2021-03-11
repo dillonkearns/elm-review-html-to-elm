@@ -18,38 +18,38 @@ result =
         [ Attr.action ""
         , Attr.method "get"
         ]
-          [ div []
-              [ label
+        [ div []
+            [ label
                 [ Attr.for "name"
                 ]
-                  [ text "Enter your name:" ]
+                [ text "Enter your name:" ]
             , input
                 [ Attr.type_ "text"
                 , Attr.name "name"
                 , Attr.id "name"
                 , Attr.required True
                 ]
-                  []
+                []
              ]
         , div []
-              [ label
+            [ label
                 [ Attr.for "email"
                 ]
-                  [ text "Enter your email:" ]
+                [ text "Enter your email:" ]
             , input
                 [ Attr.type_ "email"
                 , Attr.name "email"
                 , Attr.id "email"
                 , Attr.required True
                 ]
-                  []
+                []
              ]
         , div []
-              [ input
+            [ input
                 [ Attr.type_ "submit"
                 , Attr.value "Subscribe!"
                 ]
-                  []
+                []
              ]
          ]
     

@@ -15,13 +15,13 @@ main =
 
 result =
         main_ []
-          [ div
+        [ div
             [ Attr.style "background-image" "url(\"avatar.jpg\")"
             ]
-              []
+            []
         , div
             [ attribute "data-responsive" "[{\n      \"breakpoint\": 1200,\n      \"settings\": {\n      \"slidesToShow\": 5\n      }\n      }]"
             ]
-              []
+            []
          ]
     

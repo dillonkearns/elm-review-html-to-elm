@@ -15,18 +15,16 @@ main =
 
 result =
         main_ []
-          [ div
+        [ div
             [ css
                 [ Tw.flex
                 , Tw.flex_col
                 , Bp.md
                     [ Tw.flex_row
                     ]
-
                 ]
-
             ]
-              [ text "Single breakpoint" ]
+            [ text "Single breakpoint" ]
         , div
             [ css
                 [ Tw.flex
@@ -35,10 +33,8 @@ result =
                     [ Tw.font_extrabold
                     , Tw.flex_row
                     ]
-
                 ]
-
             ]
-              [ text "Multiple breakpoints" ]
+            [ text "Multiple breakpoints" ]
          ]
     

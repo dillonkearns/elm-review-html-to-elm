@@ -15,5 +15,5 @@ main =
 
 result =
         div []
-          []
+        []
     

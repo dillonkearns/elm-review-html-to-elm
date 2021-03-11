@@ -15,9 +15,9 @@ main =
 
 result =
         main_ []
-          [ div []
-              []
+        [ div []
+            []
         , div []
-              [ text "NO WHITESPACE" ]
+            [ text "NO WHITESPACE" ]
          ]
     

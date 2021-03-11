@@ -15,19 +15,17 @@ main =
 
 result =
         main_ []
-          [ div
+        [ div
             [ css
                 [ Tw.neg_mt_8
                 ]
-
             ]
-              []
+            []
         , div
             [ css
                 [ Tw.h_1over2
                 ]
-
             ]
-              []
+            []
          ]
     
