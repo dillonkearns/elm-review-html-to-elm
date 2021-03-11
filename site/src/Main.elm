@@ -33,7 +33,7 @@ type alias Model =
 
 init : Maybe String -> ( Model, Cmd msg )
 init configJsonString =
-    ( { htmlInput = """<a href="#" />"""
+    ( { htmlInput = """<a href="/">Home Page</a>"""
       , config =
             configJsonString
                 |> Result.fromMaybe "No initial config"
