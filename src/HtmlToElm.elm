@@ -269,7 +269,7 @@ expressionVisitor expression context =
                         }
                         (Node.range expression)
                         [ Review.Fix.replaceRangeBy (Node.range expression) <|
-                            HtmlToTailwind.htmlToElmTailwindModules context.config htmlString
+                            withHugeIndentToEnsureValidSyntax (HtmlToTailwind.htmlToElmTailwindModules context.config htmlString)
                         ]
                   ]
                 , context
@@ -280,6 +280,14 @@ expressionVisitor expression context =
 
         _ ->
             ( [], context )
+
+
+withHugeIndentToEnsureValidSyntax : String -> String
+withHugeIndentToEnsureValidSyntax source =
+    source
+        |> String.split "\n"
+        |> List.map (\line -> String.repeat (4 * 30) " " ++ line)
+        |> String.join "\n"
 
 
 

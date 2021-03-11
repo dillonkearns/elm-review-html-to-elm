@@ -132,9 +132,73 @@ import Html exposing (..)
 import Html.Attributes as Attr
 
 view =
-    main_ [] [     div []
-        []
-     ]
+    main_ [] [                                                                                                                             div []
+                                                                                                                                []
+                                                                                                                             ]
+"""
+                            ]
+            , test "fix yields valid syntax when deeply nested" <|
+                \_ ->
+                    let
+                        startCode : String
+                        startCode =
+                            """module A exposing (..)
+                           
+import Html exposing (..)
+import Html.Attributes as Attr
+
+view =
+   main_ [] [ div []
+                      [ div []
+                          [ div []
+                              [ div []
+                                  [ div []
+                                      [ case Just 1 of
+                                          Just _ ->
+                                              Debug.todo \"\"\"@html <p class="bg-black font-bold text-white">Hello!</p>\"\"\"
+
+                                          Nothing ->
+                                              div [] []
+                                      ]
+                                  ]
+                              ]
+                          ]
+                      ]
+                      ]
+"""
+                    in
+                    startCode
+                        |> Review.Test.run HtmlToElm.rule
+                        |> Review.Test.expectErrors
+                            [ Review.Test.error { message = "Here's my attempt to complete this stub", details = [ "" ], under = "Debug.todo \"\"\"@html <p class=\"bg-black font-bold text-white\">Hello!</p>\"\"\"" }
+                                |> Review.Test.whenFixed
+                                    """module A exposing (..)
+                           
+import Html exposing (..)
+import Html.Attributes as Attr
+
+view =
+   main_ [] [ div []
+                      [ div []
+                          [ div []
+                              [ div []
+                                  [ div []
+                                      [ case Just 1 of
+                                          Just _ ->
+                                                                                                                                                                          p
+                                                                                                                                [ Attr.class "bg-black font-bold text-white"
+                                                                                                                                ]
+                                                                                                                                [ text "Hello!" ]
+                                                                                                                            
+
+                                          Nothing ->
+                                              div [] []
+                                      ]
+                                  ]
+                              ]
+                          ]
+                      ]
+                      ]
 """
                             ]
             ]
