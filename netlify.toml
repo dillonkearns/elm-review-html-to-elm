@@ -1,7 +1,7 @@
 # example netlify.toml
 [build]
   base = "site/"
-  command = "npm install && npx elm make src/Main.elm --output=public/elm.js"
+  command = "npm install && npm run build"
   functions = "functions"
   publish = "public"
 

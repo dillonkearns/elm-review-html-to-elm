@@ -4,6 +4,7 @@
   "description": "Convert HTML to Elm, including tailwind utilities.",
   "scripts": {
     "start": "ntl dev --port 3000",
+    "build": "elm-optimize-level-2 src/Main.elm --output=public/elm.js && terser public/elm.js --compress 'pure_funcs=\"F2,F3,F4,F5,F6,F7,F8,F9,A2,A3,A4,A5,A6,A7,A8,A9\",pure_getters,keep_fargs=false,unsafe_comps,unsafe' | terser --mangle --output=public/elm.js",
     "postinstall": "elm-tooling install"
   },
   "repository": {
@@ -20,10 +21,12 @@
   "devDependencies": {
     "chai": "^4.3.3",
     "elm-live": "^4.0.2",
+    "elm-optimize-level-2": "^0.1.5",
     "elm-review": "^2.4.4",
     "elm-test": "^0.19.1-revision6",
     "elm-tooling": "^1.2.0",
     "mocha": "^8.3.1",
-    "node-elm-compiler": "^5.0.5"
+    "node-elm-compiler": "^5.0.5",
+    "terser": "^5.6.0"
   }
 }
