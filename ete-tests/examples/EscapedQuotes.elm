@@ -14,7 +14,7 @@ main =
 
 
 result =
-        main_ []
+    main_ []
         [ div
             [ Attr.style "background-image" "url(\"avatar.jpg\")"
             ]

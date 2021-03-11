@@ -14,7 +14,7 @@ main =
 
 
 result =
-        div []
+    div []
         [ div []
             [ div
                 [ css

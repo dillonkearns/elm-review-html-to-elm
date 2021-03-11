@@ -14,7 +14,7 @@ main =
 
 
 result =
-        form
+    form
         [ Attr.action ""
         , Attr.method "get"
         ]

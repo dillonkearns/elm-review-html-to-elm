@@ -14,7 +14,7 @@ main =
 
 
 result =
-        {- This example requires Tailwind CSS v2.0+ -}
+    {- This example requires Tailwind CSS v2.0+ -}
         div
         [ css
             [ Tw.rounded_md

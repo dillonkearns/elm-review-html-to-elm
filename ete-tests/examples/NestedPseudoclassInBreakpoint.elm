@@ -14,7 +14,7 @@ main =
 
 
 result =
-        main_ []
+    main_ []
         [ div
             [ css
                 [ Tw.bg_gray_100

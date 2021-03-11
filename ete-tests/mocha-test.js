@@ -73,7 +73,7 @@ main =
 
 
 result =
-    ${generatedElmHtmlCode}
+${generatedElmHtmlCode}
 `
         );
         resolve();

@@ -14,7 +14,7 @@ main =
 
 
 result =
-        {- Outer comment -}
+    {- Outer comment -}
         div []
         [         {- Inner comment 1 -}
                 {- Inner comment 2 -}
