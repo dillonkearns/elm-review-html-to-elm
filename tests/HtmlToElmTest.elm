@@ -20,7 +20,7 @@ view =
         a
         [ Attr.href "#"
         ]
-          [ text "Link" ]"""
+        [ text "Link" ]"""
         , testCase "elm-css qualified imports"
             """
 import Html.Styled exposing (text)
@@ -33,7 +33,7 @@ view =
         Html.Styled.a
         [ Html.Styled.Attributes.href "#"
         ]
-          [ text "Link" ]"""
+        [ text "Link" ]"""
         , testCase "elm-css classes"
             """
 import Html.Styled exposing (..)
@@ -46,7 +46,7 @@ view =
         div
         [ Attr.class "flex"
         ]
-          []"""
+        []"""
         , testCase "elm-tailwind-modules classes"
             """
 import Html.Styled exposing (..)
@@ -62,9 +62,8 @@ view =
         [ Attr.css
             [ Tw.flex
             ]
-
         ]
-          []"""
+        []"""
         , testCase "documentation example with tailwind"
             """
 import Html.Styled as Html exposing (text)
@@ -80,13 +79,12 @@ view =
         [ Attr.css
             [ Tailwind.Utilities.flex
             ]
-
         ]
-          [ Html.li []
-              [ Html.a
+        [ Html.li []
+            [ Html.a
                 [ Attr.href "/"
                 ]
-                  [ text "Home" ]
+                [ text "Home" ]
              ]
          ]"""
         , testCase "documentation example without tailwind"
@@ -101,11 +99,11 @@ view =
         Html.ul
         [ Attr.class "flex"
         ]
-          [ Html.li []
-              [ Html.a
+        [ Html.li []
+            [ Html.a
                 [ Attr.href "/"
                 ]
-                  [ text "Home" ]
+                [ text "Home" ]
              ]
          ]"""
         ]
