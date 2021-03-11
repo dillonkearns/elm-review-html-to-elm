@@ -211,25 +211,50 @@ view model =
                         ]
                     ]
                     [ settingsPanel model ]
-                , textarea
-                    [ Events.onInput OnInput
-                    , Attr.value model.htmlInput
-                    , Attr.spellcheck False
-                    , Attr.autocomplete False
-                    , css
+                , div
+                    [ css
                         [ Tw.w_full
                         , Tw.flex_grow
+                        , Tw.flex
+                        , Tw.flex_col
                         ]
                     ]
-                    []
+                    [ label
+                        [ css
+                            [ Tw.p_2
+                            , Tw.font_bold
+                            ]
+                        ]
+                        [ text "Input HTML" ]
+                    , textarea
+                        [ Events.onInput OnInput
+                        , Attr.value model.htmlInput
+                        , Attr.spellcheck False
+                        , Attr.autocomplete False
+                        , css
+                            [ Tw.w_full
+                            , Tw.flex_grow
+                            ]
+                        ]
+                        []
+                    ]
                 ]
             , div
                 [ css
                     [ Tw.w_1over2
                     , Tw.flex_grow
+                    , Tw.flex
+                    , Tw.flex_col
                     ]
                 ]
-                [ model.htmlInput
+                [ label
+                    [ css
+                        [ Tw.p_2
+                        , Tw.font_bold
+                        ]
+                    ]
+                    [ text "Output Elm" ]
+                , model.htmlInput
                     |> HtmlToTailwind.htmlToElmTailwindModules model.config
                     |> SyntaxHighlight.elm
                     |> Result.map (SyntaxHighlight.toBlockHtml Nothing)
@@ -457,7 +482,13 @@ example model { moduleName, placeholder, onInputAlias, onInputExposing } getter 
 settingsPanel : Model -> Html Msg
 settingsPanel model =
     div
-        [ css [ Tw.relative ] ]
+        [ css
+            [ Tw.relative
+            , Tw.shadow_lg
+            , Tw.p_4
+            , Tw.bg_white
+            ]
+        ]
         [ {--}
           example model
             { moduleName = "Html", placeholder = "Html", onInputAlias = SetHtmlAlias, onInputExposing = SetHtmlExposing }
