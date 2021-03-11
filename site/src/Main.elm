@@ -189,22 +189,47 @@ view model =
         , main_
             [ css
                 [ Tw.flex
-                , Tw.flex_row
+                , Tw.flex_col
                 , Tw.flex_grow
                 , Tw.overflow_hidden
+                , Bp.sm
+                    [ Tw.flex_row
+                    ]
                 ]
             ]
             [ div
                 [ css
+                    [ if model.showSettings then
+                        Css.batch
+                            [ Tw.flex
+                            , Bp.sm
+                                [ Tw.hidden
+                                ]
+                            ]
+
+                      else
+                        Tw.hidden
+                    ]
+                ]
+                [ settingsPanel model ]
+            , div
+                [ css
                     [ Tw.flex
                     , Tw.flex_col
-                    , Tw.w_1over2
+                    , Bp.sm [ Tw.w_1over2 ]
                     ]
                 ]
                 [ div
                     [ css
                         [ if model.showSettings then
-                            Css.batch []
+                            Css.batch
+                                [ Css.batch
+                                    [ Tw.hidden
+                                    , Bp.sm
+                                        [ Tw.flex
+                                        ]
+                                    ]
+                                ]
 
                           else
                             Tw.hidden
@@ -244,7 +269,7 @@ view model =
                 ]
             , div
                 [ css
-                    [ Tw.w_1over2
+                    [ Bp.sm [ Tw.w_1over2 ]
                     , Tw.flex_grow
                     , Tw.flex
                     , Tw.flex_col
