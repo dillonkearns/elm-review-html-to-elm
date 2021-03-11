@@ -1,4 +1,4 @@
-module FormattedElm exposing (..)
+module FormattedElm exposing (indentation, indentedThingy)
 
 
 indentedThingy : Int -> (a -> String) -> List a -> String
