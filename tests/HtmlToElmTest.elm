@@ -2,7 +2,7 @@ module HtmlToElmTest exposing (all)
 
 import HtmlToElm
 import Review.Test
-import Test exposing (Test, describe, test)
+import Test exposing (Test, describe, only, test)
 
 
 all : Test
@@ -106,6 +106,38 @@ view =
                 [ text "Home" ]
              ]
          ]"""
+        , describe "expression context"
+            [ test "expression example" <|
+                \_ ->
+                    let
+                        startCode : String
+                        startCode =
+                            """module A exposing (..)
+
+import Html exposing (..)
+import Html.Attributes as Attr
+
+view =
+    main_ [] [ Debug.todo "@html <div></div>" ]
+"""
+                    in
+                    startCode
+                        |> Review.Test.run HtmlToElm.rule
+                        |> Review.Test.expectErrors
+                            [ Review.Test.error { message = "Here's my attempt to complete this stub", details = [ "" ], under = "Debug.todo \"@html <div></div>\"" }
+                                |> Review.Test.whenFixed
+                                    """module A exposing (..)
+
+import Html exposing (..)
+import Html.Attributes as Attr
+
+view =
+    main_ [] [     div []
+        []
+     ]
+"""
+                            ]
+            ]
         ]
 
 

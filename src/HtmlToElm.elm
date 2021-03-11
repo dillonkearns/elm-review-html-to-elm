@@ -26,6 +26,7 @@ import Elm.Syntax.TypeAnnotation as TypeAnnotation exposing (TypeAnnotation)
 import HtmlToTailwind
 import Pretty
 import QualifiedType exposing (QualifiedType, TypeAnnotation_(..), TypeOrTypeAlias(..), Type_)
+import Regex
 import Review.Fix
 import Review.ModuleNameLookupTable as ModuleNameLookupTable exposing (ModuleNameLookupTable)
 import Review.Rule as Rule exposing (Error, ModuleKey, Rule)
@@ -248,7 +249,36 @@ moduleVisitor : Rule.ModuleRuleSchema {} ModuleContext -> Rule.ModuleRuleSchema 
 moduleVisitor schema =
     schema
         |> Rule.withDeclarationListVisitor declarationVisitor
+        |> Rule.withExpressionEnterVisitor expressionVisitor
         |> Rule.withImportVisitor importVisitor
+
+
+expressionVisitor : Node Expression -> ModuleContext -> ( List (Error {}), ModuleContext )
+expressionVisitor expression context =
+    case Node.value expression of
+        Expression.Application [ Node _ (Expression.FunctionOrValue [ "Debug" ] "todo"), Node stringRange (Expression.Literal literalString) ] ->
+            if literalString |> String.startsWith "@html" then
+                let
+                    htmlString =
+                        literalString |> Regex.replace (Regex.fromString "^@html" |> Maybe.withDefault Regex.never) (\_ -> "")
+                in
+                ( [ Rule.errorWithFix
+                        { message = "Here's my attempt to complete this stub"
+                        , details = [ "" ]
+                        }
+                        (Node.range expression)
+                        [ Review.Fix.replaceRangeBy (Node.range expression) <|
+                            HtmlToTailwind.htmlToElmTailwindModules context.config htmlString
+                        ]
+                  ]
+                , context
+                )
+
+            else
+                ( [], context )
+
+        _ ->
+            ( [], context )
 
 
 
