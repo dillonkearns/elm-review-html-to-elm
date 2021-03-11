@@ -3,12 +3,8 @@ module HtmlToTailwind exposing (htmlToElmTailwindModules)
 import Config exposing (Config)
 import Dict exposing (Dict)
 import Dict.Extra
-import Elm.Pretty
-import Elm.Syntax.Expression exposing (Expression)
-import Elm.Syntax.Node exposing (Node(..))
 import Html.Parser
 import ImplementedFunctions
-import Pretty
 import Regex
 
 
@@ -63,7 +59,7 @@ nodeToElm config indentLevel context node =
                 Nothing
 
             else
-                ( CommaSeparator, print (Config.htmlTag config "text") ++ " \"" ++ trimmed ++ "\"" ) |> Just
+                ( CommaSeparator, Config.htmlTag config "text" ++ " \"" ++ trimmed ++ "\"" ) |> Just
 
         Html.Parser.Element elementName attributes children ->
             let
@@ -73,18 +69,18 @@ nodeToElm config indentLevel context node =
                         Svg ->
                             case ImplementedFunctions.lookup ImplementedFunctions.svgTags elementName of
                                 Just functionName ->
-                                    print (Config.svgTag config functionName)
+                                    Config.svgTag config functionName
 
                                 Nothing ->
-                                    print (Config.svgTag config "node") ++ " \"" ++ elementName ++ "\""
+                                    Config.svgTag config "node" ++ " \"" ++ elementName ++ "\""
 
                         Html ->
                             case ImplementedFunctions.lookupWithDict ImplementedFunctions.htmlTagsDict ImplementedFunctions.htmlTags elementName of
                                 Just functionName ->
-                                    print (Config.htmlTag config functionName)
+                                    Config.htmlTag config functionName
 
                                 Nothing ->
-                                    print (Config.htmlTag config "node") ++ " \"" ++ elementName ++ "\""
+                                    Config.htmlTag config "node" ++ " \"" ++ elementName ++ "\""
 
                 isSvg : Bool
                 isSvg =
@@ -129,13 +125,6 @@ nodeToElm config indentLevel context node =
 
         Html.Parser.Comment string ->
             Just <| ( NoSeparator, indentation indentLevel ++ "{-" ++ string ++ "-}\n" ++ indentation indentLevel )
-
-
-print : Expression -> String
-print exp =
-    exp
-        |> Elm.Pretty.prettyExpression
-        |> Pretty.pretty 120
 
 
 indentedThingy : Int -> (a -> String) -> List a -> String
@@ -202,7 +191,7 @@ attributeToElm config indentLevel context ( name, value ) =
                 (\entry ->
                     case entry |> String.split ":" of
                         [ styleName, styleValue ] ->
-                            print (Config.htmlAttr config "style")
+                            Config.htmlAttr config "style"
                                 ++ " \""
                                 ++ String.trim styleName
                                 ++ "\" \""
@@ -216,30 +205,30 @@ attributeToElm config indentLevel context ( name, value ) =
     else
         case ImplementedFunctions.lookup ImplementedFunctions.boolAttributeFunctions name of
             Just boolFunction ->
-                [ print (Config.htmlAttr config boolFunction) ++ " True" ]
+                [ Config.htmlAttr config boolFunction ++ " True" ]
 
             Nothing ->
                 case ImplementedFunctions.lookup ImplementedFunctions.intAttributeFunctions name of
                     Just intFunction ->
-                        [ print (Config.htmlAttr config intFunction) ++ " " ++ value ]
+                        [ Config.htmlAttr config intFunction ++ " " ++ value ]
 
                     Nothing ->
                         case ImplementedFunctions.lookupWithDict ImplementedFunctions.htmlAttributeDict ImplementedFunctions.htmlAttributes name of
                             Just functionName ->
-                                [ print (Config.htmlAttr config functionName) ++ " \"" ++ value ++ "\"" ]
+                                [ Config.htmlAttr config functionName ++ " \"" ++ value ++ "\"" ]
 
                             Nothing ->
-                                [ print (Config.htmlAttr config "attribute") ++ " \"" ++ name ++ "\" \"" ++ escapedString value ++ "\"" ]
+                                [ Config.htmlAttr config "attribute" ++ " \"" ++ name ++ "\" \"" ++ escapedString value ++ "\"" ]
 
 
 svgAttr : Config -> ( String, String ) -> String
 svgAttr config ( name, value ) =
     case ImplementedFunctions.lookup ImplementedFunctions.svgAttributes name of
         Just functionName ->
-            print (Config.svgAttr config (ImplementedFunctions.toCamelCase functionName)) ++ " \"" ++ value ++ "\""
+            Config.svgAttr config (ImplementedFunctions.toCamelCase functionName) ++ " \"" ++ value ++ "\""
 
         Nothing ->
-            print (Config.htmlAttr config "attribute") ++ " \"" ++ name ++ "\" \"" ++ value ++ "\""
+            Config.htmlAttr config "attribute" ++ " \"" ++ name ++ "\" \"" ++ value ++ "\""
 
 
 classAttributeToElm : Config -> Context -> Int -> String -> String
@@ -299,7 +288,7 @@ classAttributeToElm config context indentLevel value =
                                                     ]
 
                                                 Nothing ->
-                                                    [ print (Config.bp config breakpoint)
+                                                    [ Config.bp config breakpoint
                                                         ++ indentedThingy (indentLevel + 3) (toTwClass config) twClassList
                                                     ]
                                     )
@@ -313,7 +302,7 @@ classAttributeToElm config context indentLevel value =
                     )
                 |> List.concat
 
-        cssFunction : Expression
+        cssFunction : String
         cssFunction =
             case context of
                 Html ->
@@ -322,7 +311,7 @@ classAttributeToElm config context indentLevel value =
                 Svg ->
                     Config.svgAttr config "css"
     in
-    print cssFunction ++ indentedThingy (indentLevel + 1) identity newThing
+    cssFunction ++ indentedThingy (indentLevel + 1) identity newThing
 
 
 breakpointName : Config -> String -> String
@@ -332,12 +321,12 @@ breakpointName config breakpoint =
             "Css." ++ functionName
 
         Nothing ->
-            print <| Config.bp config breakpoint
+            Config.bp config breakpoint
 
 
 toTwClass : Config -> String -> String
 toTwClass config twClass =
-    print <| Config.tw config (twClassToElmName twClass)
+    Config.tw config (twClassToElmName twClass)
 
 
 {-| Mimics the rules in <https://github.com/matheus23/elm-tailwind-modules/blob/cd5809505934ff72c9b54fd1e181f67b53af8186/src/helpers.ts#L24-L59>
