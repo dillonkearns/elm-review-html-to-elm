@@ -24,6 +24,48 @@ config =
     ]
 ```
 
+## @html directive
+
+You can replace `Debug.todo` expressions with todo Strings beginning with `@html` to replace HTML strings in-place with
+compiling Elm view code.
+
+```elm
+import Html exposing (Html)
+import Html.Attributes as Attr
+
+navbarView : Html msg
+navbarView =
+    nav
+        []
+        [ Debug.todo """@html <ul class="flex"><li><a href="/">Home</a></li></ul>""" ]
+```
+
+
+## After fix
+
+```elm
+import Html exposing (Html)
+import Html.Attributes as Attr
+
+navbarView : Html msg
+navbarView =
+    nav 
+        []
+        [ Html.ul
+            [ Attr.class "flex"
+            ]
+            [ Html.li []
+                [ Html.a
+                    [ Attr.href "/"
+                    ]
+                    [ Html.text "Home" ]
+                ]
+            ]
+        ]
+```
+
+
+
 ## Before fix
 
 The fix runs on top-level values with an Html type annotation. It turns the HTML within the String
