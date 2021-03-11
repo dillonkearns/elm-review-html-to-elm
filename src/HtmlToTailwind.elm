@@ -3,6 +3,7 @@ module HtmlToTailwind exposing (htmlToElmTailwindModules)
 import Config exposing (Config)
 import Dict exposing (Dict)
 import Dict.Extra
+import FormattedElm exposing (indentation, indentedThingy)
 import Html.Parser
 import ImplementedFunctions
 import Regex
@@ -125,33 +126,6 @@ nodeToElm config indentLevel context node =
 
         Html.Parser.Comment string ->
             Just <| ( NoSeparator, indentation indentLevel ++ "{-" ++ string ++ "-}\n" ++ indentation indentLevel )
-
-
-indentedThingy : Int -> (a -> String) -> List a -> String
-indentedThingy indentLevel function list =
-    if List.isEmpty list then
-        " []\n"
-
-    else
-        (list
-            |> List.indexedMap
-                (\index element ->
-                    if index == 0 then
-                        "\n" ++ indentation indentLevel ++ "[ " ++ function element
-
-                    else
-                        "\n" ++ indentation indentLevel ++ ", " ++ function element
-                )
-            |> String.join ""
-        )
-            ++ "\n"
-            ++ indentation indentLevel
-            ++ "]\n"
-
-
-indentation : Int -> String
-indentation level =
-    String.repeat (level * 4) " "
 
 
 isSvgContext : List ( String, String ) -> Bool
