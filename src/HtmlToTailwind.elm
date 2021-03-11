@@ -85,7 +85,7 @@ nodeToElm config indentLevel context node =
 
                 isSvg : Bool
                 isSvg =
-                    isSvgContext attributes
+                    elementName == "svg" || isSvgContext attributes
 
                 newContext : Context
                 newContext =
