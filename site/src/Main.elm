@@ -767,7 +767,6 @@ footerView =
             , Tw.flex
             , Tw.justify_around
             ]
-        , attribute "aria-labelledby" "footerHeading"
         ]
         [ div
             [ css
