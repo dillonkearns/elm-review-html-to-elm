@@ -9,6 +9,7 @@ module ImplementedFunctions exposing
     , lookup
     , lookupWithDict
     , pseudoClasses
+    , svgAttributeMap
     , svgAttributes
     , svgTags
     , toCamelCase
@@ -336,6 +337,22 @@ htmlAttributes =
     , "property"
     , "attribute"
     ]
+
+
+svgAttributeMap : Dict String String
+svgAttributeMap =
+    Dict.fromList
+        [ ( "xlink:actuate", "xlinkActuate" )
+        , ( "xlink:arcrole", "xlinkArcrole" )
+        , ( "xlink:href", "xlinkHref" )
+        , ( "xlink:role", "xlinkRole" )
+        , ( "xlink:show", "xlinkShow" )
+        , ( "xlink:title", "xlinkTitle" )
+        , ( "xlink:type", "xlinkType" )
+        , ( "xml:base", "xmlBase" )
+        , ( "xml:lang", "xmlLang" )
+        , ( "xml:space", "xmlSpace" )
+        ]
 
 
 svgAttributes : List String

@@ -142,9 +142,17 @@ escapedString string =
         |> String.replace "\n" "\\n"
 
 
+{-| Elm includes xmlns for svg's when you use the svg function, so we strip that off
+see also namespace prefixes <https://developer.mozilla.org/en-US/docs/Web/SVG/Namespaces_Crash_Course>
+-}
+isNamespaceAttribute : String -> Bool
+isNamespaceAttribute name =
+    name == "xmlns" || (name |> String.startsWith "xmlns:")
+
+
 attributeToElm : Config -> Int -> Context -> Html.Parser.Attribute -> List String
 attributeToElm config indentLevel context ( name, value ) =
-    if name == "xmlns" then
+    if isNamespaceAttribute name then
         []
 
     else if name == "class" && config.useTailwindModules then
@@ -193,7 +201,7 @@ attributeToElm config indentLevel context ( name, value ) =
 
 svgAttr : Config -> ( String, String ) -> String
 svgAttr config ( name, value ) =
-    case ImplementedFunctions.lookup ImplementedFunctions.svgAttributes name of
+    case ImplementedFunctions.lookupWithDict ImplementedFunctions.svgAttributeMap ImplementedFunctions.svgAttributes name of
         Just functionName ->
             Config.svgAttr config (ImplementedFunctions.toCamelCase functionName) ++ " \"" ++ value ++ "\""
 
