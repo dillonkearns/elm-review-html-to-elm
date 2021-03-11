@@ -233,6 +233,7 @@ view model =
                         , Attr.spellcheck False
                         , Attr.autocomplete False
                         , Attr.name "input-html"
+                        , Attr.id "input-html"
                         , css
                             [ Tw.w_full
                             , Tw.flex_grow
