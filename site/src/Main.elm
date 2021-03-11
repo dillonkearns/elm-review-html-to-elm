@@ -469,6 +469,11 @@ example model { moduleName, placeholder, onInputAlias, onInputExposing } getter 
         [ css
             [ Tw.mb_4
             , Tw.flex
+            , Tw.flex_col
+            , Tw.flex_grow
+            , Bp.sm
+                [ Tw.flex_row
+                ]
             , Tw.items_center
             ]
         ]
@@ -515,6 +520,7 @@ settingsPanel model =
             , Tw.shadow_lg
             , Tw.p_4
             , Tw.bg_white
+            , Tw.flex_grow
             ]
         ]
         [ {--}
