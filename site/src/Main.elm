@@ -224,6 +224,7 @@ view model =
                             [ Tw.p_2
                             , Tw.font_bold
                             ]
+                        , Attr.for "input-html"
                         ]
                         [ text "Input HTML" ]
                     , textarea
@@ -231,6 +232,7 @@ view model =
                         , Attr.value model.htmlInput
                         , Attr.spellcheck False
                         , Attr.autocomplete False
+                        , Attr.name "input-html"
                         , css
                             [ Tw.w_full
                             , Tw.flex_grow
