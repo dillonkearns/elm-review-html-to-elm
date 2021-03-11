@@ -14,6 +14,7 @@ import Json.Decode
 import Json.Encode
 import Svg.Styled as Svg
 import Svg.Styled.Attributes as SvgAttr
+import SyntaxHighlight
 import Tailwind.Breakpoints as Bp
 import Tailwind.Utilities as Tw
 
@@ -188,14 +189,16 @@ view model =
         , main_
             [ css
                 [ Tw.flex
-                , Tw.h_full
+                , Tw.flex_row
+                , Tw.flex_grow
+                , Tw.overflow_hidden
                 ]
             ]
             [ div
                 [ css
-                    [ Tw.flex_1
-                    , Tw.flex
+                    [ Tw.flex
                     , Tw.flex_col
+                    , Tw.w_1over2
                     ]
                 ]
                 [ div
@@ -214,26 +217,34 @@ view model =
                     , Attr.spellcheck False
                     , Attr.autocomplete False
                     , css
-                        [ Tw.h_full
-                        , Tw.w_full
+                        [ Tw.w_full
+                        , Tw.flex_grow
                         ]
                     ]
                     []
                 ]
-            , textarea
+            , div
                 [ css
-                    [ Tw.font_mono
-
-                    --, Tw.w_full
-                    , Tw.flex_1
+                    [ Tw.w_1over2
+                    , Tw.flex_grow
                     ]
-                , Attr.id "generated-elm"
-                , Attr.readonly True
-                , model.htmlInput
-                    |> HtmlToTailwind.htmlToElmTailwindModules model.config
-                    |> Attr.value
                 ]
-                []
+                [ model.htmlInput
+                    |> HtmlToTailwind.htmlToElmTailwindModules model.config
+                    |> SyntaxHighlight.elm
+                    |> Result.map (SyntaxHighlight.toBlockHtml Nothing)
+                    |> Result.map Html.Styled.fromUnstyled
+                    |> Result.withDefault
+                        (pre
+                            []
+                            [ code []
+                                [ model.htmlInput
+                                    |> HtmlToTailwind.htmlToElmTailwindModules model.config
+                                    |> text
+                                ]
+                            ]
+                        )
+                ]
             ]
         , footerView
         ]
