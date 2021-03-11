@@ -2,7 +2,7 @@ module HtmlToElmTest exposing (all)
 
 import HtmlToElm
 import Review.Test
-import Test exposing (Test, describe, only, test)
+import Test exposing (Test, describe, test)
 
 
 all : Test
