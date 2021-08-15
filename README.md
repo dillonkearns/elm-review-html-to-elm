@@ -118,7 +118,7 @@ import Tailwind.Utilities as Tw
 
 navbarView : Html msg
 navbarView =
-    Debug.todo """<ul><li><a href="/">Home</a></li></ul>"""
+    Debug.todo """<ul class="flex"><li><a href="/">Home</a></li></ul>"""
 ```
 
 ## After fix with Tailwind import
