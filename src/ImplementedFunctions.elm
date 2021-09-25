@@ -352,6 +352,8 @@ svgAttributeMap =
         , ( "xml:base", "xmlBase" )
         , ( "xml:lang", "xmlLang" )
         , ( "xml:space", "xmlSpace" )
+        , ( "in", "in_" )
+        , ( "type", "type_" )
         ]
 
 
@@ -416,7 +418,6 @@ svgAttributes =
     , "horiz-origin-y"
     , "id"
     , "ideographic"
-    , "in"
     , "in2"
     , "intercept"
     , "k"
@@ -509,7 +510,6 @@ svgAttributes =
     , "title"
     , "to"
     , "transform"
-    , "type"
     , "u1"
     , "u2"
     , "underline-position"
