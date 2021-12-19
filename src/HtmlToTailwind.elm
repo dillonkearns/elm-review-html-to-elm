@@ -211,13 +211,12 @@ svgAttr config ( name, value ) =
 
 surroundWithSpaces : String -> String
 surroundWithSpaces string =
-    case String.uncons (String.reverse string) of
-        Nothing ->
+    case String.right 1 string of
+        "" ->
             string
 
-        Just ( lastChar, _ ) ->
-            if lastChar == ' ' then
-                " " ++ string
+        " " ->
+            " " ++ string
 
-            else
-                " " ++ string ++ " "
+        _ ->
+            " " ++ string ++ " "
