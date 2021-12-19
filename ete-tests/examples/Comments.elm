@@ -24,5 +24,5 @@ result =
             [ text "2" ]
         , span []
             [ text "3" ]
-         ]
+        ]
     

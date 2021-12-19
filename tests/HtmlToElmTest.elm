@@ -85,8 +85,8 @@ view =
                 [ Attr.href "/"
                 ]
                 [ text "Home" ]
-             ]
-         ]"""
+            ]
+        ]"""
         , testCase "documentation example without tailwind"
             """
 import Html exposing (text)
@@ -104,8 +104,8 @@ view =
                 [ Attr.href "/"
                 ]
                 [ text "Home" ]
-             ]
-         ]"""
+            ]
+        ]"""
         , describe "expression context"
             [ test "expression example" <|
                 \_ ->

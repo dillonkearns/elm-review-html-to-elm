@@ -57,7 +57,7 @@ result =
                 , Attr.cols 33
                 ]
                 [ text "It was a dark and stormy night..." ]
-             ]
+            ]
         ,         {- The second value will be selected initially -}
         select
             [ Attr.name "choice"
@@ -76,7 +76,7 @@ result =
                 [ Attr.value "third"
                 ]
                 [ text "Third Value" ]
-             ]
+            ]
         , img
             [ Attr.ismap True
             ]
@@ -91,7 +91,7 @@ result =
                 [ text "2" ]
             , li []
                 [ text "3" ]
-             ]
+            ]
         , div
             [ Attr.hidden True
             ]
@@ -114,7 +114,7 @@ result =
                 , Attr.src "/media/examples/friday.vtt"
                 ]
                 []
-             ]
+            ]
         , table []
             [ caption []
                 [ text "Alien football stars" ]
@@ -133,7 +133,7 @@ result =
                     [ Attr.scope "col"
                     ]
                     [ text "Za'taak" ]
-                 ]
+                ]
             , tr []
                 [ th
                     [ Attr.scope "row"
@@ -143,7 +143,7 @@ result =
                     [ text "7" ]
                 , td []
                     [ text "4,569" ]
-                 ]
+                ]
             , tr []
                 [ th
                     [ Attr.scope "row"
@@ -153,7 +153,7 @@ result =
                     [ text "7" ]
                 , td []
                     [ text "7,223" ]
-                 ]
+                ]
             , tr []
                 [ th
                     [ Attr.scope "row"
@@ -163,8 +163,8 @@ result =
                     [ text "9" ]
                 , td []
                     [ text "6,219" ]
-                 ]
-             ]
+                ]
+            ]
         , table []
             [ colgroup []
                 [ col
@@ -176,7 +176,7 @@ result =
                     [ Attr.style "background-color" "yellow"
                     ]
                     []
-                 ]
+                ]
             , tr []
                 [ th []
                     [ text "ISBN" ]
@@ -184,7 +184,7 @@ result =
                     [ text "Title" ]
                 , th []
                     [ text "Price" ]
-                 ]
+                ]
             , tr []
                 [ td []
                     [ text "3476896" ]
@@ -192,7 +192,7 @@ result =
                     [ text "My first HTML" ]
                 , td []
                     [ text "$53" ]
-                 ]
-             ]
-         ]
+                ]
+            ]
+        ]
     

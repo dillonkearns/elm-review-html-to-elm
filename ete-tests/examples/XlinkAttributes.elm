@@ -26,8 +26,8 @@ result =
                     , SvgAttr.y "25"
                     ]
                     [ text "MDN Web Docs" ]
-                 ]
-             ]
+                ]
+            ]
         ,         {-  Design tools sometimes generate svgs with xlink attributes. This is a real-world example.  -}
         Svg.svg
             [ SvgAttr.height "16"
@@ -54,8 +54,8 @@ result =
                         [ SvgAttr.xlinkHref "#a"
                         ]
                         []
-                     ]
-                 ]
+                    ]
+                ]
             , Svg.g
                 [ SvgAttr.fill "none"
                 , SvgAttr.fillRule "evenodd"
@@ -78,8 +78,8 @@ result =
                         [ SvgAttr.d "m8.75 12v-5h-1.5v5z"
                         ]
                         []
-                     ]
-                 ]
-             ]
-         ]
+                    ]
+                ]
+            ]
+        ]
     

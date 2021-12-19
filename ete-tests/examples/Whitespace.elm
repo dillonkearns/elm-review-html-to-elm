@@ -19,5 +19,5 @@ result =
             []
         , div []
             [ text "NO WHITESPACE" ]
-         ]
+        ]
     

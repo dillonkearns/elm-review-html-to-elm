@@ -43,7 +43,7 @@ result =
                     ]
                 ]
                 [ text "3" ]
-             ]
+            ]
         , div []
             [ div
                 [ css
@@ -72,7 +72,7 @@ result =
                     ]
                 ]
                 [ text "3" ]
-             ]
+            ]
         , div []
             [ div
                 [ css
@@ -101,7 +101,7 @@ result =
                     ]
                 ]
                 [ text "3" ]
-             ]
+            ]
         , div []
             [ div
                 [ css
@@ -130,6 +130,6 @@ result =
                     ]
                 ]
                 [ text "3" ]
-             ]
-         ]
+            ]
+        ]
     
