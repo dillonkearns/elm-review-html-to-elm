@@ -30,7 +30,7 @@ result =
                 , Attr.required True
                 ]
                 []
-             ]
+            ]
         , div []
             [ label
                 [ Attr.for "email"
@@ -43,13 +43,13 @@ result =
                 , Attr.required True
                 ]
                 []
-             ]
+            ]
         , div []
             [ input
                 [ Attr.type_ "submit"
                 , Attr.value "Subscribe!"
                 ]
                 []
-             ]
-         ]
+            ]
+        ]
     

@@ -23,5 +23,5 @@ result =
             [ attribute "data-responsive" "[{\n      \"breakpoint\": 1200,\n      \"settings\": {\n      \"slidesToShow\": 5\n      }\n      }]"
             ]
             []
-         ]
+        ]
     

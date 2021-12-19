@@ -49,8 +49,8 @@ result =
                         , SvgAttr.clipRule "evenodd"
                         ]
                         []
-                     ]
-                 ]
+                    ]
+                ]
             , div
                 [ css
                     [ Tw.ml_3
@@ -73,8 +73,8 @@ result =
                     ]
                     [ p []
                         [ text "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid pariatur, ipsum similique veniam quo totam eius aperiam dolorum." ]
-                     ]
-                 ]
-             ]
-         ]
+                    ]
+                ]
+            ]
+        ]
     

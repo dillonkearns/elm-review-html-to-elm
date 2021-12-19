@@ -133,8 +133,8 @@ result =
                             ]
                         ]
                         [ text "Yearly billing" ]
-                     ]
-                 ]
+                    ]
+                ]
             , div
                 [ css
                     [ Tw.mt_12
@@ -210,7 +210,7 @@ result =
                                     ]
                                 ]
                                 [ text "/mo" ]
-                             ]
+                            ]
                         , a
                             [ Attr.href "#"
                             , css
@@ -232,7 +232,7 @@ result =
                                 ]
                             ]
                             [ text "Buy Hobby" ]
-                         ]
+                        ]
                     , div
                         [ css
                             [ Tw.pt_6
@@ -280,7 +280,7 @@ result =
                                         , SvgAttr.clipRule "evenodd"
                                         ]
                                         []
-                                     ]
+                                    ]
                                 , span
                                     [ css
                                         [ Tw.text_sm
@@ -288,7 +288,7 @@ result =
                                         ]
                                     ]
                                     [ text "Potenti felis, in cras at at ligula nunc." ]
-                                 ]
+                                ]
                             , li
                                 [ css
                                     [ Tw.flex
@@ -313,7 +313,7 @@ result =
                                         , SvgAttr.clipRule "evenodd"
                                         ]
                                         []
-                                     ]
+                                    ]
                                 , span
                                     [ css
                                         [ Tw.text_sm
@@ -321,10 +321,10 @@ result =
                                         ]
                                     ]
                                     [ text "Orci neque eget pellentesque." ]
-                                 ]
-                             ]
-                         ]
-                     ]
+                                ]
+                            ]
+                        ]
+                    ]
                 , div
                     [ css
                         [ Tw.border
@@ -378,7 +378,7 @@ result =
                                     ]
                                 ]
                                 [ text "/mo" ]
-                             ]
+                            ]
                         , a
                             [ Attr.href "#"
                             , css
@@ -400,7 +400,7 @@ result =
                                 ]
                             ]
                             [ text "Buy Freelancer" ]
-                         ]
+                        ]
                     , div
                         [ css
                             [ Tw.pt_6
@@ -448,7 +448,7 @@ result =
                                         , SvgAttr.clipRule "evenodd"
                                         ]
                                         []
-                                     ]
+                                    ]
                                 , span
                                     [ css
                                         [ Tw.text_sm
@@ -456,7 +456,7 @@ result =
                                         ]
                                     ]
                                     [ text "Potenti felis, in cras at at ligula nunc." ]
-                                 ]
+                                ]
                             , li
                                 [ css
                                     [ Tw.flex
@@ -481,7 +481,7 @@ result =
                                         , SvgAttr.clipRule "evenodd"
                                         ]
                                         []
-                                     ]
+                                    ]
                                 , span
                                     [ css
                                         [ Tw.text_sm
@@ -489,7 +489,7 @@ result =
                                         ]
                                     ]
                                     [ text "Orci neque eget pellentesque." ]
-                                 ]
+                                ]
                             , li
                                 [ css
                                     [ Tw.flex
@@ -514,7 +514,7 @@ result =
                                         , SvgAttr.clipRule "evenodd"
                                         ]
                                         []
-                                     ]
+                                    ]
                                 , span
                                     [ css
                                         [ Tw.text_sm
@@ -522,10 +522,10 @@ result =
                                         ]
                                     ]
                                     [ text "Donec mauris sit in eu tincidunt etiam." ]
-                                 ]
-                             ]
-                         ]
-                     ]
+                                ]
+                            ]
+                        ]
+                    ]
                 , div
                     [ css
                         [ Tw.border
@@ -579,7 +579,7 @@ result =
                                     ]
                                 ]
                                 [ text "/mo" ]
-                             ]
+                            ]
                         , a
                             [ Attr.href "#"
                             , css
@@ -601,7 +601,7 @@ result =
                                 ]
                             ]
                             [ text "Buy Startup" ]
-                         ]
+                        ]
                     , div
                         [ css
                             [ Tw.pt_6
@@ -649,7 +649,7 @@ result =
                                         , SvgAttr.clipRule "evenodd"
                                         ]
                                         []
-                                     ]
+                                    ]
                                 , span
                                     [ css
                                         [ Tw.text_sm
@@ -657,7 +657,7 @@ result =
                                         ]
                                     ]
                                     [ text "Potenti felis, in cras at at ligula nunc." ]
-                                 ]
+                                ]
                             , li
                                 [ css
                                     [ Tw.flex
@@ -682,7 +682,7 @@ result =
                                         , SvgAttr.clipRule "evenodd"
                                         ]
                                         []
-                                     ]
+                                    ]
                                 , span
                                     [ css
                                         [ Tw.text_sm
@@ -690,7 +690,7 @@ result =
                                         ]
                                     ]
                                     [ text "Orci neque eget pellentesque." ]
-                                 ]
+                                ]
                             , li
                                 [ css
                                     [ Tw.flex
@@ -715,7 +715,7 @@ result =
                                         , SvgAttr.clipRule "evenodd"
                                         ]
                                         []
-                                     ]
+                                    ]
                                 , span
                                     [ css
                                         [ Tw.text_sm
@@ -723,7 +723,7 @@ result =
                                         ]
                                     ]
                                     [ text "Donec mauris sit in eu tincidunt etiam." ]
-                                 ]
+                                ]
                             , li
                                 [ css
                                     [ Tw.flex
@@ -748,7 +748,7 @@ result =
                                         , SvgAttr.clipRule "evenodd"
                                         ]
                                         []
-                                     ]
+                                    ]
                                 , span
                                     [ css
                                         [ Tw.text_sm
@@ -756,10 +756,10 @@ result =
                                         ]
                                     ]
                                     [ text "Faucibus volutpat magna." ]
-                                 ]
-                             ]
-                         ]
-                     ]
+                                ]
+                            ]
+                        ]
+                    ]
                 , div
                     [ css
                         [ Tw.border
@@ -813,7 +813,7 @@ result =
                                     ]
                                 ]
                                 [ text "/mo" ]
-                             ]
+                            ]
                         , a
                             [ Attr.href "#"
                             , css
@@ -835,7 +835,7 @@ result =
                                 ]
                             ]
                             [ text "Buy Enterprise" ]
-                         ]
+                        ]
                     , div
                         [ css
                             [ Tw.pt_6
@@ -883,7 +883,7 @@ result =
                                         , SvgAttr.clipRule "evenodd"
                                         ]
                                         []
-                                     ]
+                                    ]
                                 , span
                                     [ css
                                         [ Tw.text_sm
@@ -891,7 +891,7 @@ result =
                                         ]
                                     ]
                                     [ text "Potenti felis, in cras at at ligula nunc." ]
-                                 ]
+                                ]
                             , li
                                 [ css
                                     [ Tw.flex
@@ -916,7 +916,7 @@ result =
                                         , SvgAttr.clipRule "evenodd"
                                         ]
                                         []
-                                     ]
+                                    ]
                                 , span
                                     [ css
                                         [ Tw.text_sm
@@ -924,7 +924,7 @@ result =
                                         ]
                                     ]
                                     [ text "Orci neque eget pellentesque." ]
-                                 ]
+                                ]
                             , li
                                 [ css
                                     [ Tw.flex
@@ -949,7 +949,7 @@ result =
                                         , SvgAttr.clipRule "evenodd"
                                         ]
                                         []
-                                     ]
+                                    ]
                                 , span
                                     [ css
                                         [ Tw.text_sm
@@ -957,7 +957,7 @@ result =
                                         ]
                                     ]
                                     [ text "Donec mauris sit in eu tincidunt etiam." ]
-                                 ]
+                                ]
                             , li
                                 [ css
                                     [ Tw.flex
@@ -982,7 +982,7 @@ result =
                                         , SvgAttr.clipRule "evenodd"
                                         ]
                                         []
-                                     ]
+                                    ]
                                 , span
                                     [ css
                                         [ Tw.text_sm
@@ -990,7 +990,7 @@ result =
                                         ]
                                     ]
                                     [ text "Faucibus volutpat magna." ]
-                                 ]
+                                ]
                             , li
                                 [ css
                                     [ Tw.flex
@@ -1015,7 +1015,7 @@ result =
                                         , SvgAttr.clipRule "evenodd"
                                         ]
                                         []
-                                     ]
+                                    ]
                                 , span
                                     [ css
                                         [ Tw.text_sm
@@ -1023,7 +1023,7 @@ result =
                                         ]
                                     ]
                                     [ text "Id sed tellus in varius quisque." ]
-                                 ]
+                                ]
                             , li
                                 [ css
                                     [ Tw.flex
@@ -1048,7 +1048,7 @@ result =
                                         , SvgAttr.clipRule "evenodd"
                                         ]
                                         []
-                                     ]
+                                    ]
                                 , span
                                     [ css
                                         [ Tw.text_sm
@@ -1056,7 +1056,7 @@ result =
                                         ]
                                     ]
                                     [ text "Risus egestas faucibus." ]
-                                 ]
+                                ]
                             , li
                                 [ css
                                     [ Tw.flex
@@ -1081,7 +1081,7 @@ result =
                                         , SvgAttr.clipRule "evenodd"
                                         ]
                                         []
-                                     ]
+                                    ]
                                 , span
                                     [ css
                                         [ Tw.text_sm
@@ -1089,11 +1089,11 @@ result =
                                         ]
                                     ]
                                     [ text "Risus cursus ullamcorper." ]
-                                 ]
-                             ]
-                         ]
-                     ]
-                 ]
-             ]
-         ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
     
