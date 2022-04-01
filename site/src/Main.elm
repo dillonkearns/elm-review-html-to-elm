@@ -275,13 +275,44 @@ view model =
                     , Tw.flex_col
                     ]
                 ]
-                [ label
+                [ div
                     [ css
-                        [ Tw.p_2
-                        , Tw.font_bold
+                        [ Tw.flex
+                        , Tw.flex_row
                         ]
                     ]
-                    [ text "Output Elm" ]
+                    [ label
+                        [ css
+                            [ Tw.p_2
+                            , Tw.font_bold
+                            ]
+                        ]
+                        [ text "Output Elm" ]
+                    , button
+                        [ Events.onClick CopyGeneratedCode
+                        , css
+                            [ Tw.flex
+                            , Tw.space_x_2
+                            , Tw.items_center
+                            , Tw.px_3
+                            , Tw.my_1
+                            , Tw.rounded_md
+                            , Tw.text_sm
+                            , Tw.font_medium
+                            , Tw.bg_gray_700
+                            , Tw.text_gray_300
+                            , Css.hover
+                                [ Tw.text_white
+                                , Tw.bg_gray_500
+                                ]
+                            ]
+                        ]
+                        [ div
+                            []
+                            [ text "Copy" ]
+                        , copyIcon
+                        ]
+                    ]
                 , model.htmlInput
                     |> HtmlToTailwind.htmlToElmTailwindModules model.config
                     |> SyntaxHighlight.elm
@@ -429,29 +460,6 @@ navbar model =
                             []
                             [ text "Settings" ]
                         , settingsIcon
-                        ]
-                    , button
-                        [ Events.onClick CopyGeneratedCode
-                        , css
-                            [ Tw.flex
-                            , Tw.space_x_2
-                            , Tw.items_center
-                            , Tw.text_gray_300
-                            , Tw.px_3
-                            , Tw.py_2
-                            , Tw.rounded_md
-                            , Tw.text_sm
-                            , Tw.font_medium
-                            , Css.hover
-                                [ Tw.bg_gray_700
-                                , Tw.text_white
-                                ]
-                            ]
-                        ]
-                        [ div
-                            []
-                            [ text "Copy" ]
-                        , copyIcon
                         ]
                     ]
                 ]
