@@ -63,7 +63,7 @@ result =
                         , Tw.text_yellow_800
                         ]
                     ]
-                    [ text "Attention needed" ]
+                    [ text " Attention needed " ]
                 , div
                     [ css
                         [ Tw.mt_2
@@ -72,7 +72,7 @@ result =
                         ]
                     ]
                     [ p []
-                        [ text "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid pariatur, ipsum similique veniam quo totam eius aperiam dolorum." ]
+                        [ text " Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid pariatur, ipsum similique veniam quo totam eius aperiam dolorum. " ]
                     ]
                 ]
             ]

@@ -24,6 +24,6 @@ result =
         , div []
             []
         , div []
-            [ text "NO WHITESPACE" ]
+            [ text " NO EXTRA WHITESPACE " ]
         ]
     

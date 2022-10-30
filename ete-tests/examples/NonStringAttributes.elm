@@ -56,7 +56,7 @@ result =
                 , Attr.rows 5
                 , Attr.cols 33
                 ]
-                [ text "It was a dark and stormy night..." ]
+                [ text " It was a dark and stormy night... " ]
             ]
         ,         {- The second value will be selected initially -}
         select
