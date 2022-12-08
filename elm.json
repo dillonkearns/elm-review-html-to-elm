@@ -3,7 +3,7 @@
     "name": "dillonkearns/elm-review-html-to-elm",
     "summary": "Generate Elm code from HTML strings using an elm-review fix.",
     "license": "BSD-3-Clause",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "exposed-modules": [
         "HtmlToElm"
     ],
