@@ -49,12 +49,25 @@ nodeToElm config indentLevel context node =
             let
                 trimmed : String
                 trimmed =
-                    String.trim textBody
+                    textBody
                         |> Regex.replace
-                            (Regex.fromString "\\s+"
+                            (Regex.fromStringWith
+                                { caseInsensitive = True
+                                , multiline = True
+                                }
+                                "\\s+"
                                 |> Maybe.withDefault Regex.never
                             )
                             (\_ -> " ")
+                        |> Regex.replace
+                            (Regex.fromStringWith
+                                { caseInsensitive = True
+                                , multiline = True
+                                }
+                                "^\\s*$"
+                                |> Maybe.withDefault Regex.never
+                            )
+                            (\_ -> "")
             in
             if String.isEmpty trimmed then
                 Nothing

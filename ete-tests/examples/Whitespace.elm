@@ -15,9 +15,15 @@ main =
 
 result =
     main_ []
-        [ div []
+        [ p []
+            [ text "This should preserve the trailing space ", strong []
+                [ text "because leading and trailing whitespace" ]
+            , text " is ", strong []
+                [ text "significant" ]
+            , text "." ]
+        , div []
             []
         , div []
-            [ text "NO WHITESPACE" ]
+            [ text " NO EXTRA WHITESPACE " ]
         ]
     

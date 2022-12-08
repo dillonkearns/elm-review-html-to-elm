@@ -455,7 +455,7 @@ result =
                                         , Tw.text_gray_500
                                         ]
                                     ]
-                                    [ text "Potenti felis, in cras at at ligula nunc." ]
+                                    [ text "Potenti felis, in cras at at ligula nunc. " ]
                                 ]
                             , li
                                 [ css
@@ -656,7 +656,7 @@ result =
                                         , Tw.text_gray_500
                                         ]
                                     ]
-                                    [ text "Potenti felis, in cras at at ligula nunc." ]
+                                    [ text "Potenti felis, in cras at at ligula nunc. " ]
                                 ]
                             , li
                                 [ css
@@ -890,7 +890,7 @@ result =
                                         , Tw.text_gray_500
                                         ]
                                     ]
-                                    [ text "Potenti felis, in cras at at ligula nunc." ]
+                                    [ text "Potenti felis, in cras at at ligula nunc. " ]
                                 ]
                             , li
                                 [ css

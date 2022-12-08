@@ -22,7 +22,7 @@ result =
             [ label
                 [ Attr.for "name"
                 ]
-                [ text "Enter your name:" ]
+                [ text "Enter your name: " ]
             , input
                 [ Attr.type_ "text"
                 , Attr.name "name"
@@ -35,7 +35,7 @@ result =
             [ label
                 [ Attr.for "email"
                 ]
-                [ text "Enter your email:" ]
+                [ text "Enter your email: " ]
             , input
                 [ Attr.type_ "email"
                 , Attr.name "email"
