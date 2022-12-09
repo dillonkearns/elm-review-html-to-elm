@@ -2,7 +2,7 @@
   "name": "elm-review-html-to-elm",
   "scripts": {
     "test": "npm-run-all --print-name --silent --sequential test:*",
-    "test:ete": "mocha ete-tests/mocha-test.js --timeout 5000",
+    "test:ete": "mocha ete-tests/mocha-test.js --timeout 10000",
     "test:make": "elm make --docs=docs.json",
     "test:format": "elm-format src/ tests/ --validate",
     "test:run": "elm-test",
