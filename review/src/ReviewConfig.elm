@@ -56,5 +56,5 @@ config =
             (\rule ->
                 rule
                     |> Rule.ignoreErrorsForDirectories [ "vendor/", "src/Html/" ]
-                    |> Rule.ignoreErrorsForFiles [ "src/Config.elm", "src/QualifiedType.elm" ]
+                    |> Rule.ignoreErrorsForFiles [ "src/ConfigHelpers.elm", "src/QualifiedType.elm" ]
             )

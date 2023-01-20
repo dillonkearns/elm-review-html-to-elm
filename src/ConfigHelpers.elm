@@ -1,7 +1,5 @@
-module Config exposing
-    ( Config
-    , Exposing(..)
-    , bp
+module ConfigHelpers exposing
+    ( bp
     , codec
     , default
     , getExposingString
@@ -27,17 +25,7 @@ module Config exposing
     )
 
 import Codec exposing (Codec)
-
-
-type alias Config =
-    { html : ( String, Exposing )
-    , htmlAttr : ( String, Exposing )
-    , svg : ( String, Exposing )
-    , svgAttr : ( String, Exposing )
-    , tw : ( String, Exposing )
-    , bp : ( String, Exposing )
-    , useTailwindModules : Bool
-    }
+import HtmlToElm.Config exposing (Config, Exposing(..))
 
 
 importCodec : Codec ( String, Exposing )
@@ -152,7 +140,7 @@ updateAlias defaultAlias newAlias ( importAlias, importExposing ) =
 
 
 updateExposing : Exposing -> String -> ( String, Exposing ) -> ( String, Exposing )
-updateExposing defaultExposing newExposing ( importAlias, importExposing ) =
+updateExposing _ newExposing ( importAlias, _ ) =
     ( importAlias
     , parseExposing newExposing
     )
@@ -200,12 +188,6 @@ testConfig =
 toggleUseTailwindClasses : Config -> Config
 toggleUseTailwindClasses config =
     { config | useTailwindModules = not config.useTailwindModules }
-
-
-type Exposing
-    = All
-    | None
-    | Some (List String)
 
 
 getter : (Config -> ( String, Exposing )) -> Config -> String -> String

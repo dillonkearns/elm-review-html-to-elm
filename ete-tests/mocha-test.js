@@ -20,7 +20,7 @@ async function runElm(htmlInput, name) {
       `Run${name}.elm`,
       `port module Run${name} exposing (main)
 
-import Config
+import ConfigHelpers as Config
 import HtmlToTailwind exposing (htmlToElmTailwindModules)
 
 htmlInputString : String

@@ -2,16 +2,16 @@ port module Main exposing (main)
 
 import Browser
 import Codec
-import Config exposing (Config)
+import ConfigHelpers as Config
 import Css
 import Css.Global
 import Html
 import Html.Styled exposing (..)
 import Html.Styled.Attributes as Attr exposing (attribute, css)
 import Html.Styled.Events as Events
+import HtmlToElm.Config exposing (Config)
 import HtmlToTailwind
 import Json.Decode
-import Json.Encode
 import Svg.Styled as Svg
 import Svg.Styled.Attributes as SvgAttr
 import SyntaxHighlight
@@ -470,7 +470,7 @@ navbar model =
 example :
     Model
     -> { moduleName : String, placeholder : String, onInputAlias : String -> Msg, onInputExposing : String -> Msg }
-    -> (Config -> ( String, Config.Exposing ))
+    -> (Config -> ( String, HtmlToElm.Config.Exposing ))
     -> Html Msg
 example model { moduleName, placeholder, onInputAlias, onInputExposing } getter =
     div

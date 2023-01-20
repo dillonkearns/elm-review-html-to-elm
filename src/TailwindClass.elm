@@ -1,10 +1,11 @@
 module TailwindClass exposing (classAttributeToElm)
 
-import Config exposing (Config)
+import ConfigHelpers as Config
 import Context exposing (Context(..))
 import Dict exposing (Dict)
 import Dict.Extra
 import FormattedElm exposing (indentedThingy)
+import HtmlToElm.Config exposing (Config)
 import ImplementedFunctions
 import Regex
 

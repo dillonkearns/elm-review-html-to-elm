@@ -1,9 +1,10 @@
 module HtmlToTailwind exposing (htmlToElmTailwindModules)
 
-import Config exposing (Config)
+import ConfigHelpers as Config
 import Context exposing (Context(..))
 import FormattedElm exposing (indentation, indentedThingy)
 import Html.Parser
+import HtmlToElm.Config exposing (Config)
 import ImplementedFunctions
 import Regex
 import TailwindClass

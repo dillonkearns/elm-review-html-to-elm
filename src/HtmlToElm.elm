@@ -1,14 +1,24 @@
-module HtmlToElm exposing (rule)
+module HtmlToElm exposing
+    ( rule
+    , htmlToElm
+    )
 
 {-|
 
+
+## Running Through elm-review
+
 @docs rule
+
+
+## Running Directly From Elm
+
+@docs htmlToElm
 
 -}
 
 import AssocList as Dict exposing (Dict)
 import AssocSet as Set exposing (Set)
-import Config
 import Elm.Pretty
 import Elm.Project
 import Elm.Syntax.Declaration as Declaration exposing (Declaration)
@@ -23,6 +33,7 @@ import Elm.Syntax.Range exposing (Range)
 import Elm.Syntax.Signature exposing (Signature)
 import Elm.Syntax.Type
 import Elm.Syntax.TypeAnnotation as TypeAnnotation exposing (TypeAnnotation)
+import HtmlToElm.Config as Config
 import HtmlToTailwind
 import Pretty
 import QualifiedType exposing (QualifiedType, TypeAnnotation_(..), TypeOrTypeAlias(..), Type_)
@@ -699,6 +710,9 @@ generateHtmlTodoDefinition htmlTodo =
         ++ htmlToElm htmlTodo.config htmlTodo.todoText
 
 
+{-| If you're using this through `elm-review`, you won't need this function. This is a lower-level function to convert
+an HTML String into an Elm String.
+-}
 htmlToElm : Config.Config -> String -> String
 htmlToElm config htmlString =
     HtmlToTailwind.htmlToElmTailwindModules config htmlString
