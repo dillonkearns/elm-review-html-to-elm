@@ -3,7 +3,9 @@ module HtmlToElm.Config exposing
     , default
     )
 
-{-|
+{-| If you're running this through the `elm-review` Rule, you won't need this Config. It infers the config from
+the context of the file it applies the fix to for the `elm-review` Rule. If you are running the more low-level helper
+[`HtmlToElm.htmlToElm`](HtmlToElm.htmlToElm) directly then you will need to pass it a config.
 
 @docs Config, Exposing
 
