@@ -8,6 +8,7 @@ module ConfigHelpers exposing
     , svgAttr
     , svgTag
     , testConfig
+    , theme
     , toggleUseTailwindClasses
     , tw
     , updateBpAlias
@@ -20,6 +21,8 @@ module ConfigHelpers exposing
     , updateSvgAttrAlias
     , updateSvgAttrExposing
     , updateSvgExposing
+    , updateThemeAlias
+    , updateThemeExposing
     , updateTwAlias
     , updateTwExposing
     )
@@ -45,6 +48,7 @@ codec =
         |> Codec.field "svgAttr" .svgAttr importCodec
         |> Codec.field "tw" .tw importCodec
         |> Codec.field "bp" .bp importCodec
+        |> Codec.field "theme" .theme importCodec
         |> Codec.field "useTailwindModules" .useTailwindModules Codec.bool
         |> Codec.buildObject
 
@@ -98,6 +102,11 @@ updateBpAlias config newAlias =
     { config | bp = config.bp |> updateAlias "Bp" newAlias }
 
 
+updateThemeAlias : Config -> String -> Config
+updateThemeAlias config newAlias =
+    { config | theme = config.theme |> updateAlias "Theme" newAlias }
+
+
 updateHtmlExposing : Config -> String -> Config
 updateHtmlExposing config newExposing =
     { config | html = config.html |> updateExposing All newExposing }
@@ -126,6 +135,11 @@ updateTwExposing config newExposing =
 updateBpExposing : Config -> String -> Config
 updateBpExposing config newExposing =
     { config | bp = config.bp |> updateExposing None newExposing }
+
+
+updateThemeExposing : Config -> String -> Config
+updateThemeExposing config newExposing =
+    { config | theme = config.theme |> updateExposing None newExposing }
 
 
 updateAlias : String -> String -> ( String, Exposing ) -> ( String, Exposing )
@@ -169,6 +183,7 @@ default =
     , svgAttr = ( "SvgAttr", None )
     , tw = ( "Tw", None )
     , bp = ( "Bp", None )
+    , theme = ( "Theme", None )
     , useTailwindModules = False
     }
 
@@ -181,6 +196,7 @@ testConfig =
     , svgAttr = ( "SvgAttr", None )
     , tw = ( "Tw", None )
     , bp = ( "Bp", None )
+    , theme = ( "Theme", None )
     , useTailwindModules = True
     }
 
@@ -227,6 +243,11 @@ bp =
 tw : Config -> String -> String
 tw =
     getter .tw
+
+
+theme : Config -> String -> String
+theme =
+    getter .theme
 
 
 isExposed : String -> Exposing -> Bool

@@ -58,6 +58,8 @@ type Msg
     | SetSvgAttrAlias String
     | SetTwAlias String
     | SetBpAlias String
+    | SetThemeAlias String
+    | SetThemeExposing String
     | SetHtmlExposing String
     | SetHtmlAttrExposing String
     | SetSvgExposing String
@@ -122,6 +124,18 @@ update msg model =
         SetHtmlExposing string ->
             { model
                 | config = Config.updateHtmlExposing model.config string
+            }
+                |> noCmd
+
+        SetThemeAlias string ->
+            { model
+                | config = Config.updateThemeAlias model.config string
+            }
+                |> noCmd
+
+        SetThemeExposing string ->
+            { model
+                | config = Config.updateThemeExposing model.config string
             }
                 |> noCmd
 
@@ -555,6 +569,13 @@ settingsPanel model =
             example model
                 { moduleName = "Tailwind.Breakpoints", placeholder = "Bp", onInputAlias = SetBpAlias, onInputExposing = SetBpExposing }
                 .bp
+
+          else
+            text ""
+        , if model.config.useTailwindModules then
+            example model
+                { moduleName = "Tailwind.Theme", placeholder = "Theme", onInputAlias = SetThemeAlias, onInputExposing = SetThemeExposing }
+                .theme
 
           else
             text ""

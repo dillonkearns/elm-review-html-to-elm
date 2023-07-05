@@ -22,6 +22,7 @@ type alias Config =
     , svgAttr : ( String, Exposing )
     , tw : ( String, Exposing )
     , bp : ( String, Exposing )
+    , theme : ( String, Exposing )
     , useTailwindModules : Bool
     }
 
@@ -42,5 +43,6 @@ default =
     , svgAttr = ( "SvgAttr", None )
     , tw = ( "Tw", None )
     , bp = ( "Bp", None )
+    , theme = ( "Theme", None )
     , useTailwindModules = False
     }

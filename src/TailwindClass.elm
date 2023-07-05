@@ -95,13 +95,13 @@ classAttributeToElm config context indentLevel value =
 
 toTwClass : Config -> String -> String
 toTwClass config twClass =
-    Config.tw config (twClassToElmName twClass)
+    Config.tw config (twClassToElmName config twClass)
 
 
 {-| Mimics the rules in <https://github.com/matheus23/elm-tailwind-modules/blob/cd5809505934ff72c9b54fd1e181f67b53af8186/src/helpers.ts#L24-L59>
 -}
-twClassToElmName : String -> String
-twClassToElmName twClass =
+twClassToElmName : Config -> String -> String
+twClassToElmName config twClass =
     twClass
         |> Regex.replace (Regex.fromString "^-([a-z])" |> Maybe.withDefault Regex.never)
             (\match ->
@@ -111,8 +111,33 @@ twClassToElmName twClass =
             (\_ ->
                 "_dot_"
             )
+        |> replaceColorNamesWithFunctions config
         |> String.replace "/" "over"
         |> String.replace "-" "_"
+
+
+{-| Examples: replaces bg-red-100 with Tw.bg\_color Tw.red-100 and bg-transparent with Tw.bg\_color Tw.transparent
+-}
+replaceColorNamesWithFunctions : Config -> String -> String
+replaceColorNamesWithFunctions config input =
+    Regex.replace
+        (Regex.fromString "(\\w+)\\W(\\w+\\W\\d{2,3}|black|current|inherit|transparent|white)" |> Maybe.withDefault Regex.never)
+        (\match ->
+            (match.submatches
+                |> List.head
+                |> Maybe.andThen identity
+                |> Maybe.withDefault ""
+            )
+                ++ "_color "
+                ++ Config.theme config
+                    (match.submatches
+                        |> List.drop 1
+                        |> List.head
+                        |> Maybe.andThen identity
+                        |> Maybe.withDefault ""
+                    )
+        )
+        input
 
 
 breakpointName : Config -> String -> String

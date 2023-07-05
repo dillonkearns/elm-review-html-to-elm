@@ -66,6 +66,7 @@ import Svg.Styled as Svg exposing (path, svg)
 import Svg.Styled.Attributes as SvgAttr
 import Tailwind.Breakpoints as Bp
 import Tailwind.Utilities as Tw
+import Tailwind.Theme as Theme
 
 
 main =

@@ -7,6 +7,7 @@ import Svg.Styled as Svg exposing (path, svg)
 import Svg.Styled.Attributes as SvgAttr
 import Tailwind.Breakpoints as Bp
 import Tailwind.Utilities as Tw
+import Tailwind.Theme as Theme
 
 
 main =
@@ -18,7 +19,7 @@ result =
         div
         [ css
             [ Tw.rounded_md
-            , Tw.bg_yellow_50
+            , Tw.bg_color Theme.yellow_50
             , Tw.p_4
             ]
         ]
@@ -37,7 +38,7 @@ result =
                     [ SvgAttr.css
                         [ Tw.h_5
                         , Tw.w_5
-                        , Tw.text_yellow_400
+                        , Tw.text_color Theme.yellow_400
                         ]
                     , SvgAttr.viewBox "0 0 20 20"
                     , SvgAttr.fill "currentColor"
@@ -60,7 +61,7 @@ result =
                     [ css
                         [ Tw.text_sm
                         , Tw.font_medium
-                        , Tw.text_yellow_800
+                        , Tw.text_color Theme.yellow_800
                         ]
                     ]
                     [ text " Attention needed " ]
@@ -68,7 +69,7 @@ result =
                     [ css
                         [ Tw.mt_2
                         , Tw.text_sm
-                        , Tw.text_yellow_700
+                        , Tw.text_color Theme.yellow_700
                         ]
                     ]
                     [ p []
