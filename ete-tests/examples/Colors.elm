@@ -6,8 +6,8 @@ import Html.Styled.Attributes as Attr exposing (attribute, css)
 import Svg.Styled as Svg exposing (path, svg)
 import Svg.Styled.Attributes as SvgAttr
 import Tailwind.Breakpoints as Bp
-import Tailwind.Theme as Tw
 import Tailwind.Utilities as Tw
+import Tailwind.Theme as Theme
 
 
 main =
@@ -18,44 +18,45 @@ result =
     div []
         [ div
             [ css
-                [ Tw.bg_color Tw.gray_50
+                [ Tw.bg_color Theme.gray_50
                 ]
             ]
             []
         , div
             [ css
-                [ Tw.bg_color Tw.gray_100
+                [ Tw.bg_color Theme.gray_100
                 ]
             ]
             []
         , div
             [ css
-                [ Tw.bg_color Tw.transparent
+                [ Tw.bg_color Theme.transparent
                 ]
             ]
             []
         , div
             [ css
-                [ Tw.bg_color Tw.current
+                [ Tw.bg_color Theme.current
                 ]
             ]
             []
         , div
             [ css
-                [ Tw.bg_color Tw.black
+                [ Tw.bg_color Theme.black
                 ]
             ]
             []
         , div
             [ css
-                [ Tw.bg_color Tw.white
+                [ Tw.bg_color Theme.white
                 ]
             ]
             []
         , div
             [ css
-                [ Tw.bg_color Tw.inherit
+                [ Tw.bg_color Theme.inherit
                 ]
             ]
             []
         ]
+    

@@ -129,13 +129,13 @@ replaceColorNamesWithFunctions config input =
                 |> Maybe.withDefault ""
             )
                 ++ "_color "
-                ++ Config.tw config ""
-                ++ (match.submatches
+                ++ Config.theme config
+                    (match.submatches
                         |> List.drop 1
                         |> List.head
                         |> Maybe.andThen identity
                         |> Maybe.withDefault ""
-                   )
+                    )
         )
         input
 

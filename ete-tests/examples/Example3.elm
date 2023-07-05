@@ -7,7 +7,7 @@ import Svg.Styled as Svg exposing (path, svg)
 import Svg.Styled.Attributes as SvgAttr
 import Tailwind.Breakpoints as Bp
 import Tailwind.Utilities as Tw
-import Tailwind.Theme as Tw
+import Tailwind.Theme as Theme
 
 
 main =
@@ -18,7 +18,7 @@ result =
     {- This example requires Tailwind CSS v2.0+ -}
         div
         [ css
-            [ Tw.bg_color Tw.white
+            [ Tw.bg_color Theme.white
             ]
         ]
         [ div
@@ -48,7 +48,7 @@ result =
                     [ css
                         [ Tw.text_5xl
                         , Tw.font_extrabold
-                        , Tw.text_color Tw.gray_900
+                        , Tw.text_color Theme.gray_900
                         , Bp.sm
                             [ Tw.text_center
                             ]
@@ -59,7 +59,7 @@ result =
                     [ css
                         [ Tw.mt_5
                         , Tw.text_xl
-                        , Tw.text_color Tw.gray_500
+                        , Tw.text_color Theme.gray_500
                         , Bp.sm
                             [ Tw.text_center
                             ]
@@ -71,7 +71,7 @@ result =
                         [ Tw.relative
                         , Tw.self_center
                         , Tw.mt_6
-                        , Tw.bg_color Tw.gray_100
+                        , Tw.bg_color Theme.gray_100
                         , Tw.rounded_lg
                         , Tw.p_0_dot_5
                         , Tw.flex
@@ -85,19 +85,19 @@ result =
                         , css
                             [ Tw.relative
                             , Tw.w_1over2
-                            , Tw.bg_color Tw.white
-                            , Tw.border_color Tw.gray_200
+                            , Tw.bg_color Theme.white
+                            , Tw.border_color Theme.gray_200
                             , Tw.rounded_md
                             , Tw.shadow_sm
                             , Tw.py_2
                             , Tw.text_sm
                             , Tw.font_medium
-                            , Tw.text_color Tw.gray_700
+                            , Tw.text_color Theme.gray_700
                             , Tw.whitespace_nowrap
                             , Css.focus
                                 [ Tw.outline_none
                                 , Tw.ring_2
-                                , Tw.ring_color Tw.indigo_500
+                                , Tw.ring_color Theme.indigo_500
                                 , Tw.z_10
                                 ]
                             , Bp.sm
@@ -114,17 +114,17 @@ result =
                             , Tw.relative
                             , Tw.w_1over2
                             , Tw.border
-                            , Tw.border_color Tw.transparent
+                            , Tw.border_color Theme.transparent
                             , Tw.rounded_md
                             , Tw.py_2
                             , Tw.text_sm
                             , Tw.font_medium
-                            , Tw.text_color Tw.gray_700
+                            , Tw.text_color Theme.gray_700
                             , Tw.whitespace_nowrap
                             , Css.focus
                                 [ Tw.outline_none
                                 , Tw.ring_2
-                                , Tw.ring_color Tw.indigo_500
+                                , Tw.ring_color Theme.indigo_500
                                 , Tw.z_10
                                 ]
                             , Bp.sm
@@ -161,11 +161,11 @@ result =
                 [ div
                     [ css
                         [ Tw.border
-                        , Tw.border_color Tw.gray_200
+                        , Tw.border_color Theme.gray_200
                         , Tw.rounded_lg
                         , Tw.shadow_sm
                         , Tw.divide_y
-                        , Tw.divide_color Tw.gray_200
+                        , Tw.divide_color Theme.gray_200
                         ]
                     ]
                     [ div
@@ -178,7 +178,7 @@ result =
                                 [ Tw.text_lg
                                 , Tw.leading_6
                                 , Tw.font_medium
-                                , Tw.text_color Tw.gray_900
+                                , Tw.text_color Theme.gray_900
                                 ]
                             ]
                             [ text "Hobby" ]
@@ -186,7 +186,7 @@ result =
                             [ css
                                 [ Tw.mt_4
                                 , Tw.text_sm
-                                , Tw.text_color Tw.gray_500
+                                , Tw.text_color Theme.gray_500
                                 ]
                             ]
                             [ text "All the basics for starting a new business" ]
@@ -199,7 +199,7 @@ result =
                                 [ css
                                     [ Tw.text_4xl
                                     , Tw.font_extrabold
-                                    , Tw.text_color Tw.gray_900
+                                    , Tw.text_color Theme.gray_900
                                     ]
                                 ]
                                 [ text "$12" ]
@@ -207,7 +207,7 @@ result =
                                 [ css
                                     [ Tw.text_base
                                     , Tw.font_medium
-                                    , Tw.text_color Tw.gray_500
+                                    , Tw.text_color Theme.gray_500
                                     ]
                                 ]
                                 [ text "/mo" ]
@@ -218,17 +218,17 @@ result =
                                 [ Tw.mt_8
                                 , Tw.block
                                 , Tw.w_full
-                                , Tw.bg_color Tw.gray_800
+                                , Tw.bg_color Theme.gray_800
                                 , Tw.border
-                                , Tw.border_color Tw.gray_800
+                                , Tw.border_color Theme.gray_800
                                 , Tw.rounded_md
                                 , Tw.py_2
                                 , Tw.text_sm
                                 , Tw.font_semibold
-                                , Tw.text_color Tw.white
+                                , Tw.text_color Theme.white
                                 , Tw.text_center
                                 , Css.hover
-                                    [ Tw.bg_color Tw.gray_900
+                                    [ Tw.bg_color Theme.gray_900
                                     ]
                                 ]
                             ]
@@ -245,7 +245,7 @@ result =
                             [ css
                                 [ Tw.text_xs
                                 , Tw.font_medium
-                                , Tw.text_color Tw.gray_900
+                                , Tw.text_color Theme.gray_900
                                 , Tw.tracking_wide
                                 , Tw.uppercase
                                 ]
@@ -269,7 +269,7 @@ result =
                                         [ Tw.flex_shrink_0
                                         , Tw.h_5
                                         , Tw.w_5
-                                        , Tw.text_color Tw.green_500
+                                        , Tw.text_color Theme.green_500
                                         ]
                                     , SvgAttr.viewBox "0 0 20 20"
                                     , SvgAttr.fill "currentColor"
@@ -285,7 +285,7 @@ result =
                                 , span
                                     [ css
                                         [ Tw.text_sm
-                                        , Tw.text_color Tw.gray_500
+                                        , Tw.text_color Theme.gray_500
                                         ]
                                     ]
                                     [ text "Potenti felis, in cras at at ligula nunc." ]
@@ -302,7 +302,7 @@ result =
                                         [ Tw.flex_shrink_0
                                         , Tw.h_5
                                         , Tw.w_5
-                                        , Tw.text_color Tw.green_500
+                                        , Tw.text_color Theme.green_500
                                         ]
                                     , SvgAttr.viewBox "0 0 20 20"
                                     , SvgAttr.fill "currentColor"
@@ -318,7 +318,7 @@ result =
                                 , span
                                     [ css
                                         [ Tw.text_sm
-                                        , Tw.text_color Tw.gray_500
+                                        , Tw.text_color Theme.gray_500
                                         ]
                                     ]
                                     [ text "Orci neque eget pellentesque." ]
@@ -329,11 +329,11 @@ result =
                 , div
                     [ css
                         [ Tw.border
-                        , Tw.border_color Tw.gray_200
+                        , Tw.border_color Theme.gray_200
                         , Tw.rounded_lg
                         , Tw.shadow_sm
                         , Tw.divide_y
-                        , Tw.divide_color Tw.gray_200
+                        , Tw.divide_color Theme.gray_200
                         ]
                     ]
                     [ div
@@ -346,7 +346,7 @@ result =
                                 [ Tw.text_lg
                                 , Tw.leading_6
                                 , Tw.font_medium
-                                , Tw.text_color Tw.gray_900
+                                , Tw.text_color Theme.gray_900
                                 ]
                             ]
                             [ text "Freelancer" ]
@@ -354,7 +354,7 @@ result =
                             [ css
                                 [ Tw.mt_4
                                 , Tw.text_sm
-                                , Tw.text_color Tw.gray_500
+                                , Tw.text_color Theme.gray_500
                                 ]
                             ]
                             [ text "All the basics for starting a new business" ]
@@ -367,7 +367,7 @@ result =
                                 [ css
                                     [ Tw.text_4xl
                                     , Tw.font_extrabold
-                                    , Tw.text_color Tw.gray_900
+                                    , Tw.text_color Theme.gray_900
                                     ]
                                 ]
                                 [ text "$24" ]
@@ -375,7 +375,7 @@ result =
                                 [ css
                                     [ Tw.text_base
                                     , Tw.font_medium
-                                    , Tw.text_color Tw.gray_500
+                                    , Tw.text_color Theme.gray_500
                                     ]
                                 ]
                                 [ text "/mo" ]
@@ -386,17 +386,17 @@ result =
                                 [ Tw.mt_8
                                 , Tw.block
                                 , Tw.w_full
-                                , Tw.bg_color Tw.gray_800
+                                , Tw.bg_color Theme.gray_800
                                 , Tw.border
-                                , Tw.border_color Tw.gray_800
+                                , Tw.border_color Theme.gray_800
                                 , Tw.rounded_md
                                 , Tw.py_2
                                 , Tw.text_sm
                                 , Tw.font_semibold
-                                , Tw.text_color Tw.white
+                                , Tw.text_color Theme.white
                                 , Tw.text_center
                                 , Css.hover
-                                    [ Tw.bg_color Tw.gray_900
+                                    [ Tw.bg_color Theme.gray_900
                                     ]
                                 ]
                             ]
@@ -413,7 +413,7 @@ result =
                             [ css
                                 [ Tw.text_xs
                                 , Tw.font_medium
-                                , Tw.text_color Tw.gray_900
+                                , Tw.text_color Theme.gray_900
                                 , Tw.tracking_wide
                                 , Tw.uppercase
                                 ]
@@ -437,7 +437,7 @@ result =
                                         [ Tw.flex_shrink_0
                                         , Tw.h_5
                                         , Tw.w_5
-                                        , Tw.text_color Tw.green_500
+                                        , Tw.text_color Theme.green_500
                                         ]
                                     , SvgAttr.viewBox "0 0 20 20"
                                     , SvgAttr.fill "currentColor"
@@ -453,7 +453,7 @@ result =
                                 , span
                                     [ css
                                         [ Tw.text_sm
-                                        , Tw.text_color Tw.gray_500
+                                        , Tw.text_color Theme.gray_500
                                         ]
                                     ]
                                     [ text "Potenti felis, in cras at at ligula nunc. " ]
@@ -470,7 +470,7 @@ result =
                                         [ Tw.flex_shrink_0
                                         , Tw.h_5
                                         , Tw.w_5
-                                        , Tw.text_color Tw.green_500
+                                        , Tw.text_color Theme.green_500
                                         ]
                                     , SvgAttr.viewBox "0 0 20 20"
                                     , SvgAttr.fill "currentColor"
@@ -486,7 +486,7 @@ result =
                                 , span
                                     [ css
                                         [ Tw.text_sm
-                                        , Tw.text_color Tw.gray_500
+                                        , Tw.text_color Theme.gray_500
                                         ]
                                     ]
                                     [ text "Orci neque eget pellentesque." ]
@@ -503,7 +503,7 @@ result =
                                         [ Tw.flex_shrink_0
                                         , Tw.h_5
                                         , Tw.w_5
-                                        , Tw.text_color Tw.green_500
+                                        , Tw.text_color Theme.green_500
                                         ]
                                     , SvgAttr.viewBox "0 0 20 20"
                                     , SvgAttr.fill "currentColor"
@@ -519,7 +519,7 @@ result =
                                 , span
                                     [ css
                                         [ Tw.text_sm
-                                        , Tw.text_color Tw.gray_500
+                                        , Tw.text_color Theme.gray_500
                                         ]
                                     ]
                                     [ text "Donec mauris sit in eu tincidunt etiam." ]
@@ -530,11 +530,11 @@ result =
                 , div
                     [ css
                         [ Tw.border
-                        , Tw.border_color Tw.gray_200
+                        , Tw.border_color Theme.gray_200
                         , Tw.rounded_lg
                         , Tw.shadow_sm
                         , Tw.divide_y
-                        , Tw.divide_color Tw.gray_200
+                        , Tw.divide_color Theme.gray_200
                         ]
                     ]
                     [ div
@@ -547,7 +547,7 @@ result =
                                 [ Tw.text_lg
                                 , Tw.leading_6
                                 , Tw.font_medium
-                                , Tw.text_color Tw.gray_900
+                                , Tw.text_color Theme.gray_900
                                 ]
                             ]
                             [ text "Startup" ]
@@ -555,7 +555,7 @@ result =
                             [ css
                                 [ Tw.mt_4
                                 , Tw.text_sm
-                                , Tw.text_color Tw.gray_500
+                                , Tw.text_color Theme.gray_500
                                 ]
                             ]
                             [ text "All the basics for starting a new business" ]
@@ -568,7 +568,7 @@ result =
                                 [ css
                                     [ Tw.text_4xl
                                     , Tw.font_extrabold
-                                    , Tw.text_color Tw.gray_900
+                                    , Tw.text_color Theme.gray_900
                                     ]
                                 ]
                                 [ text "$32" ]
@@ -576,7 +576,7 @@ result =
                                 [ css
                                     [ Tw.text_base
                                     , Tw.font_medium
-                                    , Tw.text_color Tw.gray_500
+                                    , Tw.text_color Theme.gray_500
                                     ]
                                 ]
                                 [ text "/mo" ]
@@ -587,17 +587,17 @@ result =
                                 [ Tw.mt_8
                                 , Tw.block
                                 , Tw.w_full
-                                , Tw.bg_color Tw.gray_800
+                                , Tw.bg_color Theme.gray_800
                                 , Tw.border
-                                , Tw.border_color Tw.gray_800
+                                , Tw.border_color Theme.gray_800
                                 , Tw.rounded_md
                                 , Tw.py_2
                                 , Tw.text_sm
                                 , Tw.font_semibold
-                                , Tw.text_color Tw.white
+                                , Tw.text_color Theme.white
                                 , Tw.text_center
                                 , Css.hover
-                                    [ Tw.bg_color Tw.gray_900
+                                    [ Tw.bg_color Theme.gray_900
                                     ]
                                 ]
                             ]
@@ -614,7 +614,7 @@ result =
                             [ css
                                 [ Tw.text_xs
                                 , Tw.font_medium
-                                , Tw.text_color Tw.gray_900
+                                , Tw.text_color Theme.gray_900
                                 , Tw.tracking_wide
                                 , Tw.uppercase
                                 ]
@@ -638,7 +638,7 @@ result =
                                         [ Tw.flex_shrink_0
                                         , Tw.h_5
                                         , Tw.w_5
-                                        , Tw.text_color Tw.green_500
+                                        , Tw.text_color Theme.green_500
                                         ]
                                     , SvgAttr.viewBox "0 0 20 20"
                                     , SvgAttr.fill "currentColor"
@@ -654,7 +654,7 @@ result =
                                 , span
                                     [ css
                                         [ Tw.text_sm
-                                        , Tw.text_color Tw.gray_500
+                                        , Tw.text_color Theme.gray_500
                                         ]
                                     ]
                                     [ text "Potenti felis, in cras at at ligula nunc. " ]
@@ -671,7 +671,7 @@ result =
                                         [ Tw.flex_shrink_0
                                         , Tw.h_5
                                         , Tw.w_5
-                                        , Tw.text_color Tw.green_500
+                                        , Tw.text_color Theme.green_500
                                         ]
                                     , SvgAttr.viewBox "0 0 20 20"
                                     , SvgAttr.fill "currentColor"
@@ -687,7 +687,7 @@ result =
                                 , span
                                     [ css
                                         [ Tw.text_sm
-                                        , Tw.text_color Tw.gray_500
+                                        , Tw.text_color Theme.gray_500
                                         ]
                                     ]
                                     [ text "Orci neque eget pellentesque." ]
@@ -704,7 +704,7 @@ result =
                                         [ Tw.flex_shrink_0
                                         , Tw.h_5
                                         , Tw.w_5
-                                        , Tw.text_color Tw.green_500
+                                        , Tw.text_color Theme.green_500
                                         ]
                                     , SvgAttr.viewBox "0 0 20 20"
                                     , SvgAttr.fill "currentColor"
@@ -720,7 +720,7 @@ result =
                                 , span
                                     [ css
                                         [ Tw.text_sm
-                                        , Tw.text_color Tw.gray_500
+                                        , Tw.text_color Theme.gray_500
                                         ]
                                     ]
                                     [ text "Donec mauris sit in eu tincidunt etiam." ]
@@ -737,7 +737,7 @@ result =
                                         [ Tw.flex_shrink_0
                                         , Tw.h_5
                                         , Tw.w_5
-                                        , Tw.text_color Tw.green_500
+                                        , Tw.text_color Theme.green_500
                                         ]
                                     , SvgAttr.viewBox "0 0 20 20"
                                     , SvgAttr.fill "currentColor"
@@ -753,7 +753,7 @@ result =
                                 , span
                                     [ css
                                         [ Tw.text_sm
-                                        , Tw.text_color Tw.gray_500
+                                        , Tw.text_color Theme.gray_500
                                         ]
                                     ]
                                     [ text "Faucibus volutpat magna." ]
@@ -764,11 +764,11 @@ result =
                 , div
                     [ css
                         [ Tw.border
-                        , Tw.border_color Tw.gray_200
+                        , Tw.border_color Theme.gray_200
                         , Tw.rounded_lg
                         , Tw.shadow_sm
                         , Tw.divide_y
-                        , Tw.divide_color Tw.gray_200
+                        , Tw.divide_color Theme.gray_200
                         ]
                     ]
                     [ div
@@ -781,7 +781,7 @@ result =
                                 [ Tw.text_lg
                                 , Tw.leading_6
                                 , Tw.font_medium
-                                , Tw.text_color Tw.gray_900
+                                , Tw.text_color Theme.gray_900
                                 ]
                             ]
                             [ text "Enterprise" ]
@@ -789,7 +789,7 @@ result =
                             [ css
                                 [ Tw.mt_4
                                 , Tw.text_sm
-                                , Tw.text_color Tw.gray_500
+                                , Tw.text_color Theme.gray_500
                                 ]
                             ]
                             [ text "All the basics for starting a new business" ]
@@ -802,7 +802,7 @@ result =
                                 [ css
                                     [ Tw.text_4xl
                                     , Tw.font_extrabold
-                                    , Tw.text_color Tw.gray_900
+                                    , Tw.text_color Theme.gray_900
                                     ]
                                 ]
                                 [ text "$48" ]
@@ -810,7 +810,7 @@ result =
                                 [ css
                                     [ Tw.text_base
                                     , Tw.font_medium
-                                    , Tw.text_color Tw.gray_500
+                                    , Tw.text_color Theme.gray_500
                                     ]
                                 ]
                                 [ text "/mo" ]
@@ -821,17 +821,17 @@ result =
                                 [ Tw.mt_8
                                 , Tw.block
                                 , Tw.w_full
-                                , Tw.bg_color Tw.gray_800
+                                , Tw.bg_color Theme.gray_800
                                 , Tw.border
-                                , Tw.border_color Tw.gray_800
+                                , Tw.border_color Theme.gray_800
                                 , Tw.rounded_md
                                 , Tw.py_2
                                 , Tw.text_sm
                                 , Tw.font_semibold
-                                , Tw.text_color Tw.white
+                                , Tw.text_color Theme.white
                                 , Tw.text_center
                                 , Css.hover
-                                    [ Tw.bg_color Tw.gray_900
+                                    [ Tw.bg_color Theme.gray_900
                                     ]
                                 ]
                             ]
@@ -848,7 +848,7 @@ result =
                             [ css
                                 [ Tw.text_xs
                                 , Tw.font_medium
-                                , Tw.text_color Tw.gray_900
+                                , Tw.text_color Theme.gray_900
                                 , Tw.tracking_wide
                                 , Tw.uppercase
                                 ]
@@ -872,7 +872,7 @@ result =
                                         [ Tw.flex_shrink_0
                                         , Tw.h_5
                                         , Tw.w_5
-                                        , Tw.text_color Tw.green_500
+                                        , Tw.text_color Theme.green_500
                                         ]
                                     , SvgAttr.viewBox "0 0 20 20"
                                     , SvgAttr.fill "currentColor"
@@ -888,7 +888,7 @@ result =
                                 , span
                                     [ css
                                         [ Tw.text_sm
-                                        , Tw.text_color Tw.gray_500
+                                        , Tw.text_color Theme.gray_500
                                         ]
                                     ]
                                     [ text "Potenti felis, in cras at at ligula nunc. " ]
@@ -905,7 +905,7 @@ result =
                                         [ Tw.flex_shrink_0
                                         , Tw.h_5
                                         , Tw.w_5
-                                        , Tw.text_color Tw.green_500
+                                        , Tw.text_color Theme.green_500
                                         ]
                                     , SvgAttr.viewBox "0 0 20 20"
                                     , SvgAttr.fill "currentColor"
@@ -921,7 +921,7 @@ result =
                                 , span
                                     [ css
                                         [ Tw.text_sm
-                                        , Tw.text_color Tw.gray_500
+                                        , Tw.text_color Theme.gray_500
                                         ]
                                     ]
                                     [ text "Orci neque eget pellentesque." ]
@@ -938,7 +938,7 @@ result =
                                         [ Tw.flex_shrink_0
                                         , Tw.h_5
                                         , Tw.w_5
-                                        , Tw.text_color Tw.green_500
+                                        , Tw.text_color Theme.green_500
                                         ]
                                     , SvgAttr.viewBox "0 0 20 20"
                                     , SvgAttr.fill "currentColor"
@@ -954,7 +954,7 @@ result =
                                 , span
                                     [ css
                                         [ Tw.text_sm
-                                        , Tw.text_color Tw.gray_500
+                                        , Tw.text_color Theme.gray_500
                                         ]
                                     ]
                                     [ text "Donec mauris sit in eu tincidunt etiam." ]
@@ -971,7 +971,7 @@ result =
                                         [ Tw.flex_shrink_0
                                         , Tw.h_5
                                         , Tw.w_5
-                                        , Tw.text_color Tw.green_500
+                                        , Tw.text_color Theme.green_500
                                         ]
                                     , SvgAttr.viewBox "0 0 20 20"
                                     , SvgAttr.fill "currentColor"
@@ -987,7 +987,7 @@ result =
                                 , span
                                     [ css
                                         [ Tw.text_sm
-                                        , Tw.text_color Tw.gray_500
+                                        , Tw.text_color Theme.gray_500
                                         ]
                                     ]
                                     [ text "Faucibus volutpat magna." ]
@@ -1004,7 +1004,7 @@ result =
                                         [ Tw.flex_shrink_0
                                         , Tw.h_5
                                         , Tw.w_5
-                                        , Tw.text_color Tw.green_500
+                                        , Tw.text_color Theme.green_500
                                         ]
                                     , SvgAttr.viewBox "0 0 20 20"
                                     , SvgAttr.fill "currentColor"
@@ -1020,7 +1020,7 @@ result =
                                 , span
                                     [ css
                                         [ Tw.text_sm
-                                        , Tw.text_color Tw.gray_500
+                                        , Tw.text_color Theme.gray_500
                                         ]
                                     ]
                                     [ text "Id sed tellus in varius quisque." ]
@@ -1037,7 +1037,7 @@ result =
                                         [ Tw.flex_shrink_0
                                         , Tw.h_5
                                         , Tw.w_5
-                                        , Tw.text_color Tw.green_500
+                                        , Tw.text_color Theme.green_500
                                         ]
                                     , SvgAttr.viewBox "0 0 20 20"
                                     , SvgAttr.fill "currentColor"
@@ -1053,7 +1053,7 @@ result =
                                 , span
                                     [ css
                                         [ Tw.text_sm
-                                        , Tw.text_color Tw.gray_500
+                                        , Tw.text_color Theme.gray_500
                                         ]
                                     ]
                                     [ text "Risus egestas faucibus." ]
@@ -1070,7 +1070,7 @@ result =
                                         [ Tw.flex_shrink_0
                                         , Tw.h_5
                                         , Tw.w_5
-                                        , Tw.text_color Tw.green_500
+                                        , Tw.text_color Theme.green_500
                                         ]
                                     , SvgAttr.viewBox "0 0 20 20"
                                     , SvgAttr.fill "currentColor"
@@ -1086,7 +1086,7 @@ result =
                                 , span
                                     [ css
                                         [ Tw.text_sm
-                                        , Tw.text_color Tw.gray_500
+                                        , Tw.text_color Theme.gray_500
                                         ]
                                     ]
                                     [ text "Risus cursus ullamcorper." ]
