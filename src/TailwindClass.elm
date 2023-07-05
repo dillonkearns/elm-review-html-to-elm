@@ -92,6 +92,7 @@ classAttributeToElm config context indentLevel value =
     in
     cssFunction ++ indentedThingy (indentLevel + 1) identity newThing
 
+
 toTwClass : Config -> String -> String
 toTwClass config twClass =
     Config.tw config (twClassToElmName config twClass)
@@ -110,10 +111,33 @@ twClassToElmName config twClass =
             (\_ ->
                 "_dot_"
             )
-        |> Regex.replace (Regex.fromString "(\\w+)\\W(\\w+\\W\\d{2,3}|white|black|transparent)" |> Maybe.withDefault Regex.never)
-            (\match -> (match.submatches |> List.head |> Maybe.andThen identity |> Maybe.withDefault "") ++ "_color "++ (Config.tw config "")  ++ (match.submatches |> List.drop 1 |> List.head |> Maybe.andThen identity |> Maybe.withDefault ""))
+        |> replaceColorNamesWithFunctions config
         |> String.replace "/" "over"
         |> String.replace "-" "_"
+
+
+{-| Examples: replaces bg-red-100 with Tw.bg\_color Tw.red-100 and bg-transparent with Tw.bg\_color Tw.transparent
+-}
+replaceColorNamesWithFunctions : Config -> String -> String
+replaceColorNamesWithFunctions config input =
+    Regex.replace
+        (Regex.fromString "(\\w+)\\W(\\w+\\W\\d{2,3}|black|current|inherit|transparent|white)" |> Maybe.withDefault Regex.never)
+        (\match ->
+            (match.submatches
+                |> List.head
+                |> Maybe.andThen identity
+                |> Maybe.withDefault ""
+            )
+                ++ "_color "
+                ++ Config.tw config ""
+                ++ (match.submatches
+                        |> List.drop 1
+                        |> List.head
+                        |> Maybe.andThen identity
+                        |> Maybe.withDefault ""
+                   )
+        )
+        input
 
 
 breakpointName : Config -> String -> String
