@@ -121,7 +121,7 @@ twClassToElmName config twClass =
 replaceColorNamesWithFunctions : Config -> String -> String
 replaceColorNamesWithFunctions config input =
     Regex.replace
-        (Regex.fromString "(\\w+)\\W(\\w+\\W\\d{2,3}|black|current|inherit|transparent|white)" |> Maybe.withDefault Regex.never)
+        (Regex.fromString "(\\w+\\W?\\w*)\\W(\\w+\\W\\d{2,3}|black|current|inherit|transparent|white)" |> Maybe.withDefault Regex.never)
         (\match ->
             (match.submatches
                 |> List.head
