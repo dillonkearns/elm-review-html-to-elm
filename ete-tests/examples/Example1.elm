@@ -39,6 +39,7 @@ result =
                         [ Tw.h_5
                         , Tw.w_5
                         , Tw.text_color Theme.yellow_400
+                        , Tw.ring_offset_color Theme.yellow_500
                         ]
                     , SvgAttr.viewBox "0 0 20 20"
                     , SvgAttr.fill "currentColor"
