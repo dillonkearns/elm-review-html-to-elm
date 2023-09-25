@@ -65,7 +65,7 @@ result =
                         , Tw.text_color Theme.yellow_800
                         ]
                     ]
-                    [ text "Attention needed" ]
+                    [ text " Attention needed " ]
                 , div
                     [ css
                         [ Tw.mt_2
