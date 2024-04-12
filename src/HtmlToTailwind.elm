@@ -69,6 +69,7 @@ nodeToElm config indentLevel context node =
                                 |> Maybe.withDefault Regex.never
                             )
                             (\_ -> "")
+                        |> String.replace "\"" "\\\""
             in
             if String.isEmpty trimmed then
                 Nothing
