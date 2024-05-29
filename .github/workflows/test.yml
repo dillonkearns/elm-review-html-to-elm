@@ -17,9 +17,9 @@ jobs:
       with:
         submodules: true
     - name: Setup Node.js environment
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v4
       with:
-        node-version: 15
+        node-version: 18
     # Re-use node_modules between runs until package-lock.json changes.
     - name: Cache node_modules
       id: internal-cache-node_modules
@@ -73,7 +73,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Setup Node.js environment
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
 
       # Re-use node_modules between runs until package-lock.json changes.
       - name: Cache node_modules
