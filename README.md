@@ -7,7 +7,7 @@ You can also run this scaffolding tool with the web UI at [html-to-elm.com](http
 
 ## Provided rules
 
-- [`HtmlToElm`](https://package.elm-lang.org/packages/dillonkearns/elm-review-html-to-elm/2.0.0/HtmlToElm)
+- [`HtmlToElm`](https://package.elm-lang.org/packages/dillonkearns/elm-review-html-to-elm/2.0.1/HtmlToElm)
 
 
 ## Configuration
